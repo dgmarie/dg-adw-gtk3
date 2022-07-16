@@ -39,7 +39,9 @@ gtk3_scss_dependencies = [
   '_phosh.scss',
 ]
 
-# Apply accent color 
+# Generate .css files and install
+gtk3_scss_dependencies = files(gtk3_scss_dependencies)
+#
 accent = get_option('accent')
 foreach f : gtk3_scss_sources
   conf_data = configuration_data()
@@ -48,11 +50,6 @@ foreach f : gtk3_scss_sources
   gtk_accents_css = configure_file(input : 'accent-colors.scss.in',
                                    output : '@0@-accent-colors.scss'.format(f),
                                    configuration : conf_data)
-endforeach
-# Generate .css files and install
-gtk3_scss_dependencies = files(gtk3_scss_dependencies)
-#
-foreach f : gtk3_scss_sources
   custom_target('generate_' + f,
     input: gtk_accents_css,
     output: f + '.css',
