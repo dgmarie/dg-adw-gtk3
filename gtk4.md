@@ -13,7 +13,3 @@ ninja -C _build
 3. Open `gtk.css` in a text editor and at the top add the line: `@import 'defaults-light.css';` (or `@import 'defaults-dark.css';` depending on your color theme preference). Save and exit.
 
 If the non-libadwaita GTK-4 app is a flatpak application you must set permissions: `flatpak override --filesystem=~/.local/share/themes`
-
-ArchLinux users can use this AUR: https://aur.archlinux.org/packages/adw-gtk-theme which will install both adw-gtk3 and the libadwaita GTK-4 theme.
-
-Note that the GTK-4 theme is NOT supported in adw-gtk3's issue tracker.

@@ -1,5 +1,5 @@
-subdir('adw-gtk3')
+subdir('dg-adw-gtk3')
 
 if get_option('dark')
-    subdir('adw-gtk3-dark')
+    subdir('dg-adw-gtk3-dark')
 endif
