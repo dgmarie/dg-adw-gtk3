@@ -3959,6 +3959,7 @@ row {
   &:backdrop { transition: $backdrop_transition; }
 
   &.activatable {
+    color: $fg_color;
     &.has-open-popup, // this is for indicathing which row generated a popover see https://bugzilla.gnome.org/show_bug.cgi?id=754411
 
     &:hover { background-color: $view_hover_color; }
