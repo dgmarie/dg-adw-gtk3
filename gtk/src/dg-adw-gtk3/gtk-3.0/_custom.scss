@@ -331,7 +331,7 @@ headerbar, .titlebar {
 
   // better animation when switching from backdrop
   &:not(:backdrop) {
-    transition: 200ms ease-in;
+    transition: 50ms ease-in;
     transition-property: background-color, background-image, box-shadow, border-color, color, text-shadow;
   }
 
@@ -508,6 +508,14 @@ popover.background {
   modelbutton.flat {
     padding-left: 16px;
     padding-right: 16px;
+  }
+
+  modelbutton.flat,
+  .menuitem.button.flat {
+    color: $popover_fg_color;
+    &:disabled label {
+      color: gtkalpha($popover_fg_color, .5);
+    }
   }
 }
 
