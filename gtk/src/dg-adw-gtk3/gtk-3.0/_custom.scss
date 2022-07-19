@@ -337,12 +337,12 @@ headerbar, .titlebar {
 
   // Adjust the titlebutton margin
   .right {
-    margin-right: 7px;
-    separator.titlebutton { min-width: 1px; }
+    margin-right: 8px;
+    separator.titlebutton { min-width: 2px; }
   }
   .left {
-    margin-left: 7px;
-    separator.titlebutton { min-width: 1px; }
+    margin-left: 8px;
+    separator.titlebutton { min-width: 2px; }
   }
 }
 
