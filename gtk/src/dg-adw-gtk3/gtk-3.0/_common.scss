@@ -10,10 +10,11 @@ $card_radius: $button_radius + 6;
 
 // Optional compact sizes for buttons, headerbar and headerbar widgets
 $_sizevariant: 'default'; //compact otherwise
-$_headerbar_height: if($_sizevariant=='default', 46px, 40px);
+$_headerbar_height: if($_sizevariant=='default', 45px, 39px);
 $_entry_height: if($_sizevariant=='default', 34px, 28px);
 $_btn_pad: if($_sizevariant=='default', 4px 10px, 2px 6px);
-$_hb_btn_pad: if($_sizevariant=='default', 6px, 4px);
+$_hb_btn_top_pad: if($_sizevariant=='default', 5px, 3px);
+$_hb_btn_bot_pad: if($_sizevariant=='default', 6px, 4px);
 $_img_btn_pad: if($_sizevariant=='default', 4px, 2px);
 $_sel_menu_pad: if($_sizevariant=='default', 6px 10px, 4px 10px);
 $_circ_btn_pad: if($_sizevariant=='default', 4px, 2px);
@@ -1562,7 +1563,7 @@ searchbar > revealer > box {
 // ***************
 %titlebar,
 headerbar {
-  padding: 0 6px;
+  padding: 0 5px;
   min-height: $_headerbar_height;
   border-width: 0 0 1px;
   border-style: solid;
@@ -1809,8 +1810,8 @@ headerbar {
   spinbutton,
   separator:not(.sidebar),
   button {
-    margin-top: $_hb_btn_pad;
-    margin-bottom: $_hb_btn_pad;
+    margin-top: $_hb_btn_top_pad;
+    margin-bottom: $_hb_btn_bot_pad;
   }
   switch {
     margin-top: $_switch_margin;
