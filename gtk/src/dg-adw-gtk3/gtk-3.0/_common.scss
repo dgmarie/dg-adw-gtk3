@@ -4691,6 +4691,7 @@ decoration {
   box-shadow: 0 1px 3px 3px transparent,
               0 2px 6px 2px transparentize(black, 0.87),
               0 3px 12px 10px transparentize(black, 0.91),
+              0 3px 14px 12px transparent,
               0 6px 14px 14px transparentize(black, 0.96),
               0 0 0 2px transparentize(black, 0.95), //doing borders with box-shadow
               0 0 0 1px gtkmix(white, $headerbar_bg_color, 10%);
@@ -4707,6 +4708,7 @@ decoration {
     // or the jumping will happen during the transition.
     box-shadow: 0 1px 3px 3px transparentize(black, 0.91),
                 0 2px 10px 6px transparentize(black, 0.95),
+                0 3px 12px 10px transparent,
                 0 3px 14px 12px transparentize(black, 0.97),
                 0 6px 14px 14px transparent,
                 0 0 0 2px transparentize(black, 0.98),
@@ -4752,7 +4754,8 @@ decoration {
     border-radius: $popover_radius;
     border: 1px solid $_popover_border;
     box-shadow: 0 1px 5px 1px transparentize(black, .91),
-                0 2px 8px 3px transparentize(black, .95);
+                0 2px 8px 3px transparentize(black, .95),
+                0 6px 14px 14px transparent;
   }
 
   tooltip.csd & {
