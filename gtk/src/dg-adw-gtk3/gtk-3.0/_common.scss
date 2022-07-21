@@ -4687,16 +4687,13 @@ decoration {
   // lamefun trick to get rounded borders regardless of CSD use
   border-width: 0px;
 
-  // this needs to be transparent
-  // see bug #722563
-  $_wm_border: if($variant=='light', transparentize(black, 0.95), gtkmix(white, $window_bg_color, 10%));
-  $_wm_border_backdrop: if($variant=='light', transparentize(black, 0.98), gtkmix(white, $window_bg_color, 10%));
-
+  // This isn't perfect but it's pretty close to libadwaita's window decoration
   box-shadow: 0 1px 3px 3px transparent,
-              0 2px 8px 2px transparentize(black, 0.87),
-              0 3px 20px 10px transparentize(black, 0.91),
-              0 6px 32px 16px transparentize(black, 0.96),
-              0 0 0 1px $_wm_border; //doing borders with box-shadow
+              0 2px 6px 2px transparentize(black, 0.87),
+              0 3px 12px 10px transparentize(black, 0.91),
+              0 6px 14px 14px transparentize(black, 0.96),
+              0 0 0 2px transparentize(black, 0.95), //doing borders with box-shadow
+              0 0 0 1px gtkmix(white, $headerbar_bg_color, 10%);
 
   // FIXME rationalize shadows
 
@@ -4709,10 +4706,11 @@ decoration {
     // The biggest shadow should be in the same order then in the active state
     // or the jumping will happen during the transition.
     box-shadow: 0 1px 3px 3px transparentize(black, 0.91),
-                0 2px 14px 5px transparentize(black, 0.95),
-                0 4px 28px 12px transparentize(black, 0.97),
-                0 6px 32px 16px transparent,
-                0 0 0 1px $_wm_border_backdrop;
+                0 2px 10px 6px transparentize(black, 0.95),
+                0 3px 14px 12px transparentize(black, 0.97),
+                0 6px 14px 14px transparent,
+                0 0 0 2px transparentize(black, 0.98),
+                0 0 0 1px gtkmix(white, $window_bg_color, 10%);
 
     transition: $backdrop_transition;
   }
@@ -4726,10 +4724,10 @@ decoration {
   .tiled-bottom &,
   .tiled-left & {
     border-radius: 0;
-    box-shadow: 0 0 0 1px $_wm_border,
+    box-shadow: 0 0 0 1px $border_color,
                 0 0 0 20px transparent; //transparent control workaround -- #3670
 
-    &:backdrop { box-shadow: 0 0 0 1px $_wm_border_backdrop,
+    &:backdrop { box-shadow: 0 0 0 1px $border_color,
                              0 0 0 20px transparent; // #3670
     }
   }
@@ -4738,17 +4736,23 @@ decoration {
 
   // server-side decorations as used by mutter
   // just doing borders, wm draws actual shadows
-  $_ssd_wm_border: if($variant=='light', transparentize(black, 0.95), gtkmix(white, $window_bg_color, 10%));
-  $_ssd_wm_border_backdrop: if($variant=='light', transparentize(black, 0.98), gtkmix(white, $window_bg_color, 10%));
-  .ssd & { box-shadow: 0 0 0 1px $_ssd_wm_border; }
-  .ssd &:backdrop { box-shadow: 0 0 0 1px $_ssd_wm_border_backdrop; }
+  .ssd & {
+    box-shadow: 0 0 0 2px transparentize(black, 0.95),
+                0 0 0 1px gtkmix(white, $headerbar_bg_color, 10%);
+  }
+  .ssd &:backdrop {
+    box-shadow: 0 0 0 2px transparentize(black, 0.98),
+                0 0 0 1px gtkmix(white, $window_bg_color, 10%);
+  }
   .ssd.maximized &,
   .ssd.maximized &:backdrop { box-shadow: none; }
 
   .csd.popup & {
-    border-radius: $menu_radius;
-    box-shadow: 0 1px 2px transparentize(black, 0.8),
-                0 0 0 1px gtkalpha($_wm_border, 0.9);
+    $_popover_border: if($variant=='light', transparentize(black, .86), transparentize(black, .86));
+    border-radius: $popover_radius;
+    border: 1px solid $_popover_border;
+    box-shadow: 0 1px 5px 1px transparentize(black, .91),
+                0 2px 8px 3px transparentize(black, .95);
   }
 
   tooltip.csd & {
@@ -4758,8 +4762,11 @@ decoration {
 
   messagedialog.csd & {
     border-radius: $window_radius;
-    box-shadow: 0 1px 2px transparentize(black, 0.8),
-                0 0 0 1px gtkalpha($_wm_border, 0.9);
+    box-shadow: 0 2px 6px 2px transparentize(black, 0.87),
+                0 3px 12px 10px transparentize(black, 0.91),
+                0 6px 14px 14px transparentize(black, 0.96),
+                0 0 0 2px transparentize(black, 0.95),
+                0 0 0 1px gtkmix(white, $headerbar_bg_color, 10%);
   }
 
   .solid-csd & {
