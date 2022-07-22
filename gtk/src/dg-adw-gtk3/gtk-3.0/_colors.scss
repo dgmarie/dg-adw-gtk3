@@ -118,14 +118,16 @@ $slider_hover_color: white;
 $fill_color: $selected_bg_color;
 $fill_text_color: $selected_fg_color;
 
-$headerbar_border: gtkmix(currentColor, $headerbar_bg_color, 15.3%);
+$headerbar_border: if($variant == 'light', gtkmix(currentColor, $headerbar_bg_color, 12.5%), gtkmix(currentColor, $headerbar_bg_color, 15%));
+$headerbar_backdrop_border: if($variant == 'light', gtkmix(currentColor, $headerbar_backdrop_color, 25%), gtkmix(currentColor, $headerbar_bg_color, 36.5%));
 
 // Notebook and tabs
 $notebook_color: $base_color;
-$tab_color: if($variant == 'light', gtkmix(currentColor, $bg_color, 12%), gtkmix(currentColor, $bg_color, 1%));
-$tab_color_hover: if($variant == 'light', gtkmix(currentColor, $bg_color, 14.7%), gtkmix(currentColor, $bg_color, 3.7%));
-$tab_color_active: if($variant == 'light', gtkmix(currentColor, $bg_color, 7.7%), gtkmix(currentColor, $bg_color, 5.7%));
-$tab_color_active_hover: if($variant == 'light', gtkshade($tab_color_active, 0.971), gtkshade($tab_color_active, 1.11));
-$tab_color_backdrop: if($variant == 'light', gtkmix(currentColor, $bg_color, 10%), gtkmix(currentColor, $bg_color, -7%));
-$tab_color_backdrop_hover: if($variant == 'light', gtkmix(currentColor, $bg_color, 16%), gtkmix(currentColor, $bg_color, -1.7%));
-$tab_color_backdrop_active: $bg_color;
+$tab_color: if($variant == 'light', gtkshade($headerbar_bg_color, 0.956), gtkshade($headerbar_bg_color, .81));
+$tab_color_hover: if($variant == 'light', gtkshade($headerbar_bg_color, 0.936), $headerbar_bg_color);
+$tab_color_active: $headerbar_bg_color;
+$tab_color_active_hover: if($variant == 'light', gtkshade($headerbar_bg_color, 0.973), gtkshade($headerbar_bg_color, 1.22));
+$tab_color_backdrop: if($variant == 'light', gtkshade($headerbar_backdrop_color, 0.96), $headerbar_bg_color);
+$tab_color_backdrop_hover: if($variant == 'light', gtkshade($headerbar_bg_color, 0.992), gtkshade($headerbar_bg_color, 1.22));
+$tab_color_backdrop_active: $headerbar_backdrop_color;
+$tab_color_backdrop_active_hover: if($variant == 'light', gtkshade($headerbar_backdrop_color,0.973), gtkshade($headerbar_backdrop_color, 1.15));
