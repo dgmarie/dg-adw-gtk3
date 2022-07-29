@@ -2229,24 +2229,30 @@ menu,
 %menu,
 .context-menu {
   margin: 4px; // see https://bugzilla.gnome.org/show_bug.cgi?id=591258
-  padding: 4px 0px;
+  padding: 6px;
   background-color: $menu_color;
   border: 1px solid $borders_color; // adds borders in a non composited env
 
   .csd & {
     border: none; // axes borders in a composited env
-    border-radius: $menu_radius;
+    border-radius: $popover_radius;
   }
 
   &:backdrop { background-color: $backdrop_menu_color; }
+
+  separator {
+    margin: 6px 0;
+    background: $border_color;
+  }
 
   menuitem,
   %menuitem {
     min-height: 16px;
     min-width: 40px;
-    padding: 4px 6px;
+    padding: 6px 10px;
     text-shadow: none;
     font-weight: normal;
+    border-radius: $button_radius;
 
     &:hover {
       color: if($variant == 'light', $fg_color, $selected_fg_color);
@@ -2329,11 +2335,11 @@ menuitem {
 
   check,
   radio {
-    min-height: 16px;
-    min-width: 16px;
+    min-height: 14px;
+    min-width: 14px;
 
-    &:dir(ltr) { margin-right: 7px; }
-    &:dir(rtl) { margin-left: 7px; }
+    &:dir(ltr) { margin-right: 8px; }
+    &:dir(rtl) { margin-left: 8px; }
   }
 }
 
@@ -2365,6 +2371,7 @@ popover.background {
   &:backdrop {
     background-color: $backdrop_bg_color;
     box-shadow: none;
+    border-color: transparent;
     transition: $backdrop_transition;
   }
 
@@ -2389,7 +2396,7 @@ popover.background {
   }
 
   separator {
-    margin: 3px;
+    margin: 6px 0;
     background: $border_color;
   }
 
@@ -3161,9 +3168,11 @@ radio {
   menu menuitem & {
     margin: 0; // this is a workaround for a menu check/radio size allocation issue
     padding: 0;
-
+  }
+  menu menuitem &,
+  popover & {
     &, &:checked, &:indeterminate {
-      &, &:hover, &:disabled { //FIXME use button reset mixin
+      &, &:hover, &:disabled, &:backdrop { //FIXME use button reset mixin
         min-height: 14px;
         min-width: 14px;
         background-image: none;
@@ -3171,12 +3180,31 @@ radio {
         box-shadow: none;
         -gtk-icon-shadow: none;
         color: inherit;
-        border-color: currentColor;
+        transition: none;
       }
     }
   }
 }
-
+check {
+  menu menuitem &,
+  popover & {
+    &, &:checked, &:indeterminate {
+      &, &:hover, &:disabled, &:backdrop { //FIXME use button reset mixin
+        border: none;
+      }
+    }
+  }
+}
+radio {
+  menu menuitem &,
+  popover & {
+    &, &:checked, &:indeterminate {
+      &, &:hover, &:disabled, &:backdrop { //FIXME use button reset mixin
+        border: 1px solid gtkalpha(currentColor, 0.3);
+      }
+    }
+  }
+}
 %check,
 check {
   border-radius: $button_radius;
