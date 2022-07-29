@@ -1,11 +1,12 @@
 #! /bin/bash
 
-INKSCAPE="flatpak run org.inkscape.Inkscape"
+INKSCAPE="/usr/bin/inkscape"
 OPTIPNG="/usr/bin/optipng"
 
 SRC_FILE="assets.svg"
 ASSETS_DIR="assets"
 INDEX="assets.txt"
+WINDOWS_SRC_FILE="windows-nord-assets.svg"
 
 for i in `cat $INDEX`
 do 

@@ -461,7 +461,8 @@ list.view.frame {
     @each $k in ('close', 'maximize', 'minimize') {
       @each $l, $m in ('',''), (':backdrop','-backdrop'), (':backdrop:hover','-backdrop-hover'), (':hover','-hover'), (':active','-active') {
         &.#{$k}#{$l} {
-          background-image: url('assets/titlebutton-#{$k}#{$m}#{$asset_suffix}.svg');
+          background-image: -gtk-scaled(url('assets/titlebutton-#{$k}#{$m}#{$asset_suffix}.png'),
+                                        url('assets/titlebutton-#{$k}#{$m}#{$asset_suffix}@2.png'));
         }
       }
     }
@@ -471,7 +472,8 @@ list.view.frame {
     button.titlebutton {
       @each $l, $m in ('',''), (':backdrop','-backdrop'), (':backdrop:hover','-backdrop-hover'), (':hover','-hover'), (':active','-active') {
         &.maximize#{$l} {
-          background-image: url('assets/titlebutton-restore#{$m}#{$asset_suffix}.svg');
+          background-image: -gtk-scaled(url('assets/titlebutton-restore#{$m}#{$asset_suffix}.png'),
+                                        url('assets/titlebutton-restore#{$m}#{$asset_suffix}@2.png'));
         }
       }
     }
