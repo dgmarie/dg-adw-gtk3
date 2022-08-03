@@ -24,7 +24,7 @@
 %colored_buttons {
   @include button(normal, $headerbar_bg_color, $headerbar_fg_color);
   &:backdrop {
-    @include button(backdrop, gtkmix(currentColor, $headerbar_backdrop_color, 3%), $backdrop_disabled_headerbar_fg);
+    @include button(backdrop, gtkmix(currentColor, $headerbar_backdrop_color, 3%), $backdrop_headerbar_fg);
   }
 
   &:hover {
@@ -35,7 +35,7 @@
       @include button(hover, gtkmix(currentColor, $headerbar_bg_color, 0.7%), $headerbar_fg_color);
     }
     &:backdrop {
-      @include button(backdrop, gtkmix(currentColor, $headerbar_backdrop_color, 12%), $backdrop_disabled_headerbar_fg);
+      @include button(backdrop, gtkmix(currentColor, $headerbar_backdrop_color, 12%), $backdrop_headerbar_fg);
     }
   }
 
@@ -54,10 +54,10 @@
     }
     &:backdrop {
       @if $variant == 'light' {
-        @include button(normal, gtkmix(currentColor, $headerbar_backdrop_color, 12%), $backdrop_disabled_headerbar_fg);
+        @include button(normal, gtkmix(currentColor, $headerbar_backdrop_color, 12%), $backdrop_headerbar_fg);
       }
       @else {
-        @include button(normal, gtkmix(currentColor, $headerbar_backdrop_color, 11%), $backdrop_disabled_headerbar_fg);
+        @include button(normal, gtkmix(currentColor, $headerbar_backdrop_color, 11%), $backdrop_headerbar_fg);
       }
     }
   }
@@ -67,7 +67,7 @@
   }
 
   &:backdrop:disabled {
-    @include button(backdrop-insensitive, $headerbar_backdrop_color, $backdrop_disabled_headerbar_fg);
+    @include button(backdrop-insensitive, $headerbar_backdrop_color, $backdrop_headerbar_fg);
   }
 
   &.default:not(:backdrop):not(.suggested-action):not(.destructive-action) {
@@ -86,7 +86,7 @@
     @include button(normal, gtkmix(currentColor, $headerbar_bg_color, -3%), $headerbar_fg_color);
 
     &:backdrop {
-      @include button(backdrop, gtkmix(currentColor, $headerbar_backdrop_color, -1%), $backdrop_disabled_headerbar_fg);
+      @include button(backdrop, gtkmix(currentColor, $headerbar_backdrop_color, -1%), $backdrop_headerbar_fg);
     }
   }
 
@@ -104,7 +104,7 @@
       }
     }
     &:backdrop {
-      @include button(backdrop, $headerbar_backdrop_color, $backdrop_disabled_headerbar_fg);
+      @include button(backdrop, $headerbar_backdrop_color, $backdrop_headerbar_fg);
     }
   }
 
@@ -179,7 +179,7 @@ headerbar, .titlebar {
     button {
       &:not(.suggested-action):not(.destructive-action):not(.titlebutton) {
         color: $headerbar_fg_color;
-        &:backdrop { color: $backdrop_disabled_headerbar_fg; }
+        &:backdrop { color: $backdrop_headerbar_fg; }
         &:disabled { color: $disabled_headerbar_fg; }
       }
     }
@@ -245,13 +245,13 @@ headerbar, .titlebar {
     min-height: 32px; // Evens out the height for the top and bottom borders which adds 2px
     @include button(normal, $headerbar_bg_color, $headerbar_fg_color);
     &:backdrop {
-      @include button(backdrop, $headerbar_backdrop_color, $backdrop_disabled_headerbar_fg);
+      @include button(backdrop, $headerbar_backdrop_color, $backdrop_headerbar_fg);
     }
     &:disabled {
       @include button(insensitive, $headerbar_bg_color, $disabled_headerbar_fg);
     }
     &:disabled:backdrop {
-      @include button(insensitive, $headerbar_backdrop_color, $backdrop_disabled_headerbar_fg);
+      @include button(insensitive, $headerbar_backdrop_color, $backdrop_headerbar_fg);
     }
 
     image { // icons inside the entry
@@ -349,18 +349,24 @@ list.view.frame {
     &.flat:not(:hover):not(:active) { @include button(undecorated); }
     &:hover { @include button(hover, $card_bg_color, $card_fg_color); }
     &:active, &:checked { @include button(active, $card_bg_color, $card_fg_color); }
-    &:disabled { @include button(insensitive, $card_bg_color, $insensitive_fg_color); }
-    &:backdrop { @include button(backdrop, $card_bg_color, $backdrop_fg_color); }
-    &:backdrop:disabled { @include button(backdrop-insensitive, $card_bg_color, $backdrop_fg_color); }
+    &:disabled, &:backdrop, &:backdrop:disabled {
+      @include button(normal, $card_bg_color, $disabled_card_fg);
+    }
+
+    &:backdrop {
+      &:hover { @include button(hover, $card_bg_color, $disabled_card_fg); }
+      &:checked { @include button(active, $card_bg_color, $disabled_card_fg); }
+    }
 
     &.suggested-action { @extend %suggested_buttons; }
     &.destructive-action { @extend %destructive_buttons; }
   }
+
   entry {
     @include button(normal, $card_bg_color, $text_color);
-    &:disabled { @include button(insensitive, $card_bg_color, $insensitive_fg_color); }
-    &:backdrop { @include button(backdrop, $card_bg_color, $backdrop_text_color); }
-    &:backdrop:disabled { @include button(backdrop-insensitive, $card_bg_color, $backdrop_fg_color); }
+    &:disabled, &:backdrop, &:backdrop:disabled {
+      @include button(normal, $card_bg_color, $disabled_card_fg);
+    }
   }
 }
 
@@ -370,24 +376,24 @@ popover.background {
     &.flat:not(:hover):not(:active) { @include button(undecorated); }
     &:hover { @include button(hover, $popover_bg_color, $popover_fg_color); }
     &:active, &:checked { @include button(active, $popover_bg_color, $popover_fg_color); }
-    &:disabled { @include button(insensitive, $popover_bg_color, $insensitive_fg_color); }
-    &:backdrop { @include button(backdrop, $popover_bg_color, $backdrop_fg_color); }
-    &:backdrop:disabled { @include button(backdrop-insensitive, $popover_bg_color, $backdrop_fg_color); }
+    &:disabled, &:backdrop, &:backdrop:disabled {
+      @include button(normal, $popover_bg_color, $disabled_popover_fg);
+    }
+
+    &:backdrop {
+      &:hover { @include button(hover, $popover_bg_color, $disabled_popover_fg); }
+      &:checked { @include button(active, $popover_bg_color, $disabled_popover_fg); }
+    }
 
     &.suggested-action { @extend %suggested_buttons; }
     &.destructive-action { @extend %destructive_buttons; }
   }
+
   entry {
     @include button(normal, $popover_bg_color, $popover_fg_color);
-    &:disabled { @include button(insensitive, $popover_bg_color, $insensitive_fg_color); }
-    &:backdrop { @include button(backdrop, $popover_bg_color, $backdrop_text_color); }
-    &:backdrop:disabled { @include button(backdrop-insensitive, $popover_bg_color, $backdrop_fg_color); }
-  }
-
-  .linked.raised button,
-  .linked button {
-    &:not(:only-child):not(:first-child) { border-left-color: $borders_color; }
-    &:not(:only-child):not(:last-child) { border-right-color: $borders_color; }
+    &:disabled, &:backdrop, &:backdrop:disabled {
+      @include button(normal, $popover_bg_color, $disabled_popover_fg);
+    }
   }
 }
 
@@ -520,6 +526,9 @@ popover.background {
     }
     &:backdrop {
       color: $backdrop_fg_color;
+    }
+    &:backdrop:hover {
+      background-color: $view_hover_color;
     }
   }
   radio {
