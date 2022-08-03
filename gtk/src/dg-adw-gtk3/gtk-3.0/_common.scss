@@ -4015,6 +4015,7 @@ list {
     color: $backdrop_text_color;
     background-color: $backdrop_base_color;
     border-color: $backdrop_borders_color;
+    transition: $backdrop_transition;
   }
 
   row { padding: 2px; }
@@ -4029,12 +4030,12 @@ row {
 
   &.activatable {
     color: $fg_color;
+    &:backdrop { color: $backdrop_fg_color; }
     &.has-open-popup, // this is for indicathing which row generated a popover see https://bugzilla.gnome.org/show_bug.cgi?id=754411
 
     &:hover { background-color: $view_hover_color; }
 
     &:active { background-color: $view_active_color; }
-
     &:backdrop:hover { background-color: transparent; }
 
     &:selected {
@@ -4049,7 +4050,7 @@ row {
 
       &:backdrop {
         background-color: $view_hover_color;
-        color: $fg_color;
+        color: $backdrop_fg_color;
       }
     }
   }
@@ -4261,7 +4262,6 @@ filechooserbutton:drop(active) {
 
   row {
     border-radius: $button_radius;
-    &:backdrop { color: $fg_color; }
   }
   row, separator {
     margin: 0 4px;
