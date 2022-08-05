@@ -519,12 +519,12 @@ notebook {
       &.reorderable-page {
         border-radius: $button_radius;
         background-color: $headerbar_bg_color;
-	      margin: 4px 0;
-	      margin-left: 1px;
-	      background-image: url('assets/tab-border.png');
-	      background-position: left;
-	      background-repeat: repeat-y;
-	      box-shadow: none;
+        margin: 4px 0;
+        margin-left: 1px;
+        background-image: url('assets/tab-border.png');
+        background-position: left;
+        background-repeat: repeat-y;
+        box-shadow: none;
       }
 
       &:hover.reorderable-page {
