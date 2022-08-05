@@ -567,7 +567,7 @@ tabbar {
   }
 
   tab {
-    border: none; // FIXME: Can't seem to get rid of the borders
+    border: none;
     border-color: transparent;
     border-radius: $button_radius;
     background-color: $headerbar_bg_color;
