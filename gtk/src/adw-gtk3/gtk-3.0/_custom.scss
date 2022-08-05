@@ -509,3 +509,42 @@ popover.background {
 popover.menu > stack {
   margin: -6px;
 }
+
+// Trying to mimic new libadwaita tabs
+notebook {
+  > header {
+    background-color: $headerbar_bg_color;
+
+    tab {
+      &.reorderable-page {
+        border-radius: $button_radius;
+        background-color: $headerbar_bg_color;
+	      margin: 4px 0;
+	      margin-left: 1px;
+	      background-image: url('assets/tab-border.png');
+	      background-position: left;
+	      background-repeat: repeat-y;
+	      box-shadow: none;
+      }
+
+      &:hover.reorderable-page {
+        background-color: $view_hover_color;
+        box-shadow: none;
+      }
+
+      &:checked.reorderable-page {
+        box-shadow: none;
+        background-color: $view_selected_color;
+        &, + tab { background-image: none; }
+        &:hover { background-color: $view_selected_hover_color; }
+      }
+    }
+
+    arrow:down + tab,
+    tab:first-child {
+      &.reorderable-page {
+        background-image: none;
+      }
+    }
+  }
+}
