@@ -514,6 +514,7 @@ popover.menu > stack {
 notebook {
   > header {
     background-color: $headerbar_bg_color;
+    &:backdrop { background-color: $headerbar_backdrop_color; }
 
     tab {
       &.reorderable-page {
@@ -527,12 +528,17 @@ notebook {
         box-shadow: none;
       }
 
-      &:hover.reorderable-page {
+      &:backdrop.reorderable-page {
+        background-color: $headerbar_backdrop_color;
+        box-shadow: none;
+      }
+
+      &:hover.reorderable-page, &:backdrop:hover.reorderable-page {
         background-color: $view_hover_color;
         box-shadow: none;
       }
 
-      &:checked.reorderable-page {
+      &:checked.reorderable-page, &:backdrop:checked.reorderable-page {
         box-shadow: none;
         background-color: $view_selected_color;
         &, + tab { background-image: none; }
@@ -540,11 +546,63 @@ notebook {
       }
     }
 
-    arrow:down + tab,
+    arrow.down + tab,
     tab:first-child {
       &.reorderable-page {
         background-image: none;
       }
     }
+  }
+}
+
+tabbar {
+  .box {
+    min-height: 38px;
+    background-color: $headerbar_bg_color;
+    border-bottom: 1px solid $borders_color;
+
+    &:backdrop {
+      background-color: $headerbar_backdrop_color;
+    }
+  }
+
+  tab {
+    border: none; // FIXME: Can't seem to get rid of the borders
+    border-color: transparent;
+    border-radius: $button_radius;
+    background-color: $headerbar_bg_color;
+    margin: 4px 0;
+    background-image: if($variant == 'light', url('assets/tab-border.png'), url('assets/tab-border-dark.png'));
+    background-position: left;
+    background-repeat: repeat-y;
+    background-size: 1px auto;
+    box-shadow: none;
+    + tab:checked { background-image: none; }
+  }
+
+  &:backdrop {
+    background-color: $headerbar_backdrop_color;
+    box-shadow: none;
+    border: none;
+  }
+
+  &:hover, &:backdrop:hover {
+    background-color: $view_hover_color;
+    box-shadow: none;
+    border: none;
+  }
+
+  &:checked, &:backdrop:checked {
+    border: none;
+    box-shadow: none;
+    background-color: $view_selected_color;
+    &, + tab { background-image: none; }
+    &:hover { background-color: $view_selected_hover_color; }
+  }
+
+  arrow.down + tab,
+  tab:first-child {
+    background-image: none;
+    border: none;
   }
 }
