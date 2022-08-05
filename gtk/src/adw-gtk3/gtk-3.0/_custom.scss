@@ -521,7 +521,7 @@ notebook {
         background-color: $headerbar_bg_color;
         margin: 4px 0;
         margin-left: 1px;
-        background-image: url('assets/tab-border.png');
+	      background-image: if($variant == 'light', url('assets/tab-border.png'), url('assets/tab-border-dark.png'));
         background-position: left;
         background-repeat: repeat-y;
         box-shadow: none;
