@@ -1,6 +1,7 @@
 option('accent-colors',
     type: 'array',
     choices: [
+        'orange',
         'bark',
         'sage',
         'olive',

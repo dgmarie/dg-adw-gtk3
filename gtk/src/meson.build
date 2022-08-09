@@ -47,12 +47,12 @@ foreach variant : variants
   if is_dark
     color = variant.split('-dark')[0]
     gtk3_scss_sources = [
-      gtk3_scss,
       gtk3_scss_dark,
     ]
   else
     color = variant
     gtk3_scss_sources = [
+      gtk3_scss,
       gtk3_scss_dark,
     ]
   endif
