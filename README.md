@@ -2,9 +2,9 @@
 
 # dg-adw-gtk3 (forked from [adw-gtk3](https://github.com/lassekongo83/adw-gtk3))
 
-**A Libadwaita + macOS + Yaru theme for Firefox**
+**A Libadwaita + macOS + Yaru theme for GTK3**
 
-Kinda crazy but I like the look of it. This theme is supposed to be used with [this](https://github.com/dgmarie/dg-gnome-theme).
+This theme is supposed to be used with [this](https://github.com/dgmarie/dg-gnome-theme).
 
 
 ## Credits
