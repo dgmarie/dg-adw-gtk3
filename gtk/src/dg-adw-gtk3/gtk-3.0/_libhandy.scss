@@ -602,7 +602,7 @@ row {
 
 tabbar {
   .box {
-    padding: 0 2px;
+    padding: 0 4px;
     min-height: 38px;
     background: $headerbar_bg_color;
     border-bottom: 1px solid $headerbar_border;
@@ -675,13 +675,13 @@ tabbar {
     border-color: transparent;
     border-width: 0;
     border-radius: $button_radius;
-    margin: 4px 0;
+    margin: 5px 1px;
     transition: background 150ms ease-in-out;
     background-color: transparent;
     background-image: if($variant == 'light', url('assets/tab-border.png'), url('assets/tab-border-dark.png'));
     background-position: left;
     background-repeat: repeat-y;
-    + tab:checked { background-image: none; }
+    + tab:checked { background-image: url('assets/tab-border-none.png'); }
 
     &:checked {
       background-color: $tab_color_active;
@@ -690,16 +690,16 @@ tabbar {
       &:hover {
         background-color: $tab_color_active_hover;
         &:backdrop { background-color: $tab_color_active_hover_backdrop; }
-        &, + tab { background-image: none; }
+        &, + tab { background-image: url('assets/tab-border-none.png'); }
       }
 
-      &, + tab { background-image: none; }
+      &, + tab { background-image: url('assets/tab-border-none.png'); }
     }
 
     &:hover {
       background-color: $tab_color_hover;
       &:backdrop { background-color: $tab_color_hover_backdrop; }
-      &, + tab { background-image: none; }
+      &, + tab { background-image: url('assets/tab-border-none.png'); }
     }
   }
 
@@ -712,14 +712,7 @@ tabbar {
   .start-action,
   .end-action {
     background: transparent;
-    border-color: $alt_borders_color;
-    border-style: solid;
     transition: background 150ms ease-in-out;
-
-    &:backdrop {
-      border-color: $backdrop_borders_color;
-      background-color: $backdrop_dark_fill;
-    }
 
     button {
       border: none;
@@ -729,8 +722,6 @@ tabbar {
 
   .start-action:dir(ltr),
   .end-action:dir(rtl) {
-    border-right-width: 1px;
-
     > * {
       margin-right: 1px;
     }
@@ -738,8 +729,6 @@ tabbar {
 
   .start-action:dir(rtl),
   .end-action:dir(ltr) {
-    border-left-width: 1px;
-
     > * {
       margin-left: 1px;
     }
@@ -764,7 +753,7 @@ tabbar {
 tabbar,
 .tab-drag-icon {
   tab {
-    padding: 6px;
+    padding: 5px 4px;
 
     &.needs-attention {
       background-image:
