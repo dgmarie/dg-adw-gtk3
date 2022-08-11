@@ -602,13 +602,13 @@ row {
 
 tabbar {
   .box {
+    padding: 0 2px;
     min-height: 38px;
     background: $headerbar_bg_color;
-    border-bottom: 1px solid $borders_color;
+    border-bottom: 1px solid $headerbar_border;
 
     &:backdrop {
       background-color: $headerbar_backdrop_color;
-      border-color: $backdrop_borders_color;
     }
   }
 
@@ -677,26 +677,29 @@ tabbar {
     border-radius: $button_radius;
     margin: 4px 0;
     transition: background 150ms ease-in-out;
+    background-color: transparent;
     background-image: if($variant == 'light', url('assets/tab-border.png'), url('assets/tab-border-dark.png'));
     background-position: left;
     background-repeat: repeat-y;
-    background-color: $headerbar_bg_color;
     + tab:checked { background-image: none; }
 
-    &:checked, &:backdrop:checked {
-      background-color: $view_selected_color;
-      margin-right: 1px;
+    &:checked {
+      background-color: $tab_color_active;
+      &:backdrop { background-color: $tab_color_active_backdrop; }
 
-      &:hover { background-color: $view_selected_hover_color; }
+      &:hover {
+        background-color: $tab_color_active_hover;
+        &:backdrop { background-color: $tab_color_active_hover_backdrop; }
+        &, + tab { background-image: none; }
+      }
 
       &, + tab { background-image: none; }
     }
 
-    &:hover { background-color: $view_hover_color; }
-
-    &:backdrop {
-      border-color: $backdrop_borders_color;
-      background-color: $headerbar_backdrop_color;
+    &:hover {
+      background-color: $tab_color_hover;
+      &:backdrop { background-color: $tab_color_hover_backdrop; }
+      &, + tab { background-image: none; }
     }
   }
 
@@ -708,7 +711,7 @@ tabbar {
 
   .start-action,
   .end-action {
-    background: $tab_color;
+    background: transparent;
     border-color: $alt_borders_color;
     border-style: solid;
     transition: background 150ms ease-in-out;

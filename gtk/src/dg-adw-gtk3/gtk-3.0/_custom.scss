@@ -547,43 +547,72 @@ popover.menu > stack {
 // Trying to mimic new libadwaita tabs
 notebook {
   > header {
+    padding: 0 2px;
     background-color: $headerbar_bg_color;
     &:backdrop { background-color: $headerbar_backdrop_color; }
 
     tab {
       &.reorderable-page {
+        min-height: 26px;
+        padding: 4px 12px;
         border-radius: $button_radius;
-        background-color: $headerbar_bg_color;
-        margin: 4px 0;
-        margin-left: 1px;
-        background-image: if($variant == 'light', url('assets/tab-border.png'), url('assets/tab-border-dark.png'));
-        background-position: left;
-        background-repeat: repeat-y;
+        background-color: transparent;
+        margin: 5px 2px 6px 3px;
         box-shadow: none;
+        > box { // hack to mimic libadwaita seperators
+          border-left: 1px solid $tab_border;
+          margin-left: -15px;
+          padding-left: 15px;
+          transition: border-color 150ms ease-in-out;
+          &:backdrop { border-color: $tab_backdrop_border; }
+        }
+        button.flat { color: transparent; }
       }
 
-      &:backdrop.reorderable-page {
-        background-color: $headerbar_backdrop_color;
+      &:hover.reorderable-page {
+        background-color: $tab_color_hover;
         box-shadow: none;
+        & box, + tab box { border-color: transparent; }
+        &:backdrop { background-color: $tab_color_hover_backdrop; }
+        button.flat { color: currentColor; }
       }
 
-      &:hover.reorderable-page, &:backdrop:hover.reorderable-page {
-        background-color: $view_hover_color;
+      &:checked.reorderable-page {
         box-shadow: none;
+        background-color: $tab_color_active;
+        & box, + tab box { border-color: transparent; }
+        &:backdrop { background-color: $tab_color_active_backdrop; }
+        &:hover { background-color: $tab_color_active_hover; }
+        &:hover:backdrop { background-color: $tab_color_active_hover_backdrop; }
+        button.flat { color: currentColor; }
       }
 
-      &:checked.reorderable-page, &:backdrop:checked.reorderable-page {
-        box-shadow: none;
-        background-color: $view_selected_color;
-        &, + tab { background-image: none; }
-        &:hover { background-color: $view_selected_hover_color; }
+      button.flat {
+        color: currentColor;
+        margin: 1px 0;
+        min-width: 22px;
+        min-height: 22px;
+        border-radius: 100%;
+
+        &:last-child {
+          margin-left: 0;
+          margin-right: -8px;
+        }
+
+        &:first-child {
+          margin-left: -8px;
+          margin-right: 0;
+        }
       }
     }
 
     arrow.down + tab,
     tab:first-child {
       &.reorderable-page {
-        background-image: none;
+        margin-left: 2px;
+        > box {
+          border-color: transparent;
+        }
       }
     }
   }

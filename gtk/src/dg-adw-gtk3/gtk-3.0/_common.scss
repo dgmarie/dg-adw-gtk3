@@ -1573,7 +1573,6 @@ headerbar {
   @include headerbar_fill;
 
   &:backdrop {
-    border-color: $headerbar_backdrop_border;
     background-color: $headerbar_backdrop_color;
     background-image: none;
     transition: $backdrop_transition;
@@ -2415,38 +2414,24 @@ notebook {
     background-color: $headerbar_bg_color;
 
     &:backdrop {
-      border-color: $headerbar_backdrop_border;
       background-color: $headerbar_backdrop_color;
     }
 
     &.top {
       box-shadow: inset 0 -1px $headerbar_border;
-      &:backdrop {
-        box-shadow: inset 0 -1px $headerbar_backdrop_border;
-      }
     }
     &.bottom {
       box-shadow: inset 0 1px $headerbar_border;
-      &:backdrop {
-        box-shadow: inset 0 1px $headerbar_backdrop_border;
-      }
     }
     &.left {
       box-shadow: inset -1px 0 $headerbar_border;
-      &:backdrop {
-        box-shadow: inset -1px 0 $headerbar_backdrop_border;
-      }
     }
     &.right {
       box-shadow: inset 1px 0 $headerbar_border;
-      &:backdrop {
-        box-shadow: inset 1px 0 $headerbar_backdrop_border;
-      }
     }
     tabs { margin: 0px; }
 
     $tab_legacy_hover: $tab_color_active_hover;
-    $tab_legacy_backdrop_hover: $tab_color_backdrop_active_hover;
 
     &.top {
       border-bottom-style: solid;
@@ -2454,11 +2439,10 @@ notebook {
         margin-bottom: 0px;
         > tab {
           &:not(.reorderable-page):hover {
-            box-shadow: inset 0 -4px $headerbar_border;
+            box-shadow: inset 0 -4px $tab_border;
             background-color: $tab_legacy_hover;
             &:backdrop {
-              box-shadow: inset 0 -4px $headerbar_backdrop_border;
-              background-color: $tab_legacy_backdrop_hover;
+              box-shadow: inset 0 -4px $tab_backdrop_border;
             }
           }
           &:not(.reorderable-page):checked {
@@ -2474,11 +2458,10 @@ notebook {
         margin-top: 0px;
         > tab {
           &:not(.reorderable-page):hover {
-            box-shadow: inset 0 4px $headerbar_border;
+            box-shadow: inset 0 4px $tab_border;
             background-color: $tab_legacy_hover;
             &:backdrop {
-              box-shadow: inset 0 4px $headerbar_backdrop_border;
-              background-color: $tab_legacy_backdrop_hover;
+              box-shadow: inset 0 4px $tab_backdrop_border;
             }
           }
           &:not(.reorderable-page):checked {
@@ -2494,11 +2477,10 @@ notebook {
         margin-right: 0px;
         > tab {
           &:not(.reorderable-page):hover {
-            box-shadow: inset -4px 0 $headerbar_border;
+            box-shadow: inset -4px 0 $tab_border;
             background-color: $tab_legacy_hover;
             &:backdrop {
-              box-shadow: inset -4px 0 $headerbar_backdrop_border;
-              background-color: $tab_legacy_backdrop_hover;
+              box-shadow: inset -4px 0 $tab_backdrop_border;
             }
           }
           &:not(.reorderable-page):checked {
@@ -2514,11 +2496,10 @@ notebook {
         margin-left: 0px;
         > tab {
           &:not(.reorderable-page):hover {
-            box-shadow: inset 4px 0 $headerbar_border;
+            box-shadow: inset 4px 0 $tab_border;
             background-color: $tab_legacy_hover;
             &:backdrop {
-              box-shadow: inset 4px 0 $headerbar_backdrop_border;
-              background-color: $tab_legacy_backdrop_hover;
+              box-shadow: inset 4px 0 $tab_backdrop_border;
             }
           }
           &:not(.reorderable-page):checked {
@@ -2609,58 +2590,8 @@ notebook {
 
       transition: background 150ms ease-in-out;
 
-      &.reorderable-page {
-        background-color: $tab_color;
-        box-shadow: inset -1px -1px $headerbar_border;
-        border: none;
-      }
-
-      &:hover {
-        color: $fg_color;
-
-        &.reorderable-page {
-          border-color: $headerbar_border;
-          background-color: $tab_color_hover;
-          box-shadow: inset -1px -1px $headerbar_border;
-          transition: background 150ms ease-in-out;
-          &:backdrop { background-color: $tab_color_backdrop_hover; }
-        }
-      }
-
       &:backdrop {
         color: $backdrop_fg_color;
-
-        &.reorderable-page {
-          border-color: transparent;
-          background-color: $tab_color_backdrop;
-          box-shadow: inset -1px -1px $headerbar_backdrop_border;
-        }
-      }
-
-      &:checked {
-        color: $fg_color;
-        &.reorderable-page {
-          border-width: 0;
-          border-color: $headerbar_border;
-          background-color: $tab_color_active;
-          box-shadow: inset -1px -1px $headerbar_border;
-          &:hover {
-            background-color: $tab_color_active_hover;
-          }
-        }
-      }
-
-      &:backdrop:checked {
-        color: $backdrop_fg_color;
-
-        &.reorderable-page {
-          border-color: $headerbar_backdrop_border;
-          box-shadow: inset -1px -1px $headerbar_backdrop_border;
-          background-color: $tab_color_backdrop_active;
-          &:hover {
-            background-color: $tab_color_backdrop_active_hover;
-          }
-        }
       }
 
       // colors the button like the label, overridden otherwise
@@ -2707,15 +2638,9 @@ notebook {
           &:last-child { margin-right: -1px; }
         }
 
-        tab {
+        tab:not(.reorderable-page) {
           margin-left: 4px;
           margin-right: 4px;
-
-          &.reorderable-page {
-            border-style: none solid;
-            margin-left: 0px;
-            margin-right: 0px;
-          }
         }
       }
     }
@@ -2733,16 +2658,9 @@ notebook {
           &:first-child { margin-top: -1px; }
           &:last-child { margin-bottom: -1px; }
         }
-
-        tab {
+        tab:not(.reorderable-page) {
           margin-top: 4px;
           margin-bottom: 4px;
-
-          &.reorderable-page {
-            border-style: none solid;
-            margin-top: 0px;
-            margin-bottom: 0px;
-          }
         }
       }
     }
@@ -2752,9 +2670,9 @@ notebook {
   }
 
   > stack:not(:only-child) { // the :not(:only-child) is for "hidden" notebooks
-    background-color: $notebook_color;
+    background-color: $headerbar_bg_color;
 
-    &:backdrop { background-color: $backdrop_base_color; }
+    &:backdrop { background-color: $headerbar_backdrop_color; }
   }
 }
 

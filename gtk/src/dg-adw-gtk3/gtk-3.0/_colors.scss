@@ -11,6 +11,7 @@ $accent_fg_color: gtkcolor(accent_fg_color);
 $accent_color: gtkcolor(accent_color);
 $headerbar_bg_color: gtkcolor(headerbar_bg_color);
 $headerbar_fg_color: gtkcolor(headerbar_fg_color);
+$headerbar_border: gtkcolor(headerbar_shade_color);
 $headerbar_backdrop_color: gtkcolor(headerbar_backdrop_color);
 $card_bg_color: gtkcolor(card_bg_color);
 $card_fg_color: gtkcolor(card_fg_color);
@@ -122,16 +123,12 @@ $slider_hover_color: white;
 $fill_color: $selected_bg_color;
 $fill_text_color: $selected_fg_color;
 
-$headerbar_border: if($variant == 'light', gtkmix(currentColor, $headerbar_bg_color, 12.5%), gtkmix(currentColor, $headerbar_bg_color, 15%));
-$headerbar_backdrop_border: if($variant == 'light', gtkmix(currentColor, $headerbar_backdrop_color, 25%), gtkmix(currentColor, $headerbar_bg_color, 36.5%));
-
 // Notebook and tabs
-$notebook_color: $base_color;
-$tab_color: if($variant == 'light', gtkshade($headerbar_bg_color, 0.956), gtkshade($headerbar_bg_color, .81));
-$tab_color_hover: if($variant == 'light', gtkshade($headerbar_bg_color, 0.936), $headerbar_bg_color);
-$tab_color_active: $headerbar_bg_color;
-$tab_color_active_hover: if($variant == 'light', gtkshade($headerbar_bg_color, 0.973), gtkshade($headerbar_bg_color, 1.22));
-$tab_color_backdrop: if($variant == 'light', gtkshade($headerbar_backdrop_color, 0.96), $headerbar_bg_color);
-$tab_color_backdrop_hover: if($variant == 'light', gtkshade($headerbar_bg_color, 0.992), gtkshade($headerbar_bg_color, 1.22));
-$tab_color_backdrop_active: $headerbar_backdrop_color;
-$tab_color_backdrop_active_hover: if($variant == 'light', gtkshade($headerbar_backdrop_color,0.973), gtkshade($headerbar_backdrop_color, 1.15));
+$tab_color_hover: gtkmix(currentColor, $headerbar_bg_color, 7%);
+$tab_color_active: gtkmix(currentColor, $headerbar_bg_color, 10%);
+$tab_color_active_hover: gtkmix(currentColor, $headerbar_bg_color, 13%);
+$tab_color_hover_backdrop: gtkmix(currentColor, $headerbar_backdrop_color, 7%);
+$tab_color_active_backdrop: gtkmix(currentColor, $headerbar_backdrop_color, 10%);
+$tab_color_active_hover_backdrop: gtkmix(currentColor, $headerbar_backdrop_color, 13%);
+$tab_border: if($variant == 'light', gtkmix(currentColor, $headerbar_bg_color, 12.5%), gtkmix(currentColor, $headerbar_bg_color, 15%));
+$tab_backdrop_border: if($variant == 'light', gtkmix(currentColor, $headerbar_backdrop_color, 25%), gtkmix(currentColor, $headerbar_bg_color, 36.5%));
