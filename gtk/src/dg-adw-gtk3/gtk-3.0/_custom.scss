@@ -547,7 +547,7 @@ popover.menu > stack {
 // Trying to mimic new libadwaita tabs
 notebook {
   > header {
-    padding: 0 2px;
+    padding: if($variant=='light', 0 3px, 0 2px);
     background-color: $headerbar_bg_color;
     &:backdrop { background-color: $headerbar_backdrop_color; }
 

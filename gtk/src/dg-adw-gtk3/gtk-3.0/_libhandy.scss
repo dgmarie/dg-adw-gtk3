@@ -602,7 +602,7 @@ row {
 
 tabbar {
   .box {
-    padding: 0 4px;
+    padding: if($variant=='light', 0 5px, 0 4px);
     min-height: 38px;
     background: $headerbar_bg_color;
     border-bottom: 1px solid $headerbar_border;

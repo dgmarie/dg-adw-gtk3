@@ -10,7 +10,7 @@ $card_radius: $button_radius + 6;
 
 // Optional compact sizes for buttons, headerbar and headerbar widgets
 $_sizevariant: 'default'; //compact otherwise
-$_headerbar_height: if($_sizevariant=='default', 45px, 39px);
+$_headerbar_height: if($_sizevariant=='default', if($variant=='light', 46px, 45px), if($variant=='light', 40px, 39px));
 $_entry_height: if($_sizevariant=='default', 34px, 28px);
 $_btn_pad: if($_sizevariant=='default', 4px 10px, 2px 6px);
 $_hb_btn_top_pad: if($_sizevariant=='default', 5px, 3px);
@@ -1563,7 +1563,7 @@ searchbar > revealer > box {
 // ***************
 %titlebar,
 headerbar {
-  padding: 0 5px;
+  padding: if($variant=='light', 0 6px, 0 5px);
   min-height: $_headerbar_height;
   border-width: 0 0 1px;
   border-style: solid;
@@ -4672,14 +4672,17 @@ decoration {
   // lamefun trick to get rounded borders regardless of CSD use
   border-width: 0px;
 
+  $_wm_border: if($variant=='light', transparentize(black, 0.95), gtkmix(white, $headerbar_bg_color, 7%));
+  $_wm_border_backdrop: if($variant=='light', transparentize(black, 0.98), gtkmix(white, $headerbar_backdrop_color, 7%));
+
   // This isn't perfect but it's pretty close to libadwaita's window decoration
   box-shadow: 0 1px 3px 3px transparent,
               0 2px 6px 2px transparentize(black, 0.87),
               0 3px 12px 10px transparentize(black, 0.91),
               0 3px 14px 12px transparent,
               0 6px 14px 14px transparentize(black, 0.96),
-              0 0 0 2px transparentize(black, 0.95), //doing borders with box-shadow
-              0 0 0 1px gtkmix(white, $headerbar_bg_color, 7%);
+              0 0 0 2px if($variant=='light', transparent, transparentize(black, 0.95)), //doing borders with box-shadow
+              0 0 0 1px $_wm_border;
 
   // FIXME rationalize shadows
 
@@ -4696,8 +4699,8 @@ decoration {
                 0 3px 12px 10px transparent,
                 0 3px 14px 12px transparentize(black, 0.97),
                 0 6px 14px 14px transparent,
-                0 0 0 2px transparentize(black, 0.98),
-                0 0 0 1px gtkmix(white, $headerbar_backdrop_color, 7%);
+                0 0 0 2px if($variant=='light', transparent, transparentize(black, 0.98)), //doing borders with box-shadow
+                0 0 0 1px $_wm_border_backdrop;
 
     transition: $backdrop_transition;
   }
@@ -4724,12 +4727,12 @@ decoration {
   // server-side decorations as used by mutter
   // just doing borders, wm draws actual shadows
   .ssd & {
-    box-shadow: 0 0 0 2px transparentize(black, 0.95),
-                0 0 0 1px gtkmix(white, $headerbar_bg_color, 10%);
+    box-shadow: 0 0 0 2px if($variant=='light', transparent, transparentize(black, 0.95)),
+                0 0 0 1px $_wm_border;
   }
   .ssd &:backdrop {
-    box-shadow: 0 0 0 2px transparentize(black, 0.98),
-                0 0 0 1px gtkmix(white, $window_bg_color, 10%);
+    box-shadow: 0 0 0 2px if($variant=='light', transparent, transparentize(black, 0.98)),
+                0 0 0 1px $_wm_border_backdrop;
   }
   .ssd.maximized &,
   .ssd.maximized &:backdrop { box-shadow: none; }
@@ -4753,8 +4756,8 @@ decoration {
     box-shadow: 0 2px 6px 2px transparentize(black, 0.87),
                 0 3px 12px 10px transparentize(black, 0.91),
                 0 6px 14px 14px transparentize(black, 0.96),
-                0 0 0 2px transparentize(black, 0.95),
-                0 0 0 1px gtkmix(white, $headerbar_bg_color, 10%);
+                0 0 0 2px if($variant=='light', transparent, transparentize(black, 0.95)),
+                0 0 0 1px $_wm_border; //doing borders with box-shadow
   }
 
   .solid-csd & {
