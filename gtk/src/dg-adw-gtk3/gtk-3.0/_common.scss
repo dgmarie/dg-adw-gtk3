@@ -4679,7 +4679,7 @@ decoration {
               0 3px 14px 12px transparent,
               0 6px 14px 14px transparentize(black, 0.96),
               0 0 0 2px transparentize(black, 0.95), //doing borders with box-shadow
-              0 0 0 1px gtkmix(white, $headerbar_bg_color, 10%);
+              0 0 0 1px gtkmix(white, $headerbar_bg_color, 7%);
 
   // FIXME rationalize shadows
 
@@ -4697,7 +4697,7 @@ decoration {
                 0 3px 14px 12px transparentize(black, 0.97),
                 0 6px 14px 14px transparent,
                 0 0 0 2px transparentize(black, 0.98),
-                0 0 0 1px gtkmix(white, $window_bg_color, 10%);
+                0 0 0 1px gtkmix(white, $headerbar_backdrop_color, 7%);
 
     transition: $backdrop_transition;
   }
