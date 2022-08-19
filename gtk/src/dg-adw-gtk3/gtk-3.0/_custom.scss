@@ -548,9 +548,18 @@ notebook {
   > header {
     padding: if($variant=='light', 0 3px, 0 2px);
     background-color: $headerbar_bg_color;
+
     &:backdrop {
       background-color: $headerbar_backdrop_color;
       transition: $backdrop_transition;
+    }
+
+    button {
+      &:dir(rtl), &:dir(ltr) { // specificity bump
+        color: $headerbar_fg_color;
+        &:backdrop { color: $backdrop_headerbar_fg; }
+        &:disabled { color: $disabled_headerbar_fg; }
+      }
     }
 
     tab {
@@ -561,41 +570,54 @@ notebook {
         background-color: transparent;
         margin: 5px 2px 6px 3px;
         box-shadow: none;
+        color: $headerbar_fg_color;
+        &:backdrop { color: $backdrop_headerbar_fg; }
         > box { // hack to mimic libadwaita seperators
           border-left: 1px solid $tab_border;
           margin-left: -15px;
           padding-left: 15px;
           transition: border-color 150ms ease-in-out;
-          &:backdrop { border-color: $tab_backdrop_border; }
         }
-        button.flat { color: transparent; }
+        &, &:backdrop {
+          button.flat { color: transparent; }
+        }
       }
 
       &:hover.reorderable-page {
         background-color: $tab_color_hover;
         box-shadow: none;
+        color: $headerbar_fg_color;
         & box, + tab box { border-color: transparent; }
-        &:backdrop { background-color: $tab_color_hover_backdrop; }
-        button.flat { color: currentColor; }
+        &:backdrop {
+          background-color: $tab_color_hover_backdrop;
+          color: $backdrop_headerbar_fg;
+          button.flat { color: $backdrop_headerbar_fg; }
+        }
+        button.flat { color: $headerbar_fg_color; }
       }
 
       &:checked.reorderable-page {
         box-shadow: none;
         background-color: $tab_color_active;
+        color: $headerbar_fg_color;
         & box, + tab box { border-color: transparent; }
-        &:backdrop { background-color: $tab_color_active_backdrop; }
+        &:backdrop {
+          background-color: $tab_color_active_backdrop;
+          color: $backdrop_headerbar_fg;
+          button.flat { color: $backdrop_headerbar_fg; }
+        }
         &:hover { background-color: $tab_color_active_hover; }
         &:hover:backdrop { background-color: $tab_color_active_hover_backdrop; }
-        button.flat { color: currentColor; }
+        button.flat { color: $headerbar_fg_color; }
       }
 
       button.flat {
-        color: currentColor;
+        color: $headerbar_fg_color;
         margin: 1px 0;
         min-width: 22px;
         min-height: 22px;
         border-radius: 100%;
-
+        &:backdrop { color: $backdrop_headerbar_fg; }
         &:last-child {
           margin-left: 0;
           margin-right: -8px;

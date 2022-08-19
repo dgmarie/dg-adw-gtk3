@@ -136,5 +136,4 @@ $tab_color_active_hover: gtkmix(currentColor, $headerbar_bg_color, 13%);
 $tab_color_hover_backdrop: gtkmix(currentColor, $headerbar_backdrop_color, 7%);
 $tab_color_active_backdrop: gtkmix(currentColor, $headerbar_backdrop_color, 10%);
 $tab_color_active_hover_backdrop: gtkmix(currentColor, $headerbar_backdrop_color, 13%);
-$tab_border: if($variant == 'light', gtkmix(currentColor, $headerbar_bg_color, 12.5%), gtkmix(currentColor, $headerbar_bg_color, 15%));
-$tab_backdrop_border: if($variant == 'light', gtkmix(currentColor, $headerbar_backdrop_color, 25%), gtkmix(currentColor, $headerbar_bg_color, 36.5%));
+$tab_border: gtkalpha(currentColor, .15);
