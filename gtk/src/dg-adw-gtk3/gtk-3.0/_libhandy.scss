@@ -608,6 +608,7 @@ tabbar {
     border-bottom: 1px solid $headerbar_shade_color;
 
     &:backdrop {
+      transition: $backdrop_transition;
       background-color: $headerbar_backdrop_color;
     }
   }

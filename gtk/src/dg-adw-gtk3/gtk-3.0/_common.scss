@@ -1898,8 +1898,10 @@ headerbar { // headerbar border rounding
 
   separator {
     background-color: $headerbar_border;
-    transition: $backdrop_transition;
-    &:backdrop { background-color: $headerbar_border_backdrop; }
+    &:backdrop {
+      background-color: $headerbar_border_backdrop;
+      transition: $backdrop_transition;
+    }
   }
 
   @extend %titlebar;

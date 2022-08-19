@@ -548,7 +548,10 @@ notebook {
   > header {
     padding: if($variant=='light', 0 3px, 0 2px);
     background-color: $headerbar_bg_color;
-    &:backdrop { background-color: $headerbar_backdrop_color; }
+    &:backdrop {
+      background-color: $headerbar_backdrop_color;
+      transition: $backdrop_transition;
+    }
 
     tab {
       &.reorderable-page {
