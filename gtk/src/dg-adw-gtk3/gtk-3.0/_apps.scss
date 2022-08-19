@@ -147,8 +147,9 @@
       }
     }
   }
+  // This is from Yaru
   notebook {
-    background-color: if($variant=='light', white, $bg_color);
+    background-color: if($variant=='light', $base_color, $bg_color);
 
     &:backdrop {
       background-color: if($variant=='light', $backdrop_base_color, $backdrop_bg_color);

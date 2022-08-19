@@ -42,7 +42,7 @@
 // Header bar, search bar, tab bar
 @define-color headerbar_bg_color #{if($variant == 'light', #ebebeb, darken(#2c2c2c, 4%))};
 @define-color headerbar_fg_color #{if($variant == 'light', transparentize(black, .2), white)};
-@define-color headerbar_border_color #{if($variant == 'light', transparentize(black, .2), white)};
+@define-color headerbar_border_color #{if($variant == 'light', black, white)}; // Unlike libadwaita this has to be fully opaque
 @define-color headerbar_backdrop_color @window_bg_color;
 @define-color headerbar_shade_color #{if($variant == 'light', transparentize(black, .93), transparentize(black, .64))};
 
