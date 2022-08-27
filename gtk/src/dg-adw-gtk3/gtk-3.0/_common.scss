@@ -3792,7 +3792,6 @@ row {
     &:hover { background-color: $view_hover_color; }
 
     &:active { background-color: $view_active_color; }
-    &:backdrop:hover { background-color: transparent; }
 
     &:selected {
       color: $fg_color;
@@ -3802,11 +3801,6 @@ row {
       &:hover {
         background-color: $view_selected_hover_color;
         color: $fg_color;
-      }
-
-      &:backdrop {
-        background-color: $view_hover_color;
-        color: $backdrop_fg_color;
       }
     }
   }
