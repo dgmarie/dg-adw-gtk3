@@ -165,7 +165,7 @@
   }
 
   // https://github.com/lassekongo83/adw-gtk3/issues/160
-  entry.search > * {
+  entry.search > :not(.csd) {
     margin: 5px;
     &:not(image), &:backdrop:not(image) {
       color: $selected_fg_color;
