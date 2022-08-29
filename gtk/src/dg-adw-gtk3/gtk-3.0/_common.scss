@@ -1674,7 +1674,8 @@ headerbar {
     min-height: 36px;
     padding: 0 6px 0 6px;
   }
-
+ 
+  /* macOS window buttons. Most of this (including the images that are used here) is borrowed from https://github.com/vinceliuice/WhiteSur-gtk-theme */
   button.titlebutton {
     background-position: center;
     background-repeat: no-repeat;
