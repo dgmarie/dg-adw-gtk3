@@ -3414,7 +3414,7 @@ scale {
       }
 
       slider {
-        &:dir(ltr), &:dir(rtl) { // specificity bumb
+        &:dir(ltr), &:dir(rtl) { // specificity bump
           &:hover, &:backdrop, &:disabled, &:backdrop:disabled, & {
             margin-bottom: -15px;
             margin-top: 6px;
@@ -3774,7 +3774,6 @@ list {
   color: $text_color;
   background-color: $base_color;
   border-color: $borders_color;
-
   row { padding: 2px; }
 }
 
