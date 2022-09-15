@@ -150,18 +150,10 @@
   // This is from Yaru
   notebook {
     background-color: if($variant=='light', $base_color, $bg_color);
-
-    &:backdrop {
-      background-color: if($variant=='light', $backdrop_base_color, $backdrop_bg_color);
-    }
   }
 
   placessidebar {
     background-color: if($variant=='light', $bg_color, $base_color);
-
-    &:backdrop {
-      background-color: $backdrop_bg_color;
-    }
   }
 
   // https://github.com/lassekongo83/adw-gtk3/issues/160
