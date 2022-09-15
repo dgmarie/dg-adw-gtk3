@@ -71,7 +71,7 @@
             @include button(backdrop, $headerbar_backdrop_color, $backdrop_headerbar_fg);
             &:hover { @include button(normal, $headerbar_backdrop_color, $backdrop_headerbar_fg); }
             border-left: 1px solid $border_color;
-            image { color: $backdrop_fg_color; }
+            image { color: $backdrop_headerbar_fg; }
           }
         }
       }
