@@ -1889,5 +1889,21 @@
         </g>
       </g>
     </g>
+    <rect
+       style="fill:#ffffff;fill-opacity:0.15;stroke-width:0.402912;stroke-linecap:round"
+       id="tab-border-dark"
+       width="0.26458332"
+       height="6.8791685"
+       x="52.652084"
+       y="0"
+       ry="2.9374649e-17" />
+    <rect
+       style="fill:#000000;fill-opacity:0.12;stroke-width:0.402912;stroke-linecap:round"
+       id="tab-border-light"
+       width="0.26458332"
+       height="6.8791685"
+       x="52.122917"
+       y="0"
+       ry="2.9374649e-17" />
   </g>
 </svg>
