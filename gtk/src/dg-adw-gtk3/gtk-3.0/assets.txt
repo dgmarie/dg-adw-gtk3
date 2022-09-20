@@ -58,3 +58,5 @@ titlebutton-restore-hover
 titlebutton-restore-hover-dark
 titlebutton-restore-active
 titlebutton-restore-active-dark
+tab-border-light
+tab-border-dark
