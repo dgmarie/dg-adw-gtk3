@@ -660,43 +660,40 @@ tabbar {
     @include need-attention-gradient("left");
   }
 
+
   tab {
+    margin: 5px 1px 5px 0;
     border-style: none;
-    border-color: transparent;
-    border-width: 0;
     border-radius: $button_radius;
-    margin: 5px 1px;
-    transition: background 150ms ease-in-out;
-    background-color: transparent;
-    background-image: if($variant == 'light', url('assets/tab-border.png'), url('assets/tab-border-dark.png'));
+    transition: background-color 150ms ease-in-out;
+
+    background-image: if($variant == 'light',
+                          -gtk-scaled(
+                            url('assets/tab-border-light.png'),
+                            url('assets/tab-border-light@2.png')
+                          ),
+                          -gtk-scaled(
+                            url('assets/tab-border-dark.png'),
+                            url('assets/tab-border-dark@2.png')
+                          )
+                        );
+
     background-position: left;
-    background-repeat: repeat-y;
-    + tab:checked { background-image: url('assets/tab-border-none.png'); }
+    background-repeat: no-repeat;
 
-    &:checked {
-      background-color: $tab_color_active;
-      &:backdrop { background-color: $tab_color_active_backdrop; }
-
-      &:hover {
-        background-color: $tab_color_active_hover;
-        &:backdrop { background-color: $tab_color_active_hover_backdrop; }
-        &, + tab { background-image: url('assets/tab-border-none.png'); }
-      }
-
-      &, + tab { background-image: url('assets/tab-border-none.png'); }
-    }
+    &:first-child { background-image: none; }
 
     &:hover {
-      background-color: $tab_color_hover;
-      &:backdrop { background-color: $tab_color_hover_backdrop; }
-      &, + tab { background-image: url('assets/tab-border-none.png'); }
+      background-color: $view_hover_color;
+      &, + tab { background-image: none; }
     }
-  }
 
-  arrow.down + tab,
-  tab:first-child {
-    background-image: none;
-    border: none;
+    &:checked {
+      background-color: $view_selected_color;
+      &, + tab { background-image: none; }
+
+      &:hover { background-color: $view_selected_hover_color; }
+    }
   }
 
   .start-action,
