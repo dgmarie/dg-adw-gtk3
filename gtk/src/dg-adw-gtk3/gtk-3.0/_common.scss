@@ -10,7 +10,7 @@ $card_radius: $button_radius + 6;
 
 // Optional compact sizes for buttons, headerbar and headerbar widgets
 $_sizevariant: 'default'; //compact otherwise
-$_headerbar_height: if($_sizevariant=='default', if($variant=='light', 46px, 45px), if($variant=='light', 40px, 39px));
+$_headerbar_height: if($_sizevariant=='default', if($variant=='light', 46px, 45px), if($variant=='light', 40px, 39px)); // make window border look like it's inset on dark theme
 $_entry_height: if($_sizevariant=='default', 34px, 28px);
 $_btn_pad: if($_sizevariant=='default', 4px 10px, 2px 6px);
 $_hb_btn_top_pad: if($_sizevariant=='default', 5px, 3px);
@@ -1497,7 +1497,7 @@ searchbar > revealer > box {
 // ***************
 %titlebar,
 headerbar {
-  padding: if($variant=='light', 0 6px, 0 5px);
+  padding: if($variant=='light', 0 6px, 0 5px); // make window border look like its inset on dark theme
   min-height: $_headerbar_height;
   border-width: 0 0 1px;
   border-style: solid;
@@ -1679,37 +1679,71 @@ headerbar {
   button.titlebutton {
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 16px;
-    background-color: transparent;
-    border-width: 0px;
+    background-clip: content-box;
+    background-size: 14px;
+    border: none;
     outline-width: 0px;
-    color: transparent;
-    min-height: 16px;
-    min-width: 16px;
-    margin: 0 1px;
-    padding: 0;
+    min-height: 14px;
+    min-width: 14px;
+    border-radius: 99px;
+    margin: 0;
+    padding: 2px;
     transition: $button_transition;
 
+    image {
+      color: transparent;
+      margin: -2px; // So we can make the window button smaller than 16px
+    }
+
+    &.close:not(:backdrop) {
+      background-color: $close_bg_color;
+      &:active {
+        background-color: $close_bg_color_active;
+      }
+    }
+
+    &.minimize:not(:backdrop) {
+      background-color: $min_bg_color;
+      &:active {
+        background-color: $min_bg_color_active;
+      }
+    }
+
+    &.maximize:not(:backdrop) {
+      background-color: $max_bg_color;
+      &:active {
+        background-color: $max_bg_color_active;
+      }
+    }
+
     &:backdrop {
-      opacity: 0.5;
+      background-color: $window_button_backdrop;
+      transition: $backdrop_transition;
     }
 
     @each $k in ('close', 'maximize', 'minimize') {
-      @each $l, $m in ('',''), (':backdrop','-backdrop'), (':backdrop:hover','-backdrop-hover'), (':hover','-hover'), (':active','-active') {
+      @each $l, $m in ('',''), (':backdrop','-backdrop') {
         &.#{$k}#{$l} {
-          background-image: -gtk-scaled(url('assets/titlebutton-#{$k}#{$m}#{$asset_suffix}.png'),
-                                        url('assets/titlebutton-#{$k}#{$m}#{$asset_suffix}@2.png'));
+          &:hover,
+          &:active {
+            background-image: -gtk-scaled(url('assets/titlebutton-#{$k}#{$m}.png'),
+                                          url('assets/titlebutton-#{$k}#{$m}@2.png'));
+          }
         }
       }
     }
   }
+
   .fullscreen &,
   .maximized & {
     button.titlebutton {
-      @each $l, $m in ('',''), (':backdrop','-backdrop'), (':backdrop:hover','-backdrop-hover'), (':hover','-hover'), (':active','-active') {
+      @each $l, $m in ('',''), (':backdrop','-backdrop') {
         &.maximize#{$l} {
-          background-image: -gtk-scaled(url('assets/titlebutton-restore#{$m}#{$asset_suffix}.png'),
-                                        url('assets/titlebutton-restore#{$m}#{$asset_suffix}@2.png'));
+          &:hover,
+          &:active {
+            background-image: -gtk-scaled(url('assets/titlebutton-restore#{$m}.png'),
+                                          url('assets/titlebutton-restore#{$m}@2.png'));
+          }
         }
       }
     }
@@ -4497,6 +4531,7 @@ colorchooser .popover.osd { border-radius: 5px; }
 // **********************
 // * Window Decorations *
 // **********************
+
 decoration {
   border-radius: $window_radius $window_radius 0 0;
   // lamefun trick to get rounded borders regardless of CSD use
