@@ -1689,9 +1689,9 @@ headerbar {
     margin: 0;
     padding: 2px;
     transition: $button_transition;
+    color: transparent;
 
     image {
-      color: transparent;
       margin: -2px; // So we can make the window button smaller than 16px
     }
 
