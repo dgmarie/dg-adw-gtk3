@@ -109,15 +109,6 @@ $backdrop_headerbar_fg: gtkmix($headerbar_fg_color, $headerbar_backdrop_color, 5
 $disabled_card_fg: gtkmix($card_fg_color, $card_bg_color, 50%);
 $disabled_popover_fg: gtkmix($popover_fg_color, $popover_bg_color, 50%);
 
-// Window buttons
-$close_bg_color: #e9583b;
-$close_bg_color_active: #f08a75;
-$min_bg_color: #f3bb2e;
-$min_bg_color_active: #f7cf6c;
-$max_bg_color: #3fcd17;
-$max_bg_color_active: #78dc5c;
-$window_button_backdrop: gtkalpha($headerbar_fg_color, .1);
-
 // Other colors from libadwaita
 $border_color: gtkalpha(currentColor, .15); // not the same as borderS-color
 

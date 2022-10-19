@@ -463,74 +463,40 @@ list.view.frame {
 // macOS Legacy application titlebuttons. Most of this (including the images that are used here) is borrowed from https://github.com/vinceliuice/WhiteSur-gtk-theme
 .ssd .titlebar {
   border-width: 0;
-  padding: if($variant=='light', 0 9px, 0 8px); // make window border look like its inset on dark theme
+  padding: if($variant=='light', 0 9px, 0 8px);
   min-height: if($variant=='light', 36px, 35px);
   border-bottom: 1px solid $headerbar_shade_color;
 
   &.default-decoration button.titlebutton {
     background-position: center;
     background-repeat: no-repeat;
-    background-clip: padding-box;
-    background-size: 14px;
-    border: none;
-    color: transparent;
+    background-size: 16px;
+    background-color: transparent;
+    border-width: 0px;
     outline-width: 0px;
-    min-height: 14px;
-    min-width: 14px;
-    border-radius: 99px;
-    margin: 0 2px;
-    padding: 1px;
+    color: transparent;
+    min-height: 16px;
+    min-width: 16px;
+    margin: 0 1px;
+    padding: 0;
     transition: $button_transition;
 
-    &.close:not(:backdrop) {
-      background-color: $close_bg_color;
-      &:active {
-        background-color: $close_bg_color_active;
-      }
-    }
-
-    &.minimize:not(:backdrop) {
-      background-color: $min_bg_color;
-      &:active {
-        background-color: $min_bg_color_active;
-      }
-    }
-
-    &.maximize:not(:backdrop) {
-      background-color: $max_bg_color;
-      &:active {
-        background-color: $max_bg_color_active;
-      }
-    }
-
-    &:backdrop {
-      background-color: $window_button_backdrop;
-      transition: $backdrop_transition;
-    }
-
     @each $k in ('close', 'maximize', 'minimize') {
-      @each $l, $m in ('',''), (':backdrop','-backdrop') {
+      @each $l, $m in ('',''), (':backdrop','-backdrop'), (':backdrop:hover','-backdrop-hover'), (':hover','-hover'), (':active','-active') {
         &.#{$k}#{$l} {
-          &:hover,
-          &:active {
-            background-image: -gtk-scaled(url('assets/titlebutton-#{$k}#{$m}.png'),
-                                          url('assets/titlebutton-#{$k}#{$m}@2.png'));
-          }
+          background-image: -gtk-scaled(url('assets/titlebutton-#{$k}#{$m}#{$asset_suffix}.png'),
+                                        url('assets/titlebutton-#{$k}#{$m}#{$asset_suffix}@2.png'));
         }
       }
     }
   }
-
   .fullscreen &,
   .maximized & {
     button.titlebutton {
-      @each $l, $m in ('',''), (':backdrop','-backdrop') {
+      @each $l, $m in ('',''), (':backdrop','-backdrop'), (':backdrop:hover','-backdrop-hover'), (':hover','-hover'), (':active','-active') {
         &.maximize#{$l} {
-          &:hover,
-          &:active {
-            background-image: -gtk-scaled(url('assets/titlebutton-restore#{$m}.png'),
-                                          url('assets/titlebutton-restore#{$m}@2.png'));
-          }
+          background-image: -gtk-scaled(url('assets/titlebutton-restore#{$m}#{$asset_suffix}.png'),
+                                        url('assets/titlebutton-restore#{$m}#{$asset_suffix}@2.png'));
         }
       }
     }

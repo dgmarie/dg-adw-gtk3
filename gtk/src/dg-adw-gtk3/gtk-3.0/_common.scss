@@ -1679,71 +1679,33 @@ headerbar {
   button.titlebutton {
     background-position: center;
     background-repeat: no-repeat;
-    background-clip: content-box;
-    background-size: 14px;
-    border: none;
+    background-size: 16px;
+    background-color: transparent;
+    border-width: 0px;
     outline-width: 0px;
-    min-height: 14px;
-    min-width: 14px;
-    border-radius: 99px;
-    margin: 0;
-    padding: 2px;
-    transition: $button_transition;
     color: transparent;
-
-    image {
-      margin: -2px; // So we can make the window button smaller than 16px
-    }
-
-    &.close:not(:backdrop) {
-      background-color: $close_bg_color;
-      &:active {
-        background-color: $close_bg_color_active;
-      }
-    }
-
-    &.minimize:not(:backdrop) {
-      background-color: $min_bg_color;
-      &:active {
-        background-color: $min_bg_color_active;
-      }
-    }
-
-    &.maximize:not(:backdrop) {
-      background-color: $max_bg_color;
-      &:active {
-        background-color: $max_bg_color_active;
-      }
-    }
-
-    &:backdrop {
-      background-color: $window_button_backdrop;
-      transition: $backdrop_transition;
-    }
+    min-height: 16px;
+    min-width: 16px;
+    margin: 0 1px;
+    padding: 0;
+    transition: $button_transition;
 
     @each $k in ('close', 'maximize', 'minimize') {
-      @each $l, $m in ('',''), (':backdrop','-backdrop') {
+      @each $l, $m in ('',''), (':backdrop','-backdrop'), (':backdrop:hover','-backdrop-hover'), (':hover','-hover'), (':active','-active') {
         &.#{$k}#{$l} {
-          &:hover,
-          &:active {
-            background-image: -gtk-scaled(url('assets/titlebutton-#{$k}#{$m}.png'),
-                                          url('assets/titlebutton-#{$k}#{$m}@2.png'));
-          }
+          background-image: -gtk-scaled(url('assets/titlebutton-#{$k}#{$m}#{$asset_suffix}.png'),
+                                        url('assets/titlebutton-#{$k}#{$m}#{$asset_suffix}@2.png'));
         }
       }
     }
   }
-
   .fullscreen &,
   .maximized & {
     button.titlebutton {
-      @each $l, $m in ('',''), (':backdrop','-backdrop') {
+      @each $l, $m in ('',''), (':backdrop','-backdrop'), (':backdrop:hover','-backdrop-hover'), (':hover','-hover'), (':active','-active') {
         &.maximize#{$l} {
-          &:hover,
-          &:active {
-            background-image: -gtk-scaled(url('assets/titlebutton-restore#{$m}.png'),
-                                          url('assets/titlebutton-restore#{$m}@2.png'));
-          }
+          background-image: -gtk-scaled(url('assets/titlebutton-restore#{$m}#{$asset_suffix}.png'),
+                                        url('assets/titlebutton-restore#{$m}#{$asset_suffix}@2.png'));
         }
       }
     }
