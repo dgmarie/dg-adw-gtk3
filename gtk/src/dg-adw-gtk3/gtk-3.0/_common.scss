@@ -2291,27 +2291,70 @@ popover.background {
 // * Notebooks *
 // *************
 notebook {
-  > header {
-    padding: 0;
-    border-color: $headerbar_shade_color;
-    border-width: 0px;
+  &:not(.frame) > header {
+    padding: if($variant=='light', 0 3px, 0 2px);
     background-color: $headerbar_bg_color;
-    &:backdrop {
-      background-color: $headerbar_backdrop_color;
-    }
+    border-color: $headerbar_shade_color;
 
     &.top {
       box-shadow: inset 0 -1px $headerbar_shade_color;
+      tabs > tab:not(.reorderable-page):backdrop:checked {
+        box-shadow: inset 0 -4px $backdrop_selected_tab_color;
+      }
     }
     &.bottom {
       box-shadow: inset 0 1px $headerbar_shade_color;
+      tabs > tab:not(.reorderable-page):backdrop:checked {
+        box-shadow: inset 0 4px $backdrop_selected_tab_color;
+      }
     }
     &.left {
       box-shadow: inset -1px 0 $headerbar_shade_color;
+      tabs > tab:not(.reorderable-page):backdrop:checked {
+        box-shadow: inset -4px 0 $backdrop_selected_tab_color;
+      }
     }
     &.right {
       box-shadow: inset 1px 0 $headerbar_shade_color;
+      tabs > tab:not(.reorderable-page):backdrop:checked {
+        box-shadow: inset 4px 0 $backdrop_selected_tab_color;
+      }
     }
+
+    &:backdrop {
+      background-color: $headerbar_backdrop_color;
+      transition: $backdrop_transition;
+    }
+
+    tabs > tab:not(.reorderable-page) {
+      &:backdrop { color: $backdrop_headerbar_fg; }
+      &:hover { background-color: $tab_color_active_backdrop; }
+    }
+  }
+
+  &.frame > header {
+    background-color: $base_color;
+    border-color: $headerbar_border;
+
+    &.top {
+      box-shadow: inset 0 -1px $headerbar_border;
+    }
+    &.bottom {
+      box-shadow: inset 0 1px $headerbar_border;
+    }
+    &.left {
+      box-shadow: inset -1px 0 $headerbar_border;
+    }
+    &.right {
+      box-shadow: inset 1px 0 $headerbar_border;
+    }
+  }
+
+  > header {
+    padding: 0;
+    border-width: 0px;
+    background-color: $headerbar_bg_color;
+
     tabs { margin: 0px; }
 
     &.top {
@@ -2321,9 +2364,6 @@ notebook {
         > tab {
           &:not(.reorderable-page):hover {
             background-color: $tab_color_active;
-            &:backdrop {
-              background-color: $tab_color_active_backdrop;
-            }
           }
           &:not(.reorderable-page):checked {
             box-shadow: inset 0 -4px $selected_bg_color;
@@ -2339,9 +2379,6 @@ notebook {
         > tab {
           &:not(.reorderable-page):hover {
             background-color: $tab_color_active;
-            &:backdrop {
-              background-color: $tab_color_active_backdrop;
-            }
           }
           &:not(.reorderable-page):checked {
             box-shadow: inset 0 4px $selected_bg_color;
@@ -2357,9 +2394,6 @@ notebook {
         > tab {
           &:not(.reorderable-page):hover {
             background-color: $tab_color_active;
-            &:backdrop {
-              background-color: $tab_color_active_backdrop;
-            }
           }
           &:not(.reorderable-page):checked {
             box-shadow: inset -4px 0 $selected_bg_color;
@@ -2375,9 +2409,6 @@ notebook {
         > tab {
           &:not(.reorderable-page):hover {
             background-color: $tab_color_active;
-            &:backdrop {
-              background-color: $tab_color_active_backdrop;
-            }
           }
           &:not(.reorderable-page):checked {
             box-shadow: inset 4px 0 $selected_bg_color;
@@ -2467,10 +2498,6 @@ notebook {
 
       transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
 
-      &:backdrop {
-        color: $backdrop_headerbar_fg;
-      }
-
       // colors the button like the label, overridden otherwise
       button.flat {
         &:hover {
@@ -2548,8 +2575,14 @@ notebook {
 
   > stack:not(:only-child) { // the :not(:only-child) is for "hidden" notebooks
     background-color: $headerbar_bg_color;
+  }
 
+  &:not(.frame) > stack:not(:only-child) {
     &:backdrop { background-color: $headerbar_backdrop_color; }
+  }
+
+  &.frame > stack:not(:only-child) {
+    background-color: $base_color;
   }
 }
 
@@ -2872,7 +2905,6 @@ radio {
                         (":hover", "hover"),
                         (":active", "active"),
                         (":disabled", "insensitive"),
-                        (":backdrop", "backdrop"),
                         (":backdrop:disabled", 'backdrop-insensitive') {
       &#{$state} {
         @include check($t, $_c);
@@ -2888,7 +2920,6 @@ radio {
                             (":hover", "hover"),
                             (":active", "active"),
                             (":disabled", "insensitive"),
-                            (":backdrop", "backdrop"),
                             (":backdrop:disabled", 'backdrop-insensitive') {
           &#{$state} {
             @include check($t, $checkradio_bg_color, $checkradio_fg_color, $checked: true);
@@ -2920,7 +2951,7 @@ radio {
     padding: 0;
 
     &, &:not(:checked), &:checked, &:indeterminate {
-      &, &:hover, &:disabled, &:backdrop { //FIXME use button reset mixin
+      &, &:hover, &:disabled { //FIXME use button reset mixin
         min-height: 14px;
         min-width: 14px;
         padding: 1px;
@@ -2937,7 +2968,7 @@ check {
   menu menuitem &,
   popover & {
     &, &:not(:checked), &:checked, &:indeterminate {
-      &, &:hover, &:disabled, &:backdrop { //FIXME use button reset mixin
+      &, &:hover, &:disabled { //FIXME use button reset mixin
         border: none;
         background: none;
         transition: none;
@@ -2950,7 +2981,7 @@ radio {
   menu menuitem &,
   popover & {
     &, &:not(:checked), &:checked, &:indeterminate {
-      &, &:hover, &:disabled, &:backdrop { //FIXME use button reset mixin
+      &, &:hover, &:disabled { //FIXME use button reset mixin
         border: 1px solid gtkalpha(currentColor, 0.3);
         background: none;
         transition: none;
