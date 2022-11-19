@@ -16,13 +16,34 @@ scss_dir = join_paths(meson.project_name(), 'gtk-3.0')
 accent_colors_scss = scss_dir / 'accent-colors.scss.in'
 
 foreach variant : variants
-  theme_name = meson.project_name() + '-' + variant
+  if variant == 'orange'
+    theme_name = meson.project_name()
+  elif variant == 'orange-dark'
+    theme_name = meson.project_name() + '-dark'
+  else
+    theme_name = meson.project_name() + '-' + variant
+  endif
+
+  icon_theme = theme_name
+  if not icon_theme.endswith('-dark')
+    icon_theme += '-dark'
+  endif
+
+  if variant.endswith('-dark')
+    metacity = meson.project_name() + '-dark'
+  else
+    metacity = meson.project_name()
+  endif
+
   theme_dir = join_paths(get_option('prefix'), get_option('datadir'), 'themes', theme_name)
   gtk3_dir = join_paths(theme_dir, 'gtk-3.0')
 
   conf_data = configuration_data()
-  conf_data.set('ThemeName', meson.project_name())
-  conf_data.set('VariantThemeName', meson.project_name() + '-' + variant)
+  conf_data.set('FullThemeName', theme_name)
+  conf_data.set('VariantThemeName', theme_name)
+  conf_data.set('MetacityThemeName', metacity)
+  conf_data.set('IconThemeName', icon_theme)
+  conf_data.set('CursorThemeName', meson.project_name())
   index = configure_file(input : 'index.theme.in',
                          output : '@0@-index.theme'.format(theme_name),
                          configuration : conf_data,

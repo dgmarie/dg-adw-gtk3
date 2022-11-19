@@ -62,3 +62,9 @@
 // Miscellaneous
 @define-color shade_color #{if($variant == 'light', transparentize(black, .93), transparentize(black, .64))};
 @define-color scrollbar_outline_color #{if($variant == 'light', white, transparentize(black, .5))};
+
+// Budgie
+@define-color budgie_tasklist_indicator_color @yaru_accent_bg_color;
+@define-color budgie_tasklist_indicator_color_active @yaru_accent_bg_color;
+@define-color budgie_tasklist_indicator_color_active_window @yaru_accent_bg_color;
+@define-color budgie_tasklist_indicator_color_attention @red_4;

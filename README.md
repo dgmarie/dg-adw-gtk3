@@ -1,11 +1,17 @@
 <div align="center">
 
-# dg-adw-gtk3 (forked from [adw-gtk3](https://github.com/lassekongo83/adw-gtk3))
+# qualia GTK3 theme (forked from [adw-gtk3](https://github.com/lassekongo83/adw-gtk3))
 
-**A Yaru inspired theme for GTK3**
+**A Yaru and Libadwaita inspired theme for GTK3**
 
-This theme is supposed to be used with [this](https://github.com/dgsasha/dg-gnome-theme).
+This theme is supposed to be used with [qualia GTK theme](https://github.com/dgsasha/dg-gnome-theme).
 
+</div>
+
+## Installing
+See [CONTRIBUTING](CONTRIBUTING.md)
 
 ## Credits
-[Yaru](https://github.com/ubuntu/yaru) [WhiteSur-gtk-theme](https://github.com/vinceliuice/WhiteSur-gtk-theme)
+A huge thanks to:
+- [vinceliuice](https://github.com/vinceliuice) for [WhiteSur-gtk-theme](https://github.com/vinceliuice/WhiteSur-gtk-theme)
+- [lassekongo83](https://github.com/lassekongo83) for [adw-gtk3](https://github.com/lassekongo83/adw-gtk3)

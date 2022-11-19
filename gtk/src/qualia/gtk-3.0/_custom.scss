@@ -437,14 +437,14 @@ statusbar {
 // scrolled window list rows
 scrolledwindow list {
   &:not(.content) {
-    padding: 6px 0;
+    padding: 5px 0;
   }
   row {
-    margin: 0 6px;
+    margin: 1px 6px;
     border-radius: $button_radius;
   }
   separator.horizontal {
-    margin: 6px;
+    margin: 5px 6px;
   }
 }
 

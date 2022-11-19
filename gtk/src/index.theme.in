@@ -1,6 +1,12 @@
-[X-GNOME-Metatheme]
-Name=@VariantThemeName@
+[Desktop Entry]
+Name=@FullThemeName@
 Type=X-GNOME-Metatheme
 Comment=@VariantThemeName@ theme
 Encoding=UTF-8
+
+[X-GNOME-Metatheme]
 GtkTheme=@VariantThemeName@
+MetacityTheme=@MetacityThemeName@
+IconTheme=@IconThemeName@
+CursorTheme=@CursorThemeName@
+CursorSize=24

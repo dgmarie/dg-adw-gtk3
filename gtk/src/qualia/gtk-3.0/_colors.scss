@@ -96,6 +96,13 @@ $backdrop_scrollbar_slider_color: $scrollbar_slider_color;
 $backdrop_menu_color: $menu_color;
 
 //special cased widget colors
+$panel_bg_color: $dark_4;
+$panel_fg_color: white;
+$panel_separator_color: gtkalpha(white, .15); // not the same as borderS-color
+
+$popover_border: transparentize(black, .86);
+$wm_border: if($variant=='light', transparentize(black, 0.95), gtkmix(white, $headerbar_bg_color, 7%));
+$wm_border_backdrop: if($variant=='light', transparentize(black, 0.98), gtkmix(white, $headerbar_backdrop_color, 7%));
 $suggested_bg_color: $selected_bg_color;
 $suggested_border_color: $selected_borders_color;
 $progress_bg_color: $selected_bg_color;
@@ -126,6 +133,8 @@ $switch_hover_color: gtkalpha(currentColor, .2);
 
 $slider_color: gtkmix(white, $base_color, 80%);
 $slider_hover_color: white;
+
+$window_border: transparentize(white, 0.93);
 
 $fill_color: $selected_bg_color;
 $fill_text_color: $selected_fg_color;

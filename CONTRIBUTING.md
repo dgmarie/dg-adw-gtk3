@@ -11,15 +11,11 @@ Other distros may have named the above packages differently.
 
 When the above requirements are installed, simply run these commands:
 ```bash
-git clone https://github.com/dgmarie/dg-adw-gtk3.git
+git clone https://github.com/dgsasha/dg-adw-gtk3.git
 cd dg-adw-gtk3
 meson -Dprefix="${HOME}/.local" build
 ninja -C build install
 ```
-
-If you want to change accent color run `meson configure -Daccent=ACCENT` and substitute `ACCENT` with one of the colors below.
-
-`orange` `bark` `sage` `olive` `viridian` `prussiangreen` `blue` `purple` `magenta` `red`
 
 If you want to install the theme for all users. Remove `-Dprefix="${HOME}/.local"` and install with `sudo ninja -C build install`.
 
