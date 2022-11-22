@@ -275,7 +275,8 @@ list.content {
   list {
     background-color: $card_bg_color;
     border-radius: $card_radius;
-    box-shadow: 0 0 0 1px transparentize(black, 0.97),
+    box-shadow: inset 0 0 0 1px $button_border,
+                0 0 0 1px transparentize(black, 0.97),
                 0 1px 2px 1px transparentize(black, .93),
                 0 2px 4px 2px transparentize(black, .97);
   }
@@ -283,7 +284,8 @@ list.content {
   background-color: $card_bg_color;
   color: $card_fg_color;
   border-radius: $card_radius;
-  box-shadow: 0 0 0 1px transparentize(black, 0.97),
+  box-shadow: inset 0 0 0 1px $button_border,
+              0 0 0 1px transparentize(black, 0.97),
               0 1px 2px 1px transparentize(black, .93),
               0 2px 4px 2px transparentize(black, .97);
 
@@ -293,6 +295,7 @@ list.content {
     margin: 0;
     //padding: 2px;
     transition: 200ms $ease-out-quad;
+    border-color: $button_border;
 
     &:not(:last-child) {
       border-bottom: 1px solid $card_shade_color;
@@ -358,43 +361,28 @@ viewswitcher {
   }
 
   button {
-    border-radius: 0;
-    border-top: 0;
-    border-bottom: 0;
+    border-radius: $button_radius;
+    border-width: 1px;
     box-shadow: none;
     font-size: 1rem;
-    border-width: 0;
+    margin: 6px 2px;
 
     &:not(:checked):not(:hover) {
       background: transparent;
     }
 
-    &:not(:only-child):not(:last-child) {
-      border-right-width: 0px;
-    }
-
-    &:not(only-child):first-child:not(:checked):not(:hover),
+    &:not(:only-child):first-child:not(:checked):not(:hover),
     &:not(:checked):not(:hover) + button:not(:checked):not(:hover) {
       border-left-color: transparent;
     }
 
-    &:not(only-child):last-child:not(:checked):not(:hover) {
+    &:not(:only-child):last-child:not(:checked):not(:hover) {
       border-right-color: transparent;
     }
 
     &:not(:checked):hover:not(:backdrop) {
       @include button(hover);
       background-image: none;
-    }
-
-    &:not(only-child):first-child:not(:checked):hover,
-    &:not(:checked):hover + button:not(:checked):not(:hover),
-    &:not(:checked):not(:hover) + button:not(:checked):hover {
-      border-left-color: $border_color;
-    }
-
-    &:not(only-child):last-child:not(:checked):hover {
-      border-right-color: $border_color;
     }
 
     &:not(:checked):hover:backdrop {
@@ -412,16 +400,6 @@ viewswitcher {
         @else {
           @include button(normal, gtkmix(black, $headerbar_bg_color, 13%), $headerbar_fg_color);
         }
-      }
-
-      &:not(only-child):first-child:hover,
-      &:hover + button:not(:checked):not(:hover),
-      &:not(:hover) + button:not(:checked):hover {
-        border-left-color: $border_color;
-      }
-
-      &:not(only-child):last-child:hover {
-        border-right-color: $border_color;
       }
 
       &:hover:backdrop {
@@ -443,12 +421,18 @@ viewswitcher {
       }
     }
 
+    headerbar & {
+      @if $variant == 'dark' {
+        margin-top: 5px
+      }
+    }
+
     // View switcher button
     > stack > box {
       &.narrow {
-        font-size: 0.75rem;
-        padding-top: 7px;
-        padding-bottom: 5px;
+        font-size: 0.65rem;
+        padding-top: 0;
+        padding-bottom: 0;
 
         image,
         label {
@@ -458,7 +442,7 @@ viewswitcher {
       }
 
       &.wide {
-        padding: 8px 12px;
+        padding: 0 11px;
 
         image {
           &:dir(ltr) {

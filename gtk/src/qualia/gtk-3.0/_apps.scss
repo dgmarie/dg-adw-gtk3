@@ -46,12 +46,14 @@
           border-width: 0px;
           border-radius: $button_radius;
           background-color: transparent;
+          border-color: transparent;
         }
 
         &:not(.current-dir) {
           border-width: 0px;
           border-radius: $button_radius;
           background-color: transparent;
+          border-color: transparent;
 
           &:hover {
             @include button(active, $bg_color, $headerbar_fg_color);
@@ -134,6 +136,7 @@
     &,
     &:backdrop {
       background-color: transparent;
+      border-color: transparent;
     }
   }
 
@@ -1498,6 +1501,7 @@ SheetStyleDialog.unity-force-quit {
     &:disabled {
       color: gtkalpha($panel_fg_color, 0.5);
       background-color: transparent;
+      border-color: transparent;
     }
   }
 }
@@ -1509,6 +1513,8 @@ SheetStyleDialog.unity-force-quit {
 
   > PanelApplet > menubar {
     background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
 
     > menuitem:hover {
       background-color: $view_active_color;

@@ -51,9 +51,10 @@ $focus_border_color: gtkalpha($accent_color, 0.5);
   $entry_backdrop: $entry_disabled;
   $entry_backdrop_disabled: $entry_disabled;
 
+  border: 1px solid $button_border;
+
   @if $t==normal {
     color: $text_color;
-    border-color: transparent;
     background-color: $entry_normal;
     @include _shadows(entry_focus_shadow(gtkalpha($fc, 0)), $_entry_edge);
     // for the transition to work the number of shadows in different states needs to match, hence the transparent shadow here.
@@ -66,22 +67,18 @@ $focus_border_color: gtkalpha($accent_color, 0.5);
   }
   @if $t==insensitive {
     color: $insensitive_fg_color;
-    border-color: transparent;
     background-color: $entry_disabled;
   }
   @if $t==backdrop {
     color: $backdrop_text_color;
-    border-color: transparent;
     background-color: $entry_backdrop;
   }
   @if $t==backdrop-insensitive {
     color: $backdrop_insensitive_color;
-    border-color: transparent;
     background-color: $entry_backdrop_disabled;
   }
   @if $t==osd {
     color: $osd_text_color;
-    border-color: $osd_borders_color;
     background-color: transparentize(opacify($osd_borders_color, 1), 0.5);
     background-clip: padding-box;
     box-shadow: none;
@@ -99,7 +96,6 @@ $focus_border_color: gtkalpha($accent_color, 0.5);
   }
   @if $t==osd-insensitive {
     color: $osd_insensitive_fg_color;
-    border-color: $osd_borders_color;
     background-color: $osd_insensitive_bg_color;
     background-clip: padding-box;
     box-shadow: none;
@@ -108,7 +104,6 @@ $focus_border_color: gtkalpha($accent_color, 0.5);
   }
   @if $t==osd-backdrop {
     color: $osd_text_color;
-    border-color: $osd_borders_color;
     background-color: transparentize(opacify($osd_borders_color, 1), 0.5);
     background-clip: padding-box;
     box-shadow: none;
@@ -154,6 +149,9 @@ $focus_border_color: gtkalpha($accent_color, 0.5);
   $button_disabled_active: gtkmix(currentColor, $c, 30%);
   $button_backdrop: $button_disabled;
   $button_backdrop_active: $button_disabled_active;
+
+  box-sizing: border-box;
+  border: 1px solid $button_border;
 
   @if $t==normal {
   //

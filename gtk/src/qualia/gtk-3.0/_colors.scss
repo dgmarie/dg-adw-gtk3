@@ -41,6 +41,7 @@ $fg_color: $window_fg_color;
 
 $selected_fg_color: $accent_fg_color;
 $selected_bg_color: $accent_bg_color;
+$button_border: gtkalpha(currentColor, 0.05);
 $selected_borders_color: if($variant== 'light', gtkmix(black, $selected_bg_color, 15%), gtkmix(black, $selected_bg_color, 30%));
 $borders_color: if($variant == 'light', gtkmix(currentColor, $bg_color, 12.2%), gtkmix(currentColor, $bg_color, 15%));
 $alt_borders_color: if($variant == 'light', gtkmix(black, $bg_color, 24%), gtkmix(black, $bg_color, 18%));

@@ -575,8 +575,9 @@ notebook {
     tab {
       &.reorderable-page {
         min-height: 26px;
-        padding: 4px 12px;
+        padding: 3px 11px;
         border-radius: $button_radius;
+        border: 1px solid transparent;
         background-color: transparent;
         margin: 5px 2px 6px 3px;
         box-shadow: none;
@@ -597,6 +598,7 @@ notebook {
         background-color: $tab_color_hover;
         box-shadow: none;
         color: $headerbar_fg_color;
+        border-color: $button_border;
         & box, + tab box { border-color: transparent; }
         &:backdrop {
           background-color: $tab_color_hover_backdrop;
@@ -610,6 +612,7 @@ notebook {
         box-shadow: none;
         background-color: $tab_color_active;
         color: $headerbar_fg_color;
+        border-color: $button_border;
         & box, + tab box { border-color: transparent; }
         &:backdrop {
           background-color: $tab_color_active_backdrop;
