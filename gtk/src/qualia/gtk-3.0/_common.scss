@@ -939,8 +939,8 @@ toolbar.inline-toolbar toolbutton {
 %linked_middle {
   &:dir(rtl), &:dir(ltr) {
     border-left-color: $border_color;
-    border-right-color: $border_color;
     border-right-color: transparent;
+    box-shadow: none;
     border-radius: 0;
     -gtk-outline-radius: 0;
   }
@@ -952,6 +952,7 @@ toolbar.inline-toolbar toolbutton {
     border-right-color: transparent;
     border-top-left-radius: $button_radius;
     border-bottom-left-radius: $button_radius;
+    box-shadow: none;
     -gtk-outline-top-left-radius: $button_radius;
     -gtk-outline-bottom-left-radius: $button_radius;
     &:not(button):focus { border-left-color: entry_focus_border(); } // Fix for linked entries
@@ -964,6 +965,7 @@ toolbar.inline-toolbar toolbutton {
     border-top-right-radius: $button_radius;
     border-bottom-right-radius: $button_radius;
     border-left-color: $border_color;
+    box-shadow: none;
     -gtk-outline-top-right-radius: $button_radius;
     -gtk-outline-bottom-right-radius: $button_radius;
     &:not(button):focus { border-right-color: entry_focus_border(); }
@@ -973,6 +975,7 @@ toolbar.inline-toolbar toolbutton {
 %linked_only_child {
   &:dir(rtl), &:dir(ltr) {
     border-style: solid;
+    box-shadow: none;
     border-radius: $button_radius;
     -gtk-outline-radius: $button_radius;
   }
@@ -1012,8 +1015,8 @@ toolbar.inline-toolbar toolbutton {
 %linked_vertical_middle {
   &:dir(rtl), &:dir(ltr) {
     border-top-color: $border_color;
-    border-bottom-color: $border_color;
     border-bottom-color: transparent;
+    box-shadow: none;
     border-radius: 0;
     -gtk-outline-radius: 0;
   }
@@ -1023,6 +1026,7 @@ toolbar.inline-toolbar toolbutton {
   &:dir(rtl), &:dir(ltr) {
     border-radius: 0;
     border-bottom-color: transparent;
+    box-shadow: none;
     border-top-left-radius: $button_radius;
     border-top-right-radius: $button_radius;
     -gtk-outline-top-left-radius: $button_radius;
@@ -1035,6 +1039,7 @@ toolbar.inline-toolbar toolbutton {
     border-radius: 0;
     border-bottom-left-radius: $button_radius;
     border-bottom-right-radius: $button_radius;
+    box-shadow: none;
     border-top-color: $border_color;
     -gtk-outline-bottom-left-radius: $button_radius;
     -gtk-outline-bottom-right-radius: $button_radius;
@@ -1045,6 +1050,7 @@ toolbar.inline-toolbar toolbutton {
   &:dir(rtl), &:dir(ltr) {
     border-style: solid;
     border-radius: $button_radius;
+    box-shadow: none;
     -gtk-outline-radius: $button_radius;
   }
 }
@@ -1239,17 +1245,23 @@ spinbutton {
       &:hover {
         @include button(hover);
         background-color: gtkalpha(currentColor, 0.1);
+        border-style: none none none solid;
+        &:dir(rtl) { border-style: none solid none none; }
       }
 
       &:disabled {
         //color: transparentize($insensitive_fg_color, 0.7);
         @include button(insensitive);
         background-color: transparent;
+        border-style: none none none solid;
+        &:dir(rtl) { border-style: none solid none none; }
       }
 
       &:active {
         @include button(active);
         background-color: gtkalpha(currentColor, 0.15);
+        border-style: none none none solid;
+        &:dir(rtl) { border-style: none solid none none; }
         //box-shadow: inset 0 2px 3px -1px transparentize(black, 0.8);
       }
 
@@ -1285,6 +1297,8 @@ spinbutton {
         background-color: gtkalpha($osd_fg_color, 0.1);
         -gtk-icon-shadow: 0 1px black;
         box-shadow: none;
+        border-style: none none none solid;
+        &:dir(rtl) { border-style: none solid none none; }
       }
 
       &:backdrop {
@@ -1303,6 +1317,8 @@ spinbutton {
         border-color: gtkalpha(opacify($osd_borders_color, 1), 0.5);
         -gtk-icon-shadow: none;
         box-shadow: none;
+        border-style: none none none solid;
+        &:dir(rtl) { border-style: none solid none none; }
       }
 
       &:dir(ltr):last-child { border-radius: 0 $button_radius $button_radius 0; }
@@ -2156,6 +2172,7 @@ menu,
   padding: 6px;
   background-color: $menu_color;
   border: 1px solid $popover_border;
+  background-clip: border-box;
 
   border-radius: $menu_radius;
   box-shadow: 0 1px 5px 1px transparentize(black, .91),
@@ -2275,7 +2292,7 @@ popover.background {
   }
 
   .csd & {
-    background-clip: padding-box;
+    background-clip: border-box;
     border-color: $popover_border;
   }
 
@@ -2352,9 +2369,8 @@ notebook {
     }
 
     tabs > tab:not(.reorderable-page) {
-      border: 1px solid transparent;
       &:backdrop { color: $backdrop_headerbar_fg; }
-      &:hover { background-color: $tab_color_active_backdrop; border-color: $button_border; }
+      &:hover { background-color: $tab_color_active_backdrop; }
     }
   }
 
@@ -2383,6 +2399,11 @@ notebook {
 
     tabs { margin: 0px; }
 
+    tabs > tab:not(.reorderable-page) {
+      border: 1px solid transparent;
+      &:hover { border-color: $button_border; }
+    }
+  
     &.top {
       border-bottom-style: solid;
       > tabs {
@@ -4624,6 +4645,7 @@ decoration {
   .csd.popup & {
     border-radius: $popover_radius;
     border: 1px solid $popover_border;
+    background-clip: border-box;
     box-shadow: 0 1px 5px 1px transparentize(black, .91),
                 0 2px 8px 3px transparentize(black, .95),
                 0 6px 14px 14px transparent;

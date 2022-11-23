@@ -411,7 +411,7 @@ XfdesktopIconView.view {
 
 // Menu
 #whiskermenu-window {
-  border-color: $window_border;
+  border-color: $window_outline_color;
   background-color: $popover_bg_color;
   padding: 3px;
 
@@ -997,7 +997,7 @@ UnityDecoration {
     // padding used for the min/max/close titlebuttons
     padding: 0 6px 1px 6px;
     background-color: $headerbar_bg_color;
-    background-clip: border-box;
+    background-clip: padding-box;
     color: $headerbar_fg_color;
     text-shadow: none;
     border: 1px solid $wm_border;
@@ -1061,7 +1061,8 @@ SheetStyleDialog.unity-force-quit {
 .budgie-popover {
   color: $fg_color;
   border-radius: $popover_radius;
-  border: 1px solid $popover_border;
+  border: 1px solid $window_outline_color;
+  background-clip: border-box;
   background-color: $popover_bg_color;
   box-shadow: 0 2px 3px 1px transparentize(black, 0.65);
 }
@@ -1081,7 +1082,7 @@ SheetStyleDialog.unity-force-quit {
   &.dock-mode {
     border-radius: 18px;
     padding: 6px 5px;
-    border: 1px solid $window_border;
+    border: 1px solid $window_outline_color;
 
     button {
       border-radius: 12px;
@@ -1292,7 +1293,7 @@ SheetStyleDialog.unity-force-quit {
 .budgie-notification-window {
   background-color: $popover_bg_color;
   border-radius: 18px;
-  border: 1px solid $window_border;
+  border: 1px solid $window_outline_color;
 }
 
 .budgie-switcher-window flowbox {
@@ -1391,7 +1392,7 @@ SheetStyleDialog.unity-force-quit {
     // specificity bump hack
     background-color: $panel_bg_color;
     color: $panel_fg_color;
-    border: $window_border;
+    border: $window_outline_color;
 
     button.flat {
       background-color: transparent;
@@ -1548,7 +1549,7 @@ SheetStyleDialog.unity-force-quit {
 #restart_dialog {
   padding: 12px;
   border-radius: 18px;
-  border: 1px solid $window_border;
+  border: 1px solid $window_outline_color;
   background-color: $headerbar_bg_color;
 }
 
