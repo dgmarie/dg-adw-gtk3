@@ -120,16 +120,20 @@
 
 %suggested_buttons {
   @include button(normal, $suggested_bg_color, white);
+  border-color: $opaque_button_border;
   &:hover {
     @include button(hover, $suggested_bg_color, white);
+    border-color: $opaque_button_border;
   }
 
   &:active, &:checked {
     @include button(active, gtkalpha($suggested_bg_color, 0.5), white);
+    border-color: $opaque_button_border;
   }
 
   &:backdrop, &:backdrop:hover {
     @include button(backdrop, gtkalpha($suggested_bg_color, 0.5), white);
+    border-color: $opaque_button_border;
   }
 
   &:disabled {
@@ -140,16 +144,20 @@
 
 %destructive_buttons {
   @include button(normal, $destructive_bg_color, $destructive_fg_color);
+  border-color: $opaque_button_border;
   &:hover {
     @include button(normal, $destructive_bg_color, $destructive_fg_color);
+    border-color: $opaque_button_border;
   }
 
   &:active, &:checked {
     @include button(active, gtkalpha($destructive_bg_color, 0.5), $destructive_fg_color);
+    border-color: $opaque_button_border;
   }
 
   &:backdrop, &:backdrop:hover {
     @include button(backdrop, gtkalpha($destructive_bg_color, 0.5), $destructive_fg_color);
+    border-color: $opaque_button_border;
   }
 
   &:disabled {
