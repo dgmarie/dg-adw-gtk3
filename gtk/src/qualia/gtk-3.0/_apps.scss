@@ -1084,6 +1084,10 @@ SheetStyleDialog.unity-force-quit {
     padding: 6px 5px;
     border: 1px solid $window_outline_color;
 
+    &.transparent {
+      border-color: transparent;
+    }
+
     button {
       border-radius: 12px;
     }
