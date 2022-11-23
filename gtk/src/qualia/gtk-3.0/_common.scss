@@ -2206,7 +2206,6 @@ menu,
     }
     &:disabled {
       color: $insensitive_fg_color;
-      box-shadow: inset 0 0 0 1px $button_border;
     }
 
     // submenu indicators
