@@ -941,7 +941,6 @@ toolbar.inline-toolbar toolbutton {
   &:dir(rtl), &:dir(ltr) {
     border-left-color: $border_color;
     border-right-color: transparent;
-    box-shadow: none;
     border-radius: 0;
     -gtk-outline-radius: 0;
   }
@@ -953,7 +952,6 @@ toolbar.inline-toolbar toolbutton {
     border-right-color: transparent;
     border-top-left-radius: $button_radius;
     border-bottom-left-radius: $button_radius;
-    box-shadow: none;
     -gtk-outline-top-left-radius: $button_radius;
     -gtk-outline-bottom-left-radius: $button_radius;
     &:not(button):focus { border-left-color: entry_focus_border(); } // Fix for linked entries
@@ -1017,7 +1015,6 @@ toolbar.inline-toolbar toolbutton {
   &:dir(rtl), &:dir(ltr) {
     border-top-color: $border_color;
     border-bottom-color: transparent;
-    box-shadow: none;
     border-radius: 0;
     -gtk-outline-radius: 0;
   }
@@ -1027,7 +1024,6 @@ toolbar.inline-toolbar toolbutton {
   &:dir(rtl), &:dir(ltr) {
     border-radius: 0;
     border-bottom-color: transparent;
-    box-shadow: none;
     border-top-left-radius: $button_radius;
     border-top-right-radius: $button_radius;
     -gtk-outline-top-left-radius: $button_radius;
@@ -1443,15 +1439,13 @@ combobox {
 // ************
 %toolbar {
   -GtkWidget-window-dragging: true;
-  padding: 4px;
-  background-color: $bg_color;
-  &:backdrop { background-color: $backdrop_bg_color; }
+  padding: if($variant=='light', 5px 5px, 5px 4px); // make window border look like its inset on dark theme
+  background-color: $headerbar_bg_color;
+  &:backdrop { background-color: $headerbar_backdrop_color;}
 }
 
 toolbar {
   @extend %toolbar;
-
-  padding: 4px 3px 3px 4px;
 
   // on OSD
   .osd & { background-color: transparent; }
@@ -1489,7 +1483,6 @@ toolbar {
   @extend %toolbar;
 
   //@extend %darkbar;
-  background-color: $bg_color;
   border-color: $borders_color;
   border-style: solid;
 
@@ -1506,7 +1499,7 @@ searchbar > revealer > box,
 
   border-width: 0 0 1px;
   border-style: solid;
-  border-color: $borders_color;
+  border-color: $headerbar_shade_color;
   padding: 3px;
 }
 
@@ -2135,6 +2128,7 @@ menubar,
     background-color: $headerbar_bg_color;
     &:backdrop {
       background-color: $headerbar_backdrop_color;
+      color: $backdrop_headerbar_fg;
     }
   }
 
@@ -4068,7 +4062,6 @@ filechooserbutton:drop(active) {
 .sidebar {
   border-style: none;
   background-color: $sidebar_bg_color;
-  padding: 5px 0;
 
   &:not(separator) {
     @at-root %sidebar_left,
@@ -4087,7 +4080,10 @@ filechooserbutton:drop(active) {
     }
   }
 
-  list { background-color: transparent; }
+  list {
+    padding: 5px 0;
+    background-color: transparent;
+  }
 
   paned & { &.left, &.right, &.left:dir(rtl), &:dir(rtl), &:dir(ltr), & { border-style: none; }}
 

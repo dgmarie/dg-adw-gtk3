@@ -1,5 +1,79 @@
 // 3rd party application styles
 
+// These are for the different desktop environments that are being suppported
+%panel_button {
+  @include button(normal, $panel_bg_color, $panel_fg_color);
+
+  &:hover {
+    @include button(hover, $panel_bg_color, $panel_fg_color);
+  }
+
+  &:active,
+  &:checked {
+    @include button(active, $panel_bg_color, $panel_fg_color);
+  }
+
+  &:disabled {
+    @include button(insensitive, $panel_bg_color, $panel_fg_color);
+  }
+}
+
+%popover_button {
+  @include button(normal, $popover_bg_color);
+
+  &:hover {
+    @include button(hover, $popover_bg_color);
+  }
+
+  &:active,
+  &:checked {
+    @include button(active, $popover_bg_color);
+  }
+
+  &:disabled {
+    @include button(insensitive, $popover_bg_color);
+  }
+}
+
+%headerbar_button {
+  @include button(normal, $headerbar_bg_color);
+
+  &:hover {
+    @include button(hover, $headerbar_bg_color);
+  }
+
+  &:active,
+  &:checked {
+    @include button(active, $headerbar_bg_color);
+  }
+
+  &:disabled {
+    @include button(insensitive, $headerbar_bg_color);
+  }
+}
+
+%button_flat {
+  background-color: transparent;
+  border-color: transparent;
+
+  &:hover {
+    background-color: $view_hover_color;
+    border-color: $button_border;
+  }
+
+  &:active,
+  &:checked {
+    background-color: $view_active_color;
+    border-color: $button_border;
+  }
+
+  &:disabled {
+    color: gtkalpha($panel_fg_color, 0.5);
+    background-color: transparent;
+    border-color: transparent;
+  }
+}
+
 // ************
 // * Nautilus *
 // ************
@@ -424,34 +498,12 @@ XfdesktopIconView.view {
   }
 
   button.flat {
-    background-color: transparent;
-
-    &:hover {
-      background-color: $view_hover_color;
-    }
-
-    &:active,
-    &:checked {
-      background-color: $view_active_color;
-    }
+    @extend %button_flat;
   }
 
   button {
     margin: 1px 0;
-    @include button(normal, $headerbar_bg_color);
-
-    &:hover {
-      @include button(hover, $headerbar_bg_color);
-    }
-
-    &:active,
-    &:checked {
-      @include button(active, $headerbar_bg_color);
-    }
-
-    &:disabled {
-      @include button(insensitive, $headerbar_bg_color);
-    }
+    @extend %headerbar_button;
   }
 
   .launchers-pane {
@@ -501,21 +553,7 @@ $panel_transition_duration: 250ms;
     color: $panel_fg_color;
 
     &.flat {
-      background-color: transparent;
-
-      &:hover {
-        background-color: $view_hover_color;
-      }
-
-      &:active,
-      &:checked {
-        background-color: $view_active_color;
-      }
-
-      &:disabled {
-        color: gtkalpha($panel_fg_color, 0.5);
-        background-color: transparent;
-      }
+      @extend %button_flat;
     }
 
     entry {
@@ -569,14 +607,15 @@ $panel_transition_duration: 250ms;
 
 .nemo-window {
   .sidebar {
+    background-color: if($variant=='light', $bg_color, $base_color);
+
     scrolledwindow.frame.nemo-places-sidebar {
       // get rid of double border in sidebar
       border: none;
     }
-
     viewport.frame box.vertical treeview.view.places-treeview {
       // use sidebar bg color
-      background-image: image($sidebar_bg_color);
+      background-image: image(if($variant=='light', $bg_color, $base_color));
       border-radius: 0; // get rid of weird radius on selected rows
 
       &:selected {
@@ -591,13 +630,13 @@ $panel_transition_duration: 250ms;
     }
   }
 
-  .nemo-inactive-pane .view,
-  .nemo-inactive-pane iconview {
-    // Shades the background of the inactive pane
-    background-color: $backdrop_bg_color;
-  }
-
   .nemo-window-pane {
+    .view {
+      background-image: image(if($variant=='light', $base_color, $bg_color));
+      &:selected {
+        background: $selected_bg_color;
+      }
+    }
     widget.entry {
       // Add border around rename text entry
       border: 1px solid;
@@ -618,9 +657,6 @@ $panel_transition_duration: 250ms;
   }
 
   toolbar.horizontal.primary-toolbar {
-    // add border under toolbar
-    border-bottom: 1px solid $borders_color;
-
     widget.linked.raised button {
 
       // use proper icons for next and left in stackswitcher-like pathbar
@@ -820,19 +856,30 @@ terminal-window notebook {
     }
   }
 }
+// **********
+// * Thunar *
+// **********
 
+window.thunar {
+  .sidebar {
+    background-color: if($variant=='light', $bg_color, $base_color);
+    treeview.view {
+      background-color: if($variant=='light', $bg_color, $base_color);
+      &:selected {
+        background: $selected_bg_color;
+      }
+    }
+  }
+  .standard-view .view {
+    background-color: if($variant=='light', $base_color, $bg_color);
+    &:selected {
+      background: $selected_bg_color;
+    }
+  }
+}
 // ********
 // * Caja *
 // ********
-
-window.background.caja-navigation-window #Toolbar {
-  border-bottom: 1px solid $borders_color;
-
-  &:backdrop {
-    background-color: $backdrop_bg_color;
-    border-color: $backdrop_borders_color;
-  }
-}
 
 .caja-pathbar button {
   min-width: 32px;
@@ -850,12 +897,26 @@ window.background.caja-navigation-window #Toolbar {
   }
 }
 
+.caja-side-pane {
+  background-color: if($variant=='light', $bg_color, $base_color);
+}
 .caja-side-pane .frame {
   border-style: solid none none none;
+  treeview.view {
+    background-color: if($variant=='light', $bg_color, $base_color);
+    &:selected {
+      background: $selected_bg_color;
+    }
+  }
 }
 
 .caja-notebook {
-
+  .view {
+    background-color: if($variant=='light', $base_color, $bg_color);
+    &:selected {
+      background: $selected_bg_color;
+    }
+  }
   .view,
   .view.frame,
   .frame {
@@ -872,7 +933,6 @@ window.background.caja-navigation-window #Toolbar {
 .caja-navigation-window,
 .caja-desktop-window {
   widget.view widget.entry {
-    background: gtkmix(currentColor, $bg_color, 5%);
     color: $fg_color;
     border-color: $borders_color;
 
@@ -1001,13 +1061,15 @@ UnityDecoration {
     color: $headerbar_fg_color;
     text-shadow: none;
     border: 1px solid $wm_border;
-    border-bottom: 1px solid $headerbar_shade_color;
+    border-bottom: none;
+    box-shadow: inset 0 -1px 0 0 $headerbar_shade_color;
 
     &:backdrop {
       background-color: $headerbar_backdrop_color;
       color: gtkmix($headerbar_fg_color, $headerbar_backdrop_color, 50%);
       border: 1px solid $wm_border_backdrop;
-      border-bottom: 1px solid $headerbar_shade_color;
+      border-bottom: none;
+      box-shadow: inset 0 -1px 0 0 $headerbar_shade_color;
       transition: $backdrop_transition;
     }
   }
@@ -1017,7 +1079,7 @@ UnityDecoration {
   .right,
   .bottom {
     border: none;
-    background-color: $wm_border_backdrop; // this is intentional
+    background-color: $wm_border;
 
     &:backdrop {
       background-color: $wm_border_backdrop;
@@ -1080,8 +1142,8 @@ SheetStyleDialog.unity-force-quit {
   }
 
   &.dock-mode {
-    border-radius: 18px;
-    padding: 6px 5px;
+    border-radius: 14px;
+    padding: 8px 7px;
     border: 1px solid $window_outline_color;
 
     &.transparent {
@@ -1093,30 +1155,21 @@ SheetStyleDialog.unity-force-quit {
     }
   }
 
-  button.flat {
-    background-color: transparent;
-    margin: 0;
+  &.horizontal button {
     padding: 0px 4px;
+  }
+  &.vertical button {
+    padding: 4px 0px;
+  }
+  button.flat {
+    margin: 0;
     min-height: 0;
     color: $panel_fg_color;
-
-    &:hover {
-      background-color: $view_hover_color;
-    }
-
-    &:active,
-    &:checked {
-      background-color: $view_active_color;
-    }
-
-    &:disabled {
-      color: gtkalpha($panel_fg_color, 0.5);
-      background-color: transparent;
-    }
+    @extend %button_flat;
   }
 
   button.flat.launcher {
-    padding: 2px;
+    padding: 0;
     margin: 0 1px;
     color: $panel_fg_color;
 
@@ -1136,6 +1189,8 @@ SheetStyleDialog.unity-force-quit {
   list row.activatable {
     &:dir(rtl), &:dir(ltr) {
       background-color: transparent;
+      border-color: transparent;
+      box-shadow: none;
       color: $fg_color;
     }
   }
@@ -1161,38 +1216,11 @@ SheetStyleDialog.unity-force-quit {
   color: $fg_color;
 
   button.flat {
-    background-color: transparent;
-
-    &:hover {
-      background-color: $view_hover_color;
-    }
-
-    &:active,
-    &:checked {
-      background-color: $view_active_color;
-    }
-
-    &:disabled {
-      color: gtkalpha($panel_fg_color, 0.5);
-      background-color: transparent;
-    }
+    @extend %button_flat;
   }
 
   button {
-    @include button(normal, $headerbar_bg_color);
-
-    &:hover {
-      @include button(hover, $headerbar_bg_color);
-    }
-
-    &:active,
-    &:checked {
-      @include button(active, $headerbar_bg_color);
-    }
-
-    &:disabled {
-      @include button(insensitive, $headerbar_bg_color);
-    }
+    @extend %headerbar_button;
   }
 }
 
@@ -1200,7 +1228,8 @@ SheetStyleDialog.unity-force-quit {
   padding: 0px;
   background-color: transparent;
   @each $pos in (top, bottom) {
-    &.#{$pos} button.flat.launcher:checked {
+    &.#{$pos} button.flat.launcher:checked,
+    &.#{$pos} .budgie-panel.dock-mode {
       &:dir(rtl), &:dir(ltr) {
         border-#{$pos}-left-radius: 0;
         border-#{$pos}-right-radius: 0;
@@ -1208,7 +1237,8 @@ SheetStyleDialog.unity-force-quit {
     }
   }
   @each $pos in (left, right) {
-    &.#{$pos} button.flat.launcher:checked {
+    &.#{$pos} button.flat.launcher:checked,
+    &.#{$pos} .budgie-panel.dock-mode {
       &:dir(rtl), &:dir(ltr) {
         border-top-#{$pos}-radius: 0;
         border-bottom-#{$pos}-radius: 0;
@@ -1250,46 +1280,23 @@ SheetStyleDialog.unity-force-quit {
   }
 
   button.flat {
-    background-color: transparent;
-
-    &:hover {
-      background-color: $view_hover_color;
-    }
-
-    &:active,
-    &:checked {
-      background-color: $view_active_color;
-    }
-
-    &:disabled {
-      color: gtkalpha($panel_fg_color, 0.5);
-      background-color: transparent;
-    }
+    @extend %button_flat;
   }
 
   button {
-    @include button(normal, $headerbar_bg_color);
+    @extend %headerbar_button;
+  }
 
-    &:hover {
-      @include button(hover, $headerbar_bg_color);
-    }
-
-    &:active,
-    &:checked {
-      @include button(active, $headerbar_bg_color);
-    }
-
-    &:disabled {
-      @include button(insensitive, $headerbar_bg_color);
+  .linked.horizontal:not(#hack) > button:first-child:not(#hack) {
+    &:dir(rtl), &:dir(ltr) {
+      border-radius: 0 0 0 18px;
     }
   }
 
-  .linked.horizontal > button:first-child {
-    border-radius: 0 0 0 18px;
-  }
-
-  .linked.horizontal > button:last-child {
-    border-radius: 0 0 18px 0;
+  .linked.horizontal:not(#hack) > button:last-child:not(#hack) {
+    &:dir(rtl), &:dir(ltr) {
+      border-radius: 0 0 18px 0;
+    }
   }
 }
 
@@ -1318,41 +1325,14 @@ SheetStyleDialog.unity-force-quit {
 
 .budgie-menu,
 .container {
+  button {
+    @extend %popover_button;
+  }
+
   row.activatable,
   button.flat,
   modelbutton.flat {
-    background-color: transparent;
-
-    &:hover {
-      background-color: $view_hover_color;
-    }
-
-    &:active,
-    &:checked {
-      background-color: $view_active_color;
-    }
-
-    &:disabled {
-      color: gtkalpha($panel_fg_color, 0.5);
-      background-color: transparent;
-    }
-  }
-
-  button {
-    @include button(normal, $popover_bg_color);
-
-    &:hover {
-      @include button(hover, $popover_bg_color);
-    }
-
-    &:active,
-    &:checked {
-      @include button(active, $popover_bg_color);
-    }
-
-    &:disabled {
-      @include button(insensitive, $popover_bg_color);
-    }
+    @extend %button_flat;
   }
 
   entry {
@@ -1381,6 +1361,7 @@ SheetStyleDialog.unity-force-quit {
 // ********
 // * Mate *
 // ********
+
 .mate-panel-menu-bar,
 #PanelPlug {
   &.horizontal button.flat {
@@ -1398,57 +1379,14 @@ SheetStyleDialog.unity-force-quit {
     color: $panel_fg_color;
     border: $window_outline_color;
 
-    button.flat {
-      background-color: transparent;
-
-      &:hover {
-        background-color: $view_hover_color;
-      }
-
-      &:active,
-      &:checked {
-        background-color: $view_active_color;
-      }
-
-      &:disabled {
-        color: gtkalpha($panel_fg_color, 0.5);
-        background-color: transparent;
-      }
-    }
-
-    #tasklist-button.flat.toggle {
-      background-color: transparent;
-
-      &:hover {
-        background-color: $view_hover_color;
-      }
-
-      &:active,
-      &:checked {
-        background-color: $view_active_color;
-      }
-
-      &:disabled {
-        color: gtkalpha($panel_fg_color, 0.5);
-        background-color: transparent;
-      }
-    }
-
     button {
-      @include button(normal, $panel_bg_color, $panel_fg_color);
+      @extend %panel_button;
+    }
 
-      &:hover {
-        @include button(hover, $panel_bg_color, $panel_fg_color);
-      }
-
-      &:active,
-      &:checked {
-        @include button(active, $panel_bg_color, $panel_fg_color);
-      }
-
-      &:disabled {
-        @include button(insensitive, $panel_bg_color, $panel_fg_color);
-      }
+    button.flat,
+    .brisk-button.flat.toggle,
+    #tasklist-button.flat.toggle {
+      @extend %button_flat;
     }
   }
 }
@@ -1492,22 +1430,7 @@ SheetStyleDialog.unity-force-quit {
   }
 
   button.flat {
-    background-color: transparent;
-
-    &:hover {
-      background-color: $view_hover_color;
-    }
-
-    &:active,
-    &:checked {
-      background-color: $view_active_color;
-    }
-
-    &:disabled {
-      color: gtkalpha($panel_fg_color, 0.5);
-      background-color: transparent;
-      border-color: transparent;
-    }
+    @extend %button_flat;
   }
 }
 
