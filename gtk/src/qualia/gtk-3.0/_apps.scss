@@ -856,12 +856,20 @@ terminal-window notebook {
     }
   }
 }
+
 // **********
 // * Thunar *
 // **********
 
 window.thunar {
+  toolbar.horizontal:not(.inline-toolbar) {
+    @extend %headerbar_stuff;
+    background-color: $headerbar_bg_color;
+    &:backdrop { background-color: $headerbar_backdrop_color; }
+    border-bottom: 1px solid $headerbar_shade_color;
+  }
   .sidebar {
+    border-top: none;
     background-color: if($variant=='light', $bg_color, $base_color);
     treeview.view {
       background-color: if($variant=='light', $bg_color, $base_color);
@@ -870,10 +878,13 @@ window.thunar {
       }
     }
   }
-  .standard-view .view {
-    background-color: if($variant=='light', $base_color, $bg_color);
-    &:selected {
-      background: $selected_bg_color;
+  .standard-view {
+    border-top: none;
+    .view {
+      background-color: if($variant=='light', $base_color, $bg_color);
+      &:selected {
+        background: $selected_bg_color;
+      }
     }
   }
 }
@@ -1482,6 +1493,10 @@ SheetStyleDialog.unity-force-quit {
 
 #login_window entry {
   border-radius: 999px;
+  background-color: gtkalpha($fg_color, 0.1);
+  &:disabled {
+    background-color: gtkalpha($fg_color, 0.05);
+  }
 }
 
 #content_frame {

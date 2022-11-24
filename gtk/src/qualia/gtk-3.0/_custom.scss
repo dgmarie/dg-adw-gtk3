@@ -176,7 +176,8 @@
 }
 
 // headerbar stuff
-headerbar, .titlebar, .primary-toolbar, .toolbar, toolbar.horizontal:not(.inline-toolbar) {
+%headerbar_stuff,
+headerbar, .titlebar, .primary-toolbar, .toolbar {
   // Text colors for gtk named color support (except backdrop and disabled)
   &:not(.selection-mode) {
     &,
@@ -532,7 +533,7 @@ treeview.view:not(:backdrop):not(:selected):hover {
 .osd .linked > button { border-color: transparent; }
 
 // Toolbars
-.primary-toolbar, .toolbar, toolbar.horizontal:not(.inline-toolbar) {
+.primary-toolbar, .toolbar {
   &:dir(ltr), &:dir(rtl) {
     background-color: $headerbar_bg_color;
     &:backdrop { background-color: $headerbar_backdrop_color; }
