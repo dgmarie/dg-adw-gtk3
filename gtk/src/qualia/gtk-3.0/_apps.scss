@@ -1062,6 +1062,7 @@ SheetStyleDialog.unity-force-quit {
     border-radius: 14px;
     padding: 8px 7px;
     border: 1px solid $window_outline_color;
+    background-clip: border-box;
 
     &.transparent {
       border-color: transparent;
@@ -1082,6 +1083,15 @@ SheetStyleDialog.unity-force-quit {
     margin: 0;
     min-height: 0;
     color: $panel_fg_color;
+    &:hover {
+      @include button(hover, $flat: true);
+      transition: $button_transition;
+      transition-duration: 500ms;
+    }
+    &:active { @include button(active, $flat: true); }
+    &:checked {
+      @include button(checked, $flat: true);
+    }
   }
 
   button.flat.launcher {
@@ -1254,17 +1264,29 @@ SheetStyleDialog.unity-force-quit {
 
 .mate-panel-menu-bar,
 #PanelPlug {
-  &.horizontal button.flat {
+  &.horizontal button.flat,
+  &.horizontal menuitem {
     margin: 0 2px;
+    padding: 0 4px;
   }
 
-  &.vertical button.flat {
+  &.vertical button.flat,
+  &.vertical menuitem {
     margin: 2px 0;
+    padding: 4px 0;
   }
+  &:dir(rtl), &:dir(ltr) {
+    button,
+    menuitem,
+    #tasklist-button {
+      border-radius: 24px;
+    }
+    #showdesktop-button {
+      &, &:hover, &:checked {
+        background-color: transparent;
+      }
+    }
 
-  &:dir(rtl),
-  &:dir(ltr) {
-    // specificity bump hack
     background-color: $panel_bg_color;
     color: $panel_fg_color;
     border: $window_outline_color;
@@ -1276,6 +1298,9 @@ SheetStyleDialog.unity-force-quit {
 }
 .brisk-menu {
   background-color: $popover_bg_color;
+  scrolledwindow.frame > scrollbar {
+    background-color: transparent;
+  }
 
   > box {
     padding: 10px;
