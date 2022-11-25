@@ -429,7 +429,7 @@ button.back-button.text-button {
   background-size: 21px;
   
   .titlebar & {
-    @include button(normal, $headerbar_bg_color, $headerbar_fg_color);
+    @include button(normal, $tc: $headerbar_fg_color);
     background-color: $headerbar_bg_color;
     background-image: -gtk-icontheme('go-previous-symbolic');
     background-repeat: no-repeat no-repeat;
@@ -438,7 +438,7 @@ button.back-button.text-button {
     padding-left: 12px * 3;
     
     &:hover {
-      @include button(hover, $headerbar_bg_color, $headerbar_fg_color);
+      @include button(hover, $tc: $headerbar_fg_color);
       background-image: -gtk-icontheme('go-previous-symbolic');
       background-repeat: no-repeat no-repeat;
       background-position: 5px 50%;
@@ -446,7 +446,7 @@ button.back-button.text-button {
     }
     
     &:active {
-      @include button(active, $headerbar_bg_color, $headerbar_fg_color);
+      @include button(active, $tc: $headerbar_fg_color);
       background-image: -gtk-icontheme('go-previous-symbolic');
       background-repeat: no-repeat no-repeat;
       background-position: 5px 50%;

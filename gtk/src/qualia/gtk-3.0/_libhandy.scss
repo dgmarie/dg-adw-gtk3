@@ -336,7 +336,7 @@ list.content {
 
 // List button
 button.list-button:not(:active):not(:checked):not(:hover) {
-  @include button(normal, $card_bg_color, $card_fg_color);
+  @include button(normal, $tc: $card_fg_color);
 }
 
 // HdyKeypad
@@ -392,33 +392,18 @@ viewswitcher {
 
     // View switcher in a header bar
     headerbar &:not(:checked) {
-      &:hover:not(:backdrop) {
+      &:hover {
         background-image: none;
-        @if $variant == 'light' {
-          @include button(normal, gtkmix(white, $headerbar_bg_color, 28%), $headerbar_fg_color);
-        }
-        @else {
-          @include button(normal, gtkmix(black, $headerbar_bg_color, 13%), $headerbar_fg_color);
-        }
-      }
-
-      &:hover:backdrop {
-        @if $variant == 'light' {
-          @include button(backdrop, gtkmix(white, $headerbar_backdrop_color, 70%), $backdrop_fg_color);
-        }
-        @else {
-          @include button(backdrop, gtkmix(black, $headerbar_backdrop_color, 10%), $backdrop_fg_color);
-        }
-        background-image: none;
+        @include button(normal, $tc: $headerbar_fg_color);
       }
     }
-    &:checked, &:active {
+    &:active {
       @include button(active);
       background-image: none;
-      &:backdrop {
-        @include button(backdrop-active);
-        background-image: none;
-      }
+    }
+    &:checked {
+      @include button(checked);
+      background-image: none;
     }
 
     headerbar & {

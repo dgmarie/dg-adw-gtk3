@@ -76,7 +76,7 @@ $shadow_color: transparentize(black, 0.9);
 $drop_target_color: $selected_bg_color;
 
 //insensitive state derived colors
-$insensitive_fg_color: gtkmix($fg_color, $bg_color, 50%);
+$insensitive_fg_color: gtkalpha($fg_color, 0.5);
 $insensitive_bg_color: gtkmix($bg_color, $base_color, 60%);
 $insensitive_borders_color: $borders_color;
 
@@ -85,12 +85,12 @@ $backdrop_base_color: $bg_color;
 $backdrop_text_color: $text_color;
 $backdrop_bg_color: $bg_color;
 $backdrop_fg_color: $fg_color;
-$backdrop_insensitive_color: gtkmix($backdrop_fg_color, $backdrop_bg_color, 50%);
+$backdrop_insensitive_color: gtkalpha($backdrop_fg_color, 0.5);
 $backdrop_selected_fg_color: $accent_fg_color;
 $backdrop_borders_color: $borders_color;
 $backdrop_dark_fill: $dark_fill;
 $backdrop_sidebar_bg_color: $bg_color;
-$backdrop_selected_tab_color:  gtkmix($accent_bg_color, $headerbar_backdrop_color, 50%);;
+$backdrop_selected_tab_color: gtkalpha($accent_bg_color, 0.5);;
 
 $backdrop_scrollbar_bg_color: $backdrop_bg_color;
 $backdrop_scrollbar_slider_color: $scrollbar_slider_color;
@@ -114,11 +114,13 @@ $checkradio_fg_color: $selected_fg_color;
 $checkradio_borders_color: if($variant == 'light', gtkmix(black,$checkradio_bg_color,20%), gtkmix(black,$checkradio_bg_color,40%));
 
 // Custom colors
-$disabled_headerbar_fg: gtkmix($headerbar_fg_color, $headerbar_bg_color, 50%);
-$backdrop_headerbar_fg: gtkmix($headerbar_fg_color, $headerbar_backdrop_color, 50%);
-$backdrop_disabled_headerbar_fg: gtkmix($headerbar_fg_color, $headerbar_backdrop_color, 25%);
-$disabled_card_fg: gtkmix($card_fg_color, $card_bg_color, 50%);
-$disabled_popover_fg: gtkmix($popover_fg_color, $popover_bg_color, 50%);
+$disabled_headerbar_fg: gtkalpha($headerbar_fg_color, 0.5);
+$backdrop_headerbar_fg: $disabled_headerbar_fg;
+$backdrop_disabled_headerbar_fg: gtkalpha($disabled_headerbar_fg, 0.5);
+$disabled_card_fg: gtkalpha($card_fg_color, 0.5);
+$disabled_popover_fg: gtkalpha($popover_fg_color, 0.5);
+$headerbar_border: if($variant == 'light', gtkmix($headerbar_border_color, $headerbar_bg_color, 12.2%), gtkmix($headerbar_border_color, $headerbar_bg_color, 15%));
+$headerbar_border_backdrop: if($variant == 'light', gtkmix($headerbar_border_color, $headerbar_backdrop_color, 12.2%), gtkmix($headerbar_border_color, $headerbar_backdrop_color, 15%));
 
 // Other colors from libadwaita
 $border_color: gtkalpha(currentColor, .15); // not the same as borderS-color
@@ -142,14 +144,8 @@ $window_outline_color: if($variant == 'light', transparentize(black, 0.92), tran
 $fill_color: $selected_bg_color;
 $fill_text_color: $selected_fg_color;
 
-$headerbar_border: if($variant == 'light', gtkmix($headerbar_border_color, $headerbar_bg_color, 12.2%), gtkmix($headerbar_border_color, $headerbar_bg_color, 15%));
-$headerbar_border_backdrop: if($variant == 'light', gtkmix($headerbar_border_color, $headerbar_backdrop_color, 12.2%), gtkmix($headerbar_border_color, $headerbar_backdrop_color, 15%));
-
 // Notebook and tabs
-$tab_color_hover: gtkmix(currentColor, $headerbar_bg_color, 7%);
-$tab_color_active: gtkmix(currentColor, $headerbar_bg_color, 10%);
-$tab_color_active_hover: gtkmix(currentColor, $headerbar_bg_color, 13%);
-$tab_color_hover_backdrop: gtkmix(currentColor, $headerbar_backdrop_color, 7%);
-$tab_color_active_backdrop: gtkmix(currentColor, $headerbar_backdrop_color, 10%);
-$tab_color_active_hover_backdrop: gtkmix(currentColor, $headerbar_backdrop_color, 13%);
+$tab_color_hover: gtkalpha(currentColor, .07);
+$tab_color_active: gtkalpha(currentColor, .1);
+$tab_color_active_hover: gtkalpha(currentColor, .13);
 $tab_border: gtkalpha(currentColor, .15);

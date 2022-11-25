@@ -1,78 +1,6 @@
 // 3rd party application styles
 
 // These are for the different desktop environments that are being suppported
-%panel_button {
-  @include button(normal, $panel_bg_color, $panel_fg_color);
-
-  &:hover {
-    @include button(hover, $panel_bg_color, $panel_fg_color);
-  }
-
-  &:active,
-  &:checked {
-    @include button(active, $panel_bg_color, $panel_fg_color);
-  }
-
-  &:disabled {
-    @include button(insensitive, $panel_bg_color, $panel_fg_color);
-  }
-}
-
-%popover_button {
-  @include button(normal, $popover_bg_color);
-
-  &:hover {
-    @include button(hover, $popover_bg_color);
-  }
-
-  &:active,
-  &:checked {
-    @include button(active, $popover_bg_color);
-  }
-
-  &:disabled {
-    @include button(insensitive, $popover_bg_color);
-  }
-}
-
-%headerbar_button {
-  @include button(normal, $headerbar_bg_color);
-
-  &:hover {
-    @include button(hover, $headerbar_bg_color);
-  }
-
-  &:active,
-  &:checked {
-    @include button(active, $headerbar_bg_color);
-  }
-
-  &:disabled {
-    @include button(insensitive, $headerbar_bg_color);
-  }
-}
-
-%button_flat {
-  background-color: transparent;
-  border-color: transparent;
-
-  &:hover {
-    background-color: $view_hover_color;
-    border-color: $button_border;
-  }
-
-  &:active,
-  &:checked {
-    background-color: $view_active_color;
-    border-color: $button_border;
-  }
-
-  &:disabled {
-    color: gtkalpha($panel_fg_color, 0.5);
-    background-color: transparent;
-    border-color: transparent;
-  }
-}
 
 // ************
 // * Nautilus *
@@ -93,85 +21,56 @@
     // Path-bar
     .path-bar-box {
       border-radius: $button_radius;
-      border: none;
       padding-right: 6px;
-      @include button(normal, $headerbar_bg_color, $headerbar_fg_color);
+      @include button(normal);
 
       &:backdrop {
-        @include button(backdrop, $headerbar_backdrop_color, $backdrop_headerbar_fg);
+        @include button(backdrop);
       }
     }
 
     .nautilus-path-bar {
       border-radius: $button_radius;
-      @include button(normal, $headerbar_bg_color, $headerbar_fg_color);
-      min-height: 34px;
+      @include button(normal);
+      min-height: 32px;
 
       &:backdrop {
-        @include button(backdrop, $headerbar_backdrop_color, $backdrop_headerbar_fg);
+        @include button(backdrop);
       }
 
       button:not(.titlebutton) {
         margin: 0;
-        padding-left: 8px;
-        padding-right: 8px;
+        padding: 2px 8px;
 
         &.current-dir {
-          border-width: 0px;
+          border-width: 1px;
           border-radius: $button_radius;
           background-color: transparent;
           border-color: transparent;
         }
 
         &:not(.current-dir) {
-          border-width: 0px;
+          border-width: 1px;
           border-radius: $button_radius;
           background-color: transparent;
           border-color: transparent;
 
           &:hover {
-            @include button(active, $bg_color, $headerbar_fg_color);
+            @include button(hover, $flat: true);
 
             * {
               opacity: 1;
             }
 
             &:backdrop {
-              @include button(backdrop-active, $headerbar_backdrop_color, $backdrop_headerbar_fg);
+              @include button(backdrop-active);
             }
           }
         }
 
         &.toggle.popup {
-          @include button(normal, $headerbar_bg_color, $headerbar_fg_color);
           border-radius: 0 $button-radius $button-radius 0;
           border-left: 1px solid $border_color;
-
-          image {
-            color: $headerbar_fg_color;
-          }
-
-          &:hover {
-            @include button(hover, $headerbar_bg_color, $headerbar_fg_color);
-          }
-
-          &:checked {
-            @include button(active, $headerbar_bg_color, $headerbar_fg_color);
-          }
-
-          &:backdrop {
-            @include button(backdrop, $headerbar_backdrop_color, $backdrop_headerbar_fg);
-
-            &:hover {
-              @include button(normal, $headerbar_backdrop_color, $backdrop_headerbar_fg);
-            }
-
-            border-left: 1px solid $border_color;
-
-            image {
-              color: $backdrop_headerbar_fg;
-            }
-          }
         }
       }
     }
@@ -186,21 +85,27 @@
   }
 
   .titlebar {
-    :not(.raised) .linked > button {
+    .linked > button {
       @extend %linked;
       @extend %headerbar_buttons;
     }
   }
 
   // Back and forward buttons
-  .linked.raised button.image-button:not(:only-child) {
-
+  .linked.raised button.image-button:not(:only-child):not(#hack) {
     &,
     &:backdrop,
     &:disabled,
     &:backdrop:disabled {
-      @extend %headerbar_buttons;
-      border: none;
+      &:dir(ltr), &:dir(rtl) {
+        @extend %headerbar_buttons;
+        &:last-child {
+          border-left-color: transparent;
+          &:hover, &:checked, &:active {
+            border-left-color: $button_border;
+          }
+        }
+      }
     }
   }
 
@@ -497,13 +402,8 @@ XfdesktopIconView.view {
     margin: 2px 0;
   }
 
-  button.flat {
-    @extend %button_flat;
-  }
-
   button {
     margin: 1px 0;
-    @extend %headerbar_button;
   }
 
   .launchers-pane {
@@ -552,10 +452,6 @@ $panel_transition_duration: 250ms;
     border-radius: 24px;
     color: $panel_fg_color;
 
-    &.flat {
-      @extend %button_flat;
-    }
-
     entry {
       caret-color: $text_color;
     }
@@ -568,12 +464,6 @@ $panel_transition_duration: 250ms;
       // Theme pulseaudio-plugin's mpris buttons
       .linked button {
         @extend %linked;
-        @include button(normal, $menu_color, $text_color);
-
-        &:disabled {
-          @include button(insensitive);
-          border-color: gtkalpha($borders_color, 0.5);
-        }
       }
     }
   }
@@ -892,6 +782,18 @@ window.thunar {
 // * Caja *
 // ********
 
+.caja-navigation-window #Toolbar button {
+  &:backdrop {
+    image {
+      color: $headerbar_fg_color;
+      opacity: 0.5; // Because some icons aren't symbolic
+    }
+    &:disabled image {
+      color: $headerbar_fg_color;
+      opacity: 0.25;
+    }
+  }
+}
 .caja-pathbar button {
   min-width: 32px;
   border-radius: 0;
@@ -1032,6 +934,10 @@ geary-conversation-viewer#conversation_viewer {
 // ************
 // * Inkscape *
 // ************
+
+#DockedDialogNotebook > header {
+  background-color: $bg_color;
+}
 
 #DialogNotebook treeview.view:hover {
   background-color: gtkalpha($selected_bg_color, .5);
@@ -1176,7 +1082,6 @@ SheetStyleDialog.unity-force-quit {
     margin: 0;
     min-height: 0;
     color: $panel_fg_color;
-    @extend %button_flat;
   }
 
   button.flat.launcher {
@@ -1225,14 +1130,6 @@ SheetStyleDialog.unity-force-quit {
   background-color: $headerbar_bg_color;
   padding: 6px;
   color: $fg_color;
-
-  button.flat {
-    @extend %button_flat;
-  }
-
-  button {
-    @extend %headerbar_button;
-  }
 }
 
 .budgie-container {
@@ -1290,14 +1187,6 @@ SheetStyleDialog.unity-force-quit {
     border-radius: 18px;
   }
 
-  button.flat {
-    @extend %button_flat;
-  }
-
-  button {
-    @extend %headerbar_button;
-  }
-
   .linked.horizontal:not(#hack) > button:first-child:not(#hack) {
     &:dir(rtl), &:dir(ltr) {
       border-radius: 0 0 0 18px;
@@ -1336,16 +1225,6 @@ SheetStyleDialog.unity-force-quit {
 
 .budgie-menu,
 .container {
-  button {
-    @extend %popover_button;
-  }
-
-  row.activatable,
-  button.flat,
-  modelbutton.flat {
-    @extend %button_flat;
-  }
-
   entry {
     background-color: $view_selected_color;
   }
@@ -1389,16 +1268,6 @@ SheetStyleDialog.unity-force-quit {
     background-color: $panel_bg_color;
     color: $panel_fg_color;
     border: $window_outline_color;
-
-    button {
-      @extend %panel_button;
-    }
-
-    button.flat,
-    .brisk-button.flat.toggle,
-    #tasklist-button.flat.toggle {
-      @extend %button_flat;
-    }
   }
 }
 
@@ -1438,10 +1307,6 @@ SheetStyleDialog.unity-force-quit {
       background-color: transparent;
       padding: 0;
     }
-  }
-
-  button.flat {
-    @extend %button_flat;
   }
 }
 
