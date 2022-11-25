@@ -4,7 +4,7 @@
 
 **A Yaru and Libadwaita inspired theme for GTK3**
 
-This theme is supposed to be used with [qualia GTK theme](https://github.com/dgsasha/dg-gnome-theme).
+This theme is supposed to be used with [qualia GTK theme](https://github.com/dgsasha/qualia-gtk-theme).
 
 ## Installing
 See [CONTRIBUTING](CONTRIBUTING.md)
