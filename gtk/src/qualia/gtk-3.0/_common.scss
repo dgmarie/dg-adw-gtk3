@@ -12,7 +12,7 @@ $card_radius: $button_radius + 6;
 $_sizevariant: 'default'; //compact otherwise
 $_headerbar_height: if($_sizevariant=='default', if($variant=='light', 46px, 45px), if($variant=='light', 40px, 39px)); // make window border look like it's inset on dark theme
 $_entry_height: if($_sizevariant=='default', 32px, 26px);
-$_btn_pad: if($_sizevariant=='default', 4px 10px, 2px 6px);
+$_btn_pad: if($_sizevariant=='default', 4px 9px, 2px 5px);
 $_hb_btn_top_pad: if($_sizevariant=='default', 5px, 3px);
 $_hb_btn_bot_pad: if($_sizevariant=='default', 6px, 4px);
 $_img_btn_pad: if($_sizevariant=='default', 4px, 2px);
@@ -552,7 +552,7 @@ button {
   @at-root %button_basic, & {
 
     min-height: 24px;
-    min-width: 16px;
+    min-width: 14px;
     padding: $_btn_pad;
     border: 1px solid;
     border-color: transparent; // Should be in _drawing.scss, but it breaks linked buttons
@@ -578,7 +578,13 @@ button {
       }
       &:active { @include button(active, $flat: true); }
       &:checked {
-        @include button(checked, $flat: true); 
+        @include button(checked, $flat: true);
+      }
+      &:disabled {
+        @include button(undecorated);
+        color: $insensitive_fg_color;
+        &:active,
+        &:checked { @include button(insensitive-active, $flat: true); }
       }
     }
 
@@ -766,7 +772,7 @@ button {
       }
 
       &:disabled {
-        @include button(insensitive, $b_color, $tc: white);
+        @include button(insensitive, $b_color, white);
 
         &:active,
         &:checked { @include button(insensitive-active, $b_color, white); }
@@ -913,20 +919,6 @@ button {
 
     &:active,
     &:checked { @include button(insensitive-active); }
-  }
-
-  &:backdrop {
-    @include button(backdrop);
-
-    &:active,
-    &:checked { @include button(backdrop-active); }
-
-    &:disabled {
-      @include button(backdrop-insensitive);
-
-      &:active,
-      &:checked { @include button(backdrop-insensitive-active); }
-    }
   }
 }
 
@@ -1264,7 +1256,6 @@ spinbutton {
       }
 
       &:disabled {
-        //color: transparentize($insensitive_fg_color, 0.7);
         @include button(insensitive);
         background-color: transparent;
         border-style: none none none solid;
@@ -1575,14 +1566,6 @@ headerbar {
     @extend .dim-label;
   }
 
-  // Darken switchbuttons for headerbars. issue #1588
-  stackswitcher button:checked,
-  button.toggle:checked {
-    &:backdrop {
-      @include button(backdrop-active);
-    }
-  }
-
   .selection-mode &,
   &.selection-mode {
     $_hc: gtkmix($top_hilight, $suggested_bg_color, 50%); // hilight color
@@ -1610,34 +1593,31 @@ headerbar {
       border-color: $opaque_button_border;
 
       @at-root %selection_mode_button_flat,
-      &.flat { @include button(undecorated);}
+      &.flat {@include button(undecorated);}
 
-      &:hover { @include button(hover, $suggested_bg_color, $selected_fg_color); border-color: $opaque_button_border; }
+      &:hover {
+        @include button(hover, $suggested_bg_color, $selected_fg_color);
+        &:backdrop {
+          @include button(hover, gtkalpha($suggested_bg_color, 0.5), gtkalpha($selected_fg_color, 0.5));
+        }
+        border-color: $opaque_button_border;
+      }
 
       &:active,
+      &.toggle:active {
+        @include button(active, $suggested_bg_color, $selected_fg_color);
+        &:backdrop {
+          @include button(active, gtkalpha($suggested_bg_color, 0.5), gtkalpha($selected_fg_color, 0.5));
+        }
+        border-color: $opaque_button_border;
+      }
+
       &:checked,
-      &.toggle:checked,
-      &.toggle:active { @include button(active, $suggested_bg_color, $selected_fg_color); border-color: $opaque_button_border; }
-
-      &:backdrop {
-        &.flat, & {
-          @include button(backdrop, $suggested_bg_color, $selected_fg_color);
-
-          -gtk-icon-effect: none;
-          border-color: transparent;
-
-          &:active,
-          &:checked {
-            @include button(backdrop-active, $suggested_bg_color, $selected_fg_color);
-          }
-
-          &:disabled {
-            @include button(backdrop-insensitive, $suggested_bg_color, $selected_fg_color);
-
-            &:active, &:checked {
-              @include button(backdrop-insensitive-active, $suggested_bg_color, $selected_fg_color);
-            }
-          }
+      &.toggle:checked {
+        @include button(checked, $suggested_bg_color, $selected_fg_color); border-color: $opaque_button_border;
+        &:backdrop {
+          @include button(checked, gtkalpha($suggested_bg_color, 0.5), gtkalpha($selected_fg_color, 0.5));
+          border-color: $opaque_button_border;
         }
       }
 
@@ -1646,43 +1626,22 @@ headerbar {
 
       &:disabled {
         @include button(insensitive, $suggested_bg_color, $selected_fg_color);
-
+        &:backdrop {
+          @include button(insensitive, gtkalpha($suggested_bg_color, 0.5), gtkalpha($selected_fg_color, 0.5));
+        }
+        border-color: $opaque_button_border;
         &:active,
-        &:checked { @include button(insensitive-active, $suggested_bg_color, $selected_fg_color); }
+        &:checked {
+          @include button(insensitive-active, $suggested_bg_color, $selected_fg_color);
+          &:backdrop {
+            @include button(insensitive-active, gtkalpha($suggested_bg_color, 0.5), gtkalpha($selected_fg_color, 0.5));
+          }
+        }
       }
 
       &.suggested-action {
-        @include button(normal);
-
-        border-color: $opaque_button_border;
-
-        &:hover {
-          @include button(hover);
-
-          border-color: $opaque_button_border;
-        }
-
-        &:active {
-          @include button(active);
-
-          border-color: $opaque_button_border;
-        }
-
-        &:disabled {
-          @include button(insensitive);
-
-          border-color: $opaque_button_border;
-        }
-
-        &:backdrop {
-          @include button(backdrop);
-          border-color: $opaque_button_border;
-        }
-
-        &:backdrop:disabled {
-          @include button(backdrop-insensitive);
-
-          border-color: $opaque_button_border;
+        &:hover, &:active, &:disabled {
+          border-color: $suggested_border_color;
         }
       }
     }
@@ -2162,7 +2121,7 @@ menubar,
     }
 
     &:hover { //Seems like it :hover even with keyboard focus
-      background-color: gtkmix(currentColor, $headerbar_bg_color, 12.5%);
+      background-color: $view_selected_color;
       box-shadow: inset 0 0 0 1px $button_border;
     }
 
@@ -4122,7 +4081,7 @@ stacksidebar {
   }
 
   row {
-    padding: 10px 4px;
+    padding: 8px 4px;
 
     > label {
       padding-left: 6px;
@@ -4528,8 +4487,6 @@ colorswatch {
       @include button(normal);
 
       &:hover { @include button(hover); }
-
-      &:backdrop { @include button(backdrop); }
     }
   }
 

@@ -380,22 +380,9 @@ viewswitcher {
       border-right-color: transparent;
     }
 
-    &:not(:checked):hover:not(:backdrop) {
+    &:not(:checked):hover {
       @include button(hover);
       background-image: none;
-    }
-
-    &:not(:checked):hover:backdrop {
-      @include button(backdrop);
-      background-image: none;
-    }
-
-    // View switcher in a header bar
-    headerbar &:not(:checked) {
-      &:hover {
-        background-image: none;
-        @include button(normal, $tc: $headerbar_fg_color);
-      }
     }
     &:active {
       @include button(active);
@@ -405,6 +392,32 @@ viewswitcher {
       @include button(checked);
       background-image: none;
     }
+
+    // View switcher in a header bar
+    headerbar & {
+      &:not(:checked):hover {
+        background-image: none;
+        @include button(normal, $tc: $headerbar_fg_color);
+        &:backdrop {
+          @include button(normal, $tc: $backdrop_headerbar_fg);
+        }
+      }
+      &:active {
+        @include button(active, $tc: $headerbar_fg_color);
+        &:backdrop {
+          @include button(active, $tc: $backdrop_headerbar_fg);
+        }
+        background-image: none;
+      }
+      &:checked {
+        @include button(checked, $tc: $headerbar_fg_color);
+        &:backdrop {
+          @include button(checked, $tc: $backdrop_headerbar_fg);
+        }
+        background-image: none;
+      }
+    }
+
 
     headerbar & {
       @if $variant == 'dark' {
