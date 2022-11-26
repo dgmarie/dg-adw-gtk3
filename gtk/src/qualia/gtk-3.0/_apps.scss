@@ -1238,15 +1238,55 @@ SheetStyleDialog.unity-force-quit {
     border-radius: 18px;
   }
 
-  .linked.horizontal:not(#hack) > button:first-child:not(#hack) {
-    &:dir(rtl), &:dir(ltr) {
-      border-radius: 0 0 0 18px;
-    }
-  }
+  .linked.horizontal > button:not(#hack) {
+    &:dir(ltr), &:dir(rtl) {
+      border-right-style: none;
+      border-bottom-style: none;
+      -gtk-outline-radius: 0;
+      background-color: transparent;
+      color: $dialog_fg_color;
+      border-top: 1px solid $border_color;
+      border-left: 1px solid $border_color;
+      border-radius: 0;
 
-  .linked.horizontal:not(#hack) > button:last-child:not(#hack) {
-    &:dir(rtl), &:dir(ltr) {
-      border-radius: 0 0 18px 0;
+      &:hover {
+        background: $view_hover_color;
+      }
+
+      &:active {
+        background: $view_active_color;
+      }
+
+      &.suggested-action {
+        color: $accent_color;
+      }
+
+      &.destructive-action {
+        color: $destructive_color;
+      }
+
+      &:checked {
+        background: $view_selected_color;
+
+        &:hover {
+          background: $view_selected_hover_color;
+        }
+
+        &:active {
+          background: $view_selected_active_color;
+        }
+      }
+
+      &:first-child {
+        border-left-style: none;
+        border-radius: 0 0 0 17px;
+        -gtk-outline-bottom-left-radius: 17px;
+      }
+
+      &:last-child {
+        border-radius: 0 0 17px 0;
+        -gtk-outline-bottom-right-radius: 17px;
+      }
     }
   }
 }
