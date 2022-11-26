@@ -565,16 +565,9 @@ button {
     @at-root %button_basic_flat,
     &.flat {
       @include button(undecorated);
-      // to avoid adiacent buttons borders clashing when transitioning, the transition on the normal state is set
-      // to none, while it's added back in the hover state, so the button decoration will fade in on hover, but
-      // it won't fade out when the pointer leave the button allocation area. To make the transition more evident
-      // in this case the duration is increased.
-      transition: none;
-
       &:hover {
         @include button(hover, $flat: true);
         transition: $button_transition;
-        transition-duration: 500ms;
       }
       &:active { @include button(active, $flat: true); }
       &:checked {
@@ -851,9 +844,9 @@ button {
 
   .primary-toolbar & { -gtk-icon-shadow: none; } // tango icons don't need shadows
 
-  .linked:not(.vertical) > & { @extend %linked; }
+  .linked:not(.vertical):not(#hack) > & { @extend %linked; }
 
-  .linked.vertical > & { @extend %linked_vertical; }
+  .linked.vertical:not(#hack) > & { @extend %linked_vertical; }
 
   &.circular { // The Bloody Circul Button
     border-radius: 9999px;
@@ -3937,68 +3930,70 @@ messagedialog { // Message Dialog styling
     border-top-right-radius: 7px;
   }
 
-  .dialog-action-area button:not(#hack) {
-    &:dir(ltr), &:dir(rtl) {
-      padding: 10px 14px; // labels are not vertically centered on message dialog, this is a workaround
-      border-right-style: none;
-      border-bottom-style: none;
-      -gtk-outline-radius: 0;
-      background-color: transparent;
-      color: $dialog_fg_color;
-      border-top: 1px solid $border_color;
-      border-left: 1px solid $border_color;
-      border-radius: 0;
-
-      &:hover {
-        background: $view_hover_color;
-      }
-
-      &:active {
-        background: $view_active_color;
-      }
-
-      &.suggested-action {
-        color: $accent_color;
-      }
-
-      &.destructive-action {
-        color: $destructive_color;
-      }
-
-      &:checked {
-        background: $view_selected_color;
-
+  .dialog-action-area:not(#hack) {
+    button:not(#hack) {
+      &:dir(ltr), &:dir(rtl) {
+        padding: 10px 14px; // labels are not vertically centered on message dialog, this is a workaround
+        border-right-style: none;
+        border-bottom-style: none;
+        -gtk-outline-radius: 0;
+        background-color: transparent;
+        color: $dialog_fg_color;
+        border-left: 1px solid gtkalpha($fg_color, 0.15);
+        border-top: 1px solid gtkalpha($fg_color, 0.15);
+        border-radius: 0;
+  
         &:hover {
-          background: $view_selected_hover_color;
+          background: $view_hover_color;
         }
 
         &:active {
-          background: $view_selected_active_color;
+          background: $view_active_color;
         }
-      }
 
-      &:first-child {
-        border-left-style: none;
+        &.suggested-action {
+          color: $accent_color;
+        }
+
+        &.destructive-action {
+          color: $destructive_color;
+        }
+
+        &:checked {
+          background: $view_selected_color;
+
+          &:hover {
+            background: $view_selected_hover_color;
+          }
+
+          &:active {
+            background: $view_selected_active_color;
+          }
+        }
+
+        &:first-child {
+          border-left-style: none;
+        }
       }
     }
-    &.csd { // rounded bottom border styling for csd version
-      &:dir(ltr), &:dir(rtl) {
-        &.background {
-          border-bottom-left-radius: $window_radius;
-          border-bottom-right-radius: $window_radius;
-          background-color: $dialog_bg_color;
-          color: $dialog_fg_color;
+  }
+  &.csd:not(#hack) { // rounded bottom border styling for csd version
+    &:dir(ltr), &:dir(rtl) {
+      &.background {
+        border-bottom-left-radius: $window_radius;
+        border-bottom-right-radius: $window_radius;
+        background-color: $dialog_bg_color;
+        color: $dialog_fg_color;
+      }
+      .dialog-action-area button:not(#hack) {
+        &:first-child {
+          border-bottom-left-radius: $window_radius - 1;
+          -gtk-outline-bottom-left-radius: $window_radius - 1;
         }
-        .dialog-action-aria button:not(#hack) {
-          &:first-child {
-            border-bottom-left-radius: $window_radius - 1;
-            -gtk-outline-bottom-left-radius: $window_radius - 1;
-          }
-    
-          &:last-child {
-            border-bottom-right-radius: $window_radius - 1;
-            -gtk-outline-bottom-right-radius: $window_radius - 1;
-          }
+  
+        &:last-child {
+          border-bottom-right-radius: $window_radius - 1;
+          -gtk-outline-bottom-right-radius: $window_radius - 1;
         }
       }
     }
