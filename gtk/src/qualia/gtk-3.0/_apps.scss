@@ -127,6 +127,12 @@
     }
   }
 
+  .operations-list row.activatable {
+    &, &:hover, &:active, &:selected {
+      box-shadow: none;
+    }
+  }
+
   // Back and forward buttons
   .linked.raised button.image-button:not(:only-child):not(#hack) {
     &,
