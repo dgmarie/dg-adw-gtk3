@@ -4603,7 +4603,6 @@ decoration {
 
   .csd.popup & {
     border-radius: $menu_radius;
-    border: 1px solid $popover_border;
     background-clip: border-box;
     box-shadow: 0 1px 5px 1px transparentize(black, .91),
                 0 2px 8px 3px transparentize(black, .95),
