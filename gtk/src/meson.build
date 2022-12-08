@@ -193,8 +193,8 @@ foreach variant : variants
   ################
 
   install_data(
-    'thumbnails' / 'thumbnail-@0@.png'.format(variant),
-    install_dir: theme_dir,
+    meson.current_source_dir() / 'thumbnails' / 'thumbnail-@0@.png'.format(variant),
+    install_dir: gtk3_dir,
     rename: 'thumbnail.png'
   )
 endforeach
