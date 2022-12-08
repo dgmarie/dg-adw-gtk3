@@ -1,4 +1,4 @@
-$orange:        #ed5b28;
+$default:       #ed5b28;
 $bark:          #8d6b4c;
 $sage:          #737d5a;
 $olive:         #518e3c;

@@ -989,6 +989,16 @@ geary-conversation-viewer#conversation_viewer {
   background-color: gtkalpha($selected_bg_color, .5);
 }
 
+// Transmission
+#main-window-toolbar button {
+  &:backdrop {
+    image {
+      color: $headerbar_fg_color;
+      opacity: 0.5; // Because some icons aren't symbolic
+    }
+  }
+}
+
 // *********
 // * Unity *
 // *********

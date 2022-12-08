@@ -1,7 +1,8 @@
+option('gtk3', type: 'boolean', value: true)
+option('gtk4', type: 'boolean', value: true)
 option('accent-colors',
     type: 'array',
     choices: [
-        'orange',
         'bark',
         'sage',
         'olive',

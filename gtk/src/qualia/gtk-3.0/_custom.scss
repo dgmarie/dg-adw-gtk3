@@ -501,7 +501,10 @@ treeview.view:not(:backdrop):not(:selected):hover {
 .primary-toolbar, .toolbar {
   &:dir(ltr), &:dir(rtl) {
     background-color: $headerbar_bg_color;
-    &:backdrop { background-color: $headerbar_backdrop_color; }
+    &:backdrop {
+      background-color: $headerbar_backdrop_color;
+      transition: $backdrop_transition;
+    }
   }
 }
 .primary-toolbar.horizontal {
