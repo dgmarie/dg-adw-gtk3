@@ -187,4 +187,14 @@ foreach variant : variants
   elif not variant.startswith('default')
     meson.add_install_script('bash', '-c', 'ln -rsf @0@ @1@'.format(themes_dir / meson.project_name() + '-dark' / 'gtk-4.0', theme_dir))
   endif
+
+  ################
+  #  Thumbnails  #
+  ################
+
+  install_data(
+    'thumbnails' / 'thumbnail-@0@.png'.format(variant),
+    install_dir: theme_dir,
+    rename: 'thumbnail.png'
+  )
 endforeach
