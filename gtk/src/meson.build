@@ -180,17 +180,17 @@ foreach variant : variants
   ##############
 
   if variant != 'default' and get_option('gtk3')
-    meson.add_install_script('bash', '-c', 'ln -rsf ${DESTDIR}/@0@ ${DESTDIR}/@1@'.format(themes_dir / meson.project_name() / 'gtk-3.0' / 'assets', gtk3_dir))
+    meson.add_install_script('symlink.sh', themes_dir / meson.project_name() / 'gtk-3.0', gtk3_dir, 'assets')
   endif
   if variant == 'default-dark' and get_option('gtk4')
-    meson.add_install_script('bash', '-c', 'ln -rsf ${DESTDIR}/@0@ ${DESTDIR}/@1@'.format(themes_dir / meson.project_name() / 'gtk-4.0' / 'assets', gtk4_dir))
+    meson.add_install_script('symlink.sh', themes_dir / meson.project_name() / 'gtk-4.0', gtk4_dir, 'assets')
   endif
 
   if not variant.startswith('default') and get_option('gtk4')
     if not variant.endswith('-dark')
-      meson.add_install_script('bash', '-c', 'ln -rsf ${DESTDIR}/@0@ ${DESTDIR}/@1@'.format(themes_dir / meson.project_name() / 'gtk-4.0', theme_dir))
+      meson.add_install_script('symlink.sh', themes_dir / meson.project_name(), theme_dir,  'gtk-4.0')
     else
-      meson.add_install_script('bash', '-c', 'ln -rsf ${DESTDIR}/@0@ ${DESTDIR}/@1@'.format(themes_dir / meson.project_name() + '-dark' / 'gtk-4.0', theme_dir))
+      meson.add_install_script('symlink.sh', themes_dir / meson.project_name() + '-dark', theme_dir, 'gtk-4.0')
     endif
   endif
 
