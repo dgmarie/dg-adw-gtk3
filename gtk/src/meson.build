@@ -180,17 +180,17 @@ foreach variant : variants
   ##############
 
   if variant != 'default' and get_option('gtk3')
-    meson.add_install_script('bash', '-c', 'ln -rsf @0@ @1@'.format(themes_dir / meson.project_name() / 'gtk-3.0' / 'assets', gtk3_dir))
+    meson.add_install_script('bash', '-c', 'ln -rsf ${DESTDIR}/@0@ ${DESTDIR}/@1@'.format(themes_dir / meson.project_name() / 'gtk-3.0' / 'assets', gtk3_dir))
   endif
   if variant == 'default-dark' and get_option('gtk4')
-    meson.add_install_script('bash', '-c', 'ln -rsf @0@ @1@'.format(themes_dir / meson.project_name() / 'gtk-4.0' / 'assets', gtk4_dir))
+    meson.add_install_script('bash', '-c', 'ln -rsf ${DESTDIR}/@0@ ${DESTDIR}/@1@'.format(themes_dir / meson.project_name() / 'gtk-4.0' / 'assets', gtk4_dir))
   endif
 
   if not variant.startswith('default') and get_option('gtk4')
     if not variant.endswith('-dark')
-      meson.add_install_script('bash', '-c', 'ln -rsf @0@ @1@'.format(themes_dir / meson.project_name() / 'gtk-4.0', theme_dir))
+      meson.add_install_script('bash', '-c', 'ln -rsf ${DESTDIR}/@0@ ${DESTDIR}/@1@'.format(themes_dir / meson.project_name() / 'gtk-4.0', theme_dir))
     else
-      meson.add_install_script('bash', '-c', 'ln -rsf @0@ @1@'.format(themes_dir / meson.project_name() + '-dark' / 'gtk-4.0', theme_dir))
+      meson.add_install_script('bash', '-c', 'ln -rsf ${DESTDIR}/@0@ ${DESTDIR}/@1@'.format(themes_dir / meson.project_name() + '-dark' / 'gtk-4.0', theme_dir))
     endif
   endif
 
@@ -206,6 +206,6 @@ foreach variant : variants
     )
 
     # Create an empty gtk2 dir to allow theme to be seen in cinnamon settings
-    meson.add_install_script('mkdir', '-p', gtk2_dir)
+    meson.add_install_script('mkdir', '-p', '${DESTDIR}' / gtk2_dir)
   endif
 endforeach
