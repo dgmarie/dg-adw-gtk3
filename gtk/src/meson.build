@@ -206,6 +206,6 @@ foreach variant : variants
     )
 
     # Create an empty gtk2 dir to allow theme to be seen in cinnamon settings
-    meson.add_install_script('mkdir', '-p', 'gtk2_dir')
+    meson.add_install_script('mkdir', '-p', gtk2_dir)
   endif
 endforeach
