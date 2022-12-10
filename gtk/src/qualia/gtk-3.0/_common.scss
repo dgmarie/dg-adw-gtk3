@@ -932,6 +932,12 @@ toolbar.inline-toolbar toolbutton {
     border-right-color: transparent;
     border-radius: 0;
     -gtk-outline-radius: 0;
+    &:checked, &:active {
+      border-right-color: $border_color;
+      + button {
+        border-left-color: transparent;
+      }
+    }
   }
 }
 
@@ -943,6 +949,12 @@ toolbar.inline-toolbar toolbutton {
     border-bottom-left-radius: $button_radius;
     -gtk-outline-top-left-radius: $button_radius;
     -gtk-outline-bottom-left-radius: $button_radius;
+    &:checked, &:active {
+      border-right-color: $border_color;
+      + button {
+        border-left-color: transparent;
+      }
+    }
   }
   &:not(button):focus { border-left-color: entry_focus_border(); } // Fix for linked entries
 }
@@ -1004,6 +1016,12 @@ toolbar.inline-toolbar toolbutton {
     border-bottom-color: transparent;
     border-radius: 0;
     -gtk-outline-radius: 0;
+    &:checked, &:active {
+      border-bottom-color: $border_color;
+      + button {
+        border-top-color: transparent;
+      }
+    }
   }
 }
 
@@ -1015,6 +1033,12 @@ toolbar.inline-toolbar toolbutton {
     border-top-right-radius: $button_radius;
     -gtk-outline-top-left-radius: $button_radius;
     -gtk-outline-top-right-radius: $button_radius;
+    &:checked, &:active {
+      border-bottom-color: $border_color;
+      + button {
+        border-top-color: transparent;
+      }
+    }
   }
 }
 
