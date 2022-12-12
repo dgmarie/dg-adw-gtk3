@@ -1094,7 +1094,7 @@ SheetStyleDialog.unity-force-quit {
   border: 1px solid $window_outline_color;
   background-clip: border-box;
   background-color: $popover_bg_color;
-  box-shadow: 0 2px 3px 1px transparentize(black, 0.65);
+  box-shadow: 0 2px 3px 1px transparentize(black, 0.75);
 }
 
 .budgie-popover .container {
@@ -1120,12 +1120,13 @@ SheetStyleDialog.unity-force-quit {
     }
 
     button {
-      border-radius: 12px;
+      border-radius: 8px;
     }
   }
 
   button {
     @extend %panel_button;
+    margin: 0 1px;
   }
   &.horizontal button {
     padding: 0px 4px;
@@ -1141,8 +1142,7 @@ SheetStyleDialog.unity-force-quit {
   }
 
   button.flat.launcher {
-    padding: 0;
-    margin: 0 1px;
+    padding: 8px 0;
     color: $panel_fg_color;
 
     > icon {
@@ -1183,9 +1183,12 @@ SheetStyleDialog.unity-force-quit {
 }
 
 .raven {
-  background-color: $headerbar_bg_color;
+  background-color: $popover_bg_color;
   padding: 6px;
   color: $fg_color;
+  .raven-mpris {
+    background-color: gtkalpha($popover_bg_color, 0.7);
+  }
 }
 
 .budgie-container {
@@ -1222,9 +1225,7 @@ SheetStyleDialog.unity-force-quit {
 
   .#{$pos} .shadow-block {
     background-color: transparent;
-    background-image: linear-gradient(to $b_pos,
-        transparentize(black, .65),
-        transparent);
+    background-image: none;
   }
 }
 
@@ -1250,8 +1251,8 @@ SheetStyleDialog.unity-force-quit {
       -gtk-outline-radius: 0;
       background-color: transparent;
       color: $dialog_fg_color;
-      border-top: 1px solid $border_color;
-      border-left: 1px solid $border_color;
+      border-top: 1px solid gtkalpha($fg_color, 0.15);
+      border-left: 1px solid gtkalpha($fg_color, 0.15);
       border-radius: 0;
 
       &:hover {
@@ -1331,6 +1332,9 @@ SheetStyleDialog.unity-force-quit {
 
   .category-button {
     margin: 1px 0;
+  }
+  .categories.sidebar {
+    margin: 2px 0;
   }
 
   > .container > box > box > .sidebar {

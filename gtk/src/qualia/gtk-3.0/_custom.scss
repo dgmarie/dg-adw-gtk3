@@ -492,9 +492,11 @@ treeview.view:not(:selected):hover {
 }
 treeview.view:selected:not(:hover) {
   background-color: $view_selected_color;
+  color: $fg_color;
 }
 treeview.view:selected:hover {
   background-color: $view_selected_hover_color;
+  color: $fg_color;
 }
 // Preferences window
 // In nautilus preferences there is no padding below the last list
