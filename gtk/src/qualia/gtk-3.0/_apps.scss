@@ -3,6 +3,7 @@
 // These are for the different desktop environments that are being suppported
 
 %panel_flat_button {
+  color: $panel_fg_color;
   &:hover {
     @include button(hover, $tc: $panel_fg_color, $flat: true);
   }
@@ -18,6 +19,7 @@
   }
 }
 %panel_button {
+  color: $panel_fg_color;
   &:hover {
     @include button(hover, $tc: $panel_fg_color);
   }
@@ -840,16 +842,17 @@ window.thunar {
 .caja-pathbar button {
   min-width: 32px;
   border-radius: 0;
-  border-right-width: 0;
   margin-right: -3px;
-
+  border-right-color: transparent;
+  border-left-color: $border_color;
   &.slider-button:nth-child(odd) {
     border-radius: $button_radius 0px 0px $button_radius;
+    border-left-color: $button_border;
   }
 
   &.slider-button:nth-child(even) {
     border-radius: 0 $button_radius $button_radius 0;
-    border-right-width: 1px;
+    border-right-color: $button_border;
   }
 }
 
@@ -1407,7 +1410,7 @@ SheetStyleDialog.unity-force-quit {
   }
 
   .categories-list {
-    padding: 2px 0;
+    padding: 4px 0;
 
     button {
       margin: 1px 3px;
@@ -1516,5 +1519,21 @@ SheetStyleDialog.unity-force-quit {
         }
       }
     }
+  }
+}
+
+// *********
+// * Pluma *
+// *********
+
+.pluma-window {
+  .primary-toolbar {
+    @extend %headerbar_stuff;
+    background-color: $headerbar_bg_color;
+    &:backdrop { background-color: $headerbar_backdrop_color; }
+    border-bottom: 1px solid $headerbar_shade_color;
+  }
+  statusbar > widget > frame > border {
+    border: none;
   }
 }
