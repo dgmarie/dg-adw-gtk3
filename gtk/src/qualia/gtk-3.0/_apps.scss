@@ -454,6 +454,10 @@ XfdesktopIconView.view {
     border: 1px solid $border-color;
   }
 
+  scrollbar {
+    background-color: transparent;
+  }
+
   .launchers-view {
     background-color: transparent;
   }
@@ -550,13 +554,7 @@ $panel_transition_duration: 250ms;
       border: none;
     }
     viewport.frame box.vertical treeview.view.places-treeview {
-      // use sidebar bg color
-      background-image: image(if($variant=='light', $bg_color, $base_color));
       border-radius: 0; // get rid of weird radius on selected rows
-
-      &:selected {
-        background: $selected_bg_color;
-      }
 
       &:not(:selected) {
         &:not(:backdrop):hover {
@@ -807,12 +805,6 @@ window.thunar {
   .sidebar {
     border-top: none;
     background-color: if($variant=='light', $bg_color, $base_color);
-    treeview.view {
-      background-color: if($variant=='light', $bg_color, $base_color);
-      &:selected {
-        background: $selected_bg_color;
-      }
-    }
   }
   .standard-view {
     border-top: none;
@@ -861,12 +853,6 @@ window.thunar {
 }
 .caja-side-pane .frame {
   border-style: solid none none none;
-  treeview.view {
-    background-color: if($variant=='light', $bg_color, $base_color);
-    &:selected {
-      background: $selected_bg_color;
-    }
-  }
 }
 
 .caja-notebook {
@@ -987,6 +973,10 @@ geary-conversation-viewer#conversation_viewer {
 
 #DialogNotebook treeview.view:hover {
   background-color: gtkalpha($selected_bg_color, .5);
+}
+
+#tool-toolbar flowbox button {
+  margin: 1px;
 }
 
 // Transmission
@@ -1488,4 +1478,34 @@ SheetStyleDialog.unity-force-quit {
 
 #content_frame {
   padding-bottom: 12px;
+}
+
+// ************
+// * Mousepad *
+// ************
+
+.mousepad {
+  box.horizontal > toolbar.horizontal:not(.inline-toolbar) {
+    @extend %headerbar_stuff;
+    background-color: $headerbar_bg_color;
+    &:backdrop { background-color: $headerbar_backdrop_color; }
+    border-bottom: 1px solid $headerbar_shade_color;
+  }
+  notebook {
+    margin-top: -2px; // This might cause issues but is the only way i can get rid of the blank space
+  }
+  toolbar, notebook {
+    button {
+      &:backdrop {
+        image {
+          color: $headerbar_fg_color;
+          opacity: 0.5; // Because some icons aren't symbolic
+        }
+        &:disabled image {
+          color: $headerbar_fg_color;
+          opacity: 0.25;
+        }
+      }
+    }
+  }
 }

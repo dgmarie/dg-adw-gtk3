@@ -404,27 +404,43 @@ entry {
     @extend %linked_vertical;
 
     // brighter border between linked entries
-    &:not(:disabled) + entry:not(:disabled),
-    &:not(:disabled) + %entry:not(:disabled) {
-      border-top-color: gtkmix($borders_color, $base_color, 30%);
-
-      &:backdrop { border-top-color: gtkmix($backdrop_borders_color, $backdrop_base_color, 30%); }
+    + entry,
+    + %entry {
+      &:dir(ltr), &:dir(rtl) {
+        border-top-color: gtkalpha($fg_color, 0.15);
+      }
     }
 
     // brighter border between linked insensitive entries
     &:disabled + %entry:disabled,
-    &:disabled + entry:disabled { border-top-color: gtkmix($borders_color, $base_color, 30%); }
+    &:disabled + entry:disabled {
+      &:dir(ltr), &:dir(rtl) {
+        border-top-color: gtkalpha($insensitive_fg_color, 0.15);
+      }
+    }
 
     // color back the top border of a linked focused entry following another entry.
-    // :not(:only-child) is a specificity bump hack.
-    + %entry:focus:not(:only-child),
-    + entry:focus:not(:only-child) { border-top-color: entry_focus_border(); }
+    // :not(:only-child):not(#hack) is a specificity bump hack.
+    + %entry:focus:not(:only-child):not(#hack),
+    + entry:focus:not(:only-child):not(#hack) {
+      &:dir(ltr), &:dir(rtl) {
+        border-top-color: entry_focus_border();
+      }
+    }
 
-    + %entry:focus.error:not(:only-child),
-    + entry:focus.error:not(:only-child) { border-top-color: entry_focus_border($error_bg_color); }
+    + %entry:focus.error:not(:only-child):not(#hack),
+    + entry:focus.error:not(:only-child):not(#hack) {
+      &:dir(ltr), &:dir(rtl) {
+        border-top-color: entry_focus_border($error_bg_color);
+      }
+    }
 
-    + %entry:drop(active):not(:only-child),
-    + entry:drop(active):not(:only-child) { border-top-color: $drop_target_color; }
+    + %entry:drop(active):not(:only-child):not(#hack),
+    + entry:drop(active):not(:only-child):not(#hack) {
+      &:dir(ltr), &:dir(rtl) {
+        border-top-color: $drop_target_color;
+      }
+    }
 
     // this takes care of coloring the top border of the focused entry subsequent widget.
     // :not(:only-child) is a specificity bump hack.
@@ -4670,13 +4686,13 @@ decoration {
     color: $selected_fg_color;
 
     @at-root %selected_items_disabled,
-    &:disabled { color: gtkmix($selected_fg_color, $selected_bg_color, 50%); }
+    &:disabled { color: gtkalpha($selected_fg_color, 0.5); }
 
     @at-root %selected_items_backdrop,
     &:backdrop {
       color: $backdrop_selected_fg_color;
 
-      &:disabled { color: gtkmix($backdrop_selected_fg_color, $selected_bg_color, 30%); }
+      &:disabled { color: gtkalpha($backdrop_selected_fg_color, 0.5); }
     }
   }
 }
