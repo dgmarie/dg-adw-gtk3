@@ -177,7 +177,7 @@
 
 // headerbar stuff
 %headerbar_stuff,
-headerbar, .titlebar, .primary-toolbar, .toolbar {
+headerbar, .titlebar, .primary-toolbar {
   // Text colors for gtk named color support (except backdrop and disabled)
   &:not(.selection-mode) {
     &,
@@ -506,7 +506,7 @@ treeview.view:selected:hover {
 .osd .linked > button { border-color: transparent; }
 
 // Toolbars
-.primary-toolbar, .toolbar {
+.primary-toolbar {
   &:dir(ltr), &:dir(rtl) {
     background-color: $headerbar_bg_color;
     &:backdrop {
