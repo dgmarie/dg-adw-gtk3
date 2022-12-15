@@ -255,15 +255,18 @@ headerbar, .titlebar, .primary-toolbar {
   // Entries
   entry {
     min-height: 32px; // Evens out the height for the top and bottom borders which adds 2px
-    @include button(normal, $tc: $headerbar_fg_color);
+    @include entry(normal);
     &:backdrop {
-      @include button(normal, $tc: $backdrop_headerbar_fg);
+      @include entry(backdrop);
+    }
+    &:focus {
+      @include entry(focus);
     }
     &:disabled {
-      @include button(insensitive, $tc: $disabled_headerbar_fg);
+      @include entry(insensitive);
     }
     &:disabled:backdrop {
-      @include button(insensitive, $tc: $backdrop_headerbar_fg);
+      @include entry(backdrop-insensitive);
     }
 
     image { // icons inside the entry
@@ -380,16 +383,6 @@ headerbar, .titlebar, .primary-toolbar {
   .left {
     margin-left: 8px;
     separator.titlebutton { min-width: 2px; }
-  }
-}
-
-
-popover.background {
-  entry {
-    @include button(normal, $tc: $popover_fg_color);
-    &:disabled {
-      @include button(normal, $tc: $disabled_popover_fg);
-    }
   }
 }
 
