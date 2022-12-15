@@ -2469,13 +2469,11 @@ notebook {
     &.left > tabs > arrow {
       @extend %notebook_horz_arrows;
 
-      border-left-style: none;
     }
 
     &.right > tabs > arrow {
       @extend %notebook_horz_arrows;
 
-      border-right-style: none;
     }
 
     @at-root %notebook_horz_arrows {
@@ -2490,21 +2488,9 @@ notebook {
     }
 
     > tabs > arrow {
-      @extend %button_basic;
-
-      @extend %button_basic_flat;
-
       min-height: 16px;
       min-width: 16px;
       border-radius: 0;
-
-      &:hover:not(:active):not(:backdrop) {
-        background-clip: padding-box;
-        background-image: none;
-        background-color: transparentize(white, 0.7);
-        border-color: transparent;
-        box-shadow: none;
-      }
 
       &:disabled { @include button(undecorated); }
     }
@@ -2527,11 +2513,9 @@ notebook {
       button.flat {
         &:hover {
           color: currentColor;
-          background-color: gtkalpha(currentColor, .15);
+          background: $view_hover_color;
         }
-        &:active { background-color: gtkalpha(currentColor, .3); }
-
-        &, &:backdrop { color: gtkalpha(currentColor, 0.3); }
+        &:active { background: $view_active_color;}
 
         padding: 0;
         margin-top: 4px;

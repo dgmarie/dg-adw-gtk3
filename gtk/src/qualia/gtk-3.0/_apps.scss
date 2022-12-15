@@ -718,17 +718,23 @@ button .download_progress trough {
   min-height: 2px;
 }
 
-.titlebar .navigation-box.linked button:not(:only-child) {
-
+// Back and forward buttons
+.navigation-box.linked button.image-button:not(:only-child):not(#hack) {
   &,
+  &:backdrop,
   &:disabled,
-  &:backdrop {
-    &:not(:hover):not(:active) {
-      @include button(undecorated);
-    }
-
-    &:last-child {
-      border-left-color: transparent;
+  &:backdrop:disabled {
+    &:dir(ltr), &:dir(rtl) {
+      @extend %headerbar_buttons;
+      &:not(:hover):not(:active) {
+        @include button(undecorated);
+      }
+      &:last-child {
+        border-left-color: transparent;
+        &:hover, &:checked, &:active {
+          border-left-color: $button_border;
+        }
+      }
     }
   }
 }

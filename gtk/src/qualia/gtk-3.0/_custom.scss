@@ -564,6 +564,7 @@ notebook {
     button {
       &:dir(rtl), &:dir(ltr) { // specificity bump
         color: $headerbar_fg_color;
+        margin: 0 3px;
         &:backdrop { color: $backdrop_headerbar_fg; }
         &:disabled { color: $disabled_headerbar_fg; }
       }
@@ -650,10 +651,6 @@ notebook {
       }
     }
   }
-}
-
-grid > button { // fix grid buttons overlapping
-  margin: 1px;
 }
 
 notebook.frame,
