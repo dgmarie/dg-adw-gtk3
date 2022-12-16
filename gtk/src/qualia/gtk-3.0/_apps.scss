@@ -218,7 +218,12 @@
       }
     }
   }
-
+  .nautilus-grid-view {
+    &:selected {
+      background: gtkalpha($selected_bg_color, 0.3);
+      color: $text_color;
+    }
+  }
   // This is from Yaru
   notebook {
     background-color: if($variant=='light', $base_color, $bg_color);
@@ -494,10 +499,10 @@ $panel_transition_duration: 250ms;
   }
 
   button {
+    border-radius: 12px;
     padding: 0 6px;
     min-height: 12px;
     min-width: 12px;
-    border-radius: 24px;
     color: $panel_fg_color;
     @extend %panel_button;
     &.flat {
@@ -555,6 +560,7 @@ $panel_transition_duration: 250ms;
   }
   .sidebar {
     background-color: if($variant=='light', $bg_color, $base_color);
+    scrollbar {background-color: transparent;}
 
     scrolledwindow.frame.nemo-places-sidebar {
       // get rid of double border in sidebar
@@ -572,10 +578,23 @@ $panel_transition_duration: 250ms;
   }
 
   .nemo-window-pane {
-    .view {
-      background-image: image(if($variant=='light', $base_color, $bg_color));
+    widget.view {
+      background-color: if($variant=='light', $base_color, $bg_color);
       &:selected {
-        background: $selected_bg_color;
+        background: gtkalpha($selected_bg_color, 0.3);
+        color: $text_color;
+      }
+    }
+    treeview.view {
+      background-color: if($variant=='light', $base_color, $bg_color);
+      :hover {
+        background-color: $view_hover_color;
+      }
+      &:selected {
+        background-color: $view_selected_color;
+      }
+      &:selected:hover {
+        background-color: $view_selected_hover_color;
       }
     }
     widget.entry {
@@ -818,13 +837,27 @@ window.thunar {
   .sidebar {
     border-top: none;
     background-color: if($variant=='light', $bg_color, $base_color);
+    scrollbar {background-color: transparent;}
   }
   .standard-view {
     border-top: none;
-    .view {
+    widget.view {
       background-color: if($variant=='light', $base_color, $bg_color);
       &:selected {
-        background: $selected_bg_color;
+        background: gtkalpha($selected_bg_color, 0.3);
+        color: $text_color;
+      }
+    }
+    treeview.view {
+      background-color: if($variant=='light', $base_color, $bg_color);
+      :hover {
+        background-color: $view_hover_color;
+      }
+      &:selected {
+        background-color: $view_selected_color;
+      }
+      &:selected:hover {
+        background-color: $view_selected_hover_color;
       }
     }
   }
@@ -864,16 +897,30 @@ window.thunar {
 
 .caja-side-pane {
   background-color: if($variant=='light', $bg_color, $base_color);
+  scrollbar {background-color: transparent;}
 }
 .caja-side-pane .frame {
   border-style: solid none none none;
 }
 
 .caja-notebook {
-  .view {
+  widget.view {
     background-color: if($variant=='light', $base_color, $bg_color);
     &:selected {
-      background: $selected_bg_color;
+      background: gtkalpha($selected_bg_color, 0.3);
+      color: $text_color;
+    }
+  }
+  treeview.view {
+    background-color: if($variant=='light', $base_color, $bg_color);
+    :hover {
+      background-color: $view_hover_color;
+    }
+    &:selected {
+      background-color: $view_selected_color;
+    }
+    &:selected:hover {
+      background-color: $view_selected_hover_color;
     }
   }
   .view,
@@ -894,11 +941,6 @@ window.thunar {
   widget.view widget.entry {
     color: $fg_color;
     border-color: $borders_color;
-
-    &:selected {
-      background: $selected_bg_color;
-      color: $selected_fg_color;
-    }
   }
 }
 
@@ -1378,7 +1420,7 @@ SheetStyleDialog.unity-force-quit {
     button,
     menuitem,
     #tasklist-button {
-      border-radius: 24px;
+      border-radius: 12px;
     }
     #showdesktop-button {
       &, &:hover, &:checked {
@@ -1401,6 +1443,10 @@ SheetStyleDialog.unity-force-quit {
 #MatePanelAppletPopup {
   color: $fg_color;
 }
+MatePanelAppletFrameDBus > MatePanelAppletFrameDBus {
+  color: $panel_fg_color;
+}
+
 .brisk-menu {
   background-color: $popover_bg_color;
   scrolledwindow.frame > scrollbar {
@@ -1541,5 +1587,26 @@ SheetStyleDialog.unity-force-quit {
   }
   statusbar > widget > frame > border {
     border: none;
+  }
+}
+
+// *********************
+// * Cinnamon Settings *
+// *********************
+
+.cs-category-view iconview.view {
+  :hover {
+    background-color: $view_hover_color;
+    border: 1px solid $button_border;
+    border-radius: 6px;
+  }
+  &:selected {
+    background-color: gtkalpha($selected_bg_color, 0.15);
+    color: $text_color;
+    border: 1px solid $button_border;
+    &:hover {
+      background-color: gtkalpha($selected_bg_color, 0.2);
+      color: $text_color;
+    }
   }
 }
