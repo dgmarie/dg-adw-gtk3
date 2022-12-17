@@ -2194,9 +2194,9 @@ menu,
     text-shadow: none;
     font-weight: normal;
     border-radius: $button_radius;
+    color: $fg_color;
 
     &:hover {
-      color: if($variant == 'light', $fg_color, $selected_fg_color);
       background-color: $view_hover_color;
       box-shadow: inset 0 0 0 1px $button_border;
     }

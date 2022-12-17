@@ -100,6 +100,7 @@ $backdrop_menu_color: $menu_color;
 //special cased widget colors
 $panel_bg_color: $dark_4;
 $panel_fg_color: white;
+$unity_panel_bg_color: if($variant== 'light', $light_2, $dark_4);
 $panel_separator_color: gtkalpha(white, .15); // not the same as borderS-color
 
 $popover_border: if($variant=='light', gtkmix($popover_bg_color, black, 95%), gtkmix($popover_bg_color, white, 95%));

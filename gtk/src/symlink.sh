@@ -1,6 +1,4 @@
 #! /usr/bin/env bash
-if [ -d "${DESTDIR}/${2}/${3}" ]; then
-    rm -rf "${DESTDIR}/${2}/${3}"
-fi
+mkdir -p "${DESTDIR}/${2}"
 
-ln -rsf "${DESTDIR}/${1}/${3}" "${DESTDIR}/${2}"
+ln -svf "${DESTDIR}/${1}/${3}" "${DESTDIR}/${2}"
