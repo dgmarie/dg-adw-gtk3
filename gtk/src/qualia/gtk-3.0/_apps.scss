@@ -1238,8 +1238,9 @@ SheetStyleDialog.unity-force-quit {
   padding: 0px;
   background-color: transparent;
   @each $pos in (top, bottom) {
-    &.#{$pos} button.flat.launcher:checked,
-    &.#{$pos} .budgie-panel.dock-mode {
+    &.#{$pos} .budgie-panel.dock-mode button.flat,
+    &.#{$pos} .budgie-panel.dock-mode,
+    &.#{$pos} button.flat.launcher:checked  {
       &:dir(rtl), &:dir(ltr) {
         border-#{$pos}-left-radius: 0;
         border-#{$pos}-right-radius: 0;
@@ -1247,8 +1248,9 @@ SheetStyleDialog.unity-force-quit {
     }
   }
   @each $pos in (left, right) {
-    &.#{$pos} button.flat.launcher:checked,
-    &.#{$pos} .budgie-panel.dock-mode {
+    &.#{$pos} .budgie-panel.dock-mode button.flat,
+    &.#{$pos} .budgie-panel.dock-mode,
+    &.#{$pos} button.flat.launcher:checked {
       &:dir(rtl), &:dir(ltr) {
         border-top-#{$pos}-radius: 0;
         border-bottom-#{$pos}-radius: 0;
@@ -1264,6 +1266,10 @@ SheetStyleDialog.unity-force-quit {
 @each $pos, $b_pos in ((top, bottom), (bottom, top), (left, right), (right, left)) {
   .#{$pos} .raven-frame {
     border-#{$b_pos}: 1px solid $wm_border;
+  }
+  .#{$pos} .budgie-panel.dock-mode {
+    padding-#{$pos}: 0;
+    border-#{$pos}-color: transparent;
   }
 
   .#{$pos} .shadow-block {
@@ -1297,6 +1303,7 @@ SheetStyleDialog.unity-force-quit {
       border-top: 1px solid gtkalpha($fg_color, 0.15);
       border-left: 1px solid gtkalpha($fg_color, 0.15);
       border-radius: 0;
+      padding: 10px 14px;
 
       &:hover {
         background: $view_hover_color;

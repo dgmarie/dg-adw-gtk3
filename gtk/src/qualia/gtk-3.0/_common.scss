@@ -3960,7 +3960,7 @@ messagedialog { // Message Dialog styling
   .dialog-action-area:not(#hack) {
     button:not(#hack) {
       &:dir(ltr), &:dir(rtl) {
-        padding: 10px 14px; // labels are not vertically centered on message dialog, this is a workaround
+        padding: 6px 14px; // labels are not vertically centered on message dialog, this is a workaround
         border-right-style: none;
         border-bottom-style: none;
         -gtk-outline-radius: 0;
