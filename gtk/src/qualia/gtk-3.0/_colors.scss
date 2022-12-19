@@ -103,7 +103,7 @@ $panel_fg_color: white;
 $unity_panel_bg_color: if($variant== 'light', $light_2, $dark_4);
 $panel_separator_color: gtkalpha(white, .15); // not the same as borderS-color
 
-$popover_border: if($variant=='light', gtkmix($popover_bg_color, black, 95%), gtkmix($popover_bg_color, white, 95%));
+$popover_border: if($variant=='light', gtkmix($popover_bg_color, black, 93%), gtkmix($popover_bg_color, white, 93%));
 $wm_border: if($variant=='light', transparentize(black, 0.92), gtkmix(white, $headerbar_bg_color, 10%));
 $wm_border_backdrop: if($variant=='light', transparentize(black, 0.95), gtkmix(white, $headerbar_backdrop_color, 10%));
 $suggested_bg_color: $selected_bg_color;
