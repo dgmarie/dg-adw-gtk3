@@ -218,7 +218,7 @@
       }
     }
   }
-  .nautilus-grid-view {
+  widget.view {
     &:selected {
       background: gtkalpha($selected_bg_color, 0.3);
       color: $text_color;
