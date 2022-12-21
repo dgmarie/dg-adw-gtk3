@@ -536,7 +536,7 @@ popover.background {
       color: $backdrop_fg_color;
     }
     &:backdrop:hover {
-      background-color: $view_hover_color;
+      background-color: $hover_color;
     }
   }
   radio {

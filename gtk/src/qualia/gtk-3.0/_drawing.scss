@@ -168,7 +168,7 @@ $focus_border_color: gtkalpha($accent_color, 0.5);
   //
     color: $tc;
     outline-color: gtkalpha($tc, 0.3);
-    background-color: if($flat == true, $view_hover_color, $button_hover);
+    background-color: if($flat == true, $hover_color, $button_hover);
     box-shadow: none;
   }
 
@@ -192,7 +192,7 @@ $focus_border_color: gtkalpha($accent_color, 0.5);
   //
     color: $tc;
     outline-color: gtkalpha($tc, 0.3);
-    background-color: if($flat == true, $view_active_color, $button_active);
+    background-color: if($flat == true, $active_color, $button_active);
     box-shadow: none;
 
     text-shadow: none;
@@ -205,13 +205,13 @@ $focus_border_color: gtkalpha($accent_color, 0.5);
   //
     color: $tc;
     outline-color: gtkalpha($tc, 0.3);
-    background-color: if($flat == true, $view_selected_color, $button_checked);
+    background-color: if($flat == true, $selected_color, $button_checked);
     box-shadow: none;
 
     text-shadow: none;
     -gtk-icon-shadow: none;
-    &:hover { background-color: if($flat == true, $view_selected_hover_color, $button_checked_hover); }
-    &:active { background-color: if($flat == true, $view_selected_active_color, $button_checked_active); }
+    &:hover { background-color: if($flat == true, $selected_hover_color, $button_checked_hover); }
+    &:active { background-color: if($flat == true, $selected_active_color, $button_checked_active); }
   }
 
   @else if $t==insensitive {
@@ -230,7 +230,7 @@ $focus_border_color: gtkalpha($accent_color, 0.5);
   // insensitive pushed button
   //
     color: gtkalpha($tc, 0.5);
-    background-color: if($flat == true, $view_active_color, $button_disabled_active);
+    background-color: if($flat == true, $active_color, $button_disabled_active);
     box-shadow: none;
   }
 

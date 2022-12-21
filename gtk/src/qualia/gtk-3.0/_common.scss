@@ -113,8 +113,7 @@ $_switch_margin: if($_sizevariant=='default', 9px, 7px);
 
   &:selected {
     &:focus, & {
-      @extend %selected_items;
-
+      background-color: $view_selected_color;
       border-radius: $button_radius;
     }
   }
@@ -648,8 +647,7 @@ button {
       }
     }
 
-    @at-root %button_basic_drop_active,
-    &:drop(active) {
+    @at-root %button_basic_drop_active, &:drop(active) {
       color: $drop_target_color;
       border-color: $drop_target_color;
       box-shadow: inset 0 0 0 1px $drop_target_color;
@@ -1112,9 +1110,9 @@ modelbutton.flat,
 
   @extend %undecorated_button;
 
-  &:hover { background-color: $view_selected_color; box-shadow: inset 0 0 0 1px $button_border; }
+  &:hover { background-color: $selected_color; box-shadow: inset 0 0 0 1px $button_border; }
 
-  &:active { background-color: $view_selected_active_color; box-shadow: inset 0 0 0 1px $button_border; }
+  &:active { background-color: $selected_active_color; box-shadow: inset 0 0 0 1px $button_border; }
 
   &:selected { @extend %selected_items; box-shadow: inset 0 0 0 1px $button_border; }
 }
@@ -2139,7 +2137,7 @@ menubar,
     }
 
     &:hover { //Seems like it :hover even with keyboard focus
-      background-color: $view_selected_color;
+      background-color: $selected_color;
       box-shadow: inset 0 0 0 1px $button_border;
     }
 
@@ -2197,11 +2195,11 @@ menu,
     color: $fg_color;
 
     &:hover {
-      background-color: $view_hover_color;
+      background-color: $hover_color;
       box-shadow: inset 0 0 0 1px $button_border;
     }
     &:active {
-      background-color: $view_active_color;
+      background-color: $active_color;
       box-shadow: inset 0 0 0 1px $button_border;
     }
     &:disabled {
@@ -2513,9 +2511,9 @@ notebook {
       button.flat {
         &:hover {
           color: currentColor;
-          background: $view_hover_color;
+          background: $hover_color;
         }
-        &:active { background: $view_active_color;}
+        &:active { background: $active_color;}
 
         padding: 0;
         margin-top: 4px;
@@ -3831,25 +3829,25 @@ row {
     &:backdrop { color: $backdrop_fg_color; }
     &.has-open-popup, // this is for indicathing which row generated a popover see https://bugzilla.gnome.org/show_bug.cgi?id=754411
 
-    &:hover { background-color: $view_hover_color; box-shadow: inset 0 0 0 1px $button_border; }
+    &:hover { background-color: $hover_color; box-shadow: inset 0 0 0 1px $button_border; }
 
-    &:active { background-color: $view_active_color; box-shadow: inset 0 0 0 1px $button_border; }
+    &:active { background-color: $active_color; box-shadow: inset 0 0 0 1px $button_border; }
     &:selected {
-      background-color: $view_selected_color;
+      background-color: $selected_color;
       box-shadow: inset 0 0 0 1px $button_border;
       color: $fg_color;
-      &:hover { background-color: $view_selected_hover_color; }
-      &:active { background-color: $view_selected_active_color; }
+      &:hover { background-color: $selected_hover_color; }
+      &:active { background-color: $selected_active_color; }
 
       &.has-open-popup,
       &:hover {
-        background-color: $view_selected_hover_color;
+        background-color: $selected_hover_color;
         color: $fg_color;
       }
     }
   }
 
-  &:selected { background-color: $view_selected_color; }
+  &:selected { background-color: $selected_color; }
 }
 
 // *********************
@@ -3971,11 +3969,11 @@ messagedialog { // Message Dialog styling
         border-radius: 0;
   
         &:hover {
-          background: $view_hover_color;
+          background: $hover_color;
         }
 
         &:active {
-          background: $view_active_color;
+          background: $active_color;
         }
 
         &.suggested-action {
@@ -3987,14 +3985,14 @@ messagedialog { // Message Dialog styling
         }
 
         &:checked {
-          background: $view_selected_color;
+          background: $selected_color;
 
           &:hover {
-            background: $view_selected_hover_color;
+            background: $selected_hover_color;
           }
 
           &:active {
-            background: $view_selected_active_color;
+            background: $selected_active_color;
           }
         }
 
@@ -4845,6 +4843,6 @@ popover.emoji-completion contents row box {
 }
 
 popover.emoji-completion .emoji:hover {
-  background: $view_hover_color;
+  background: $hover_color;
 }
 
