@@ -143,6 +143,9 @@
     &:backdrop:disabled {
       &:dir(ltr), &:dir(rtl) {
         @extend %headerbar_buttons;
+        border-radius: 6px;
+        margin-left: 3px;
+        margin-right: 3px;
         &:last-child {
           border-left-color: transparent;
           &:hover, &:checked, &:active {
@@ -760,6 +763,9 @@ button .download_progress trough {
       &:not(:hover):not(:active) {
         @include button(undecorated);
       }
+      border-radius: 6px;
+      margin-left: 3px;
+      margin-right: 3px;
       &:last-child {
         border-left-color: transparent;
         &:hover, &:checked, &:active {

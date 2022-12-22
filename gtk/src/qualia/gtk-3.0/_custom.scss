@@ -500,9 +500,6 @@ treeview.view {
   &.large, &.medium, &.small { padding-bottom: 30px; }
 }
 
-// Linked osd buttons, like in totem
-.osd .linked > button { border-color: transparent; }
-
 // Toolbars
 .primary-toolbar {
   &:dir(ltr), &:dir(rtl) {
@@ -618,7 +615,7 @@ notebook {
         button.flat { color: $headerbar_fg_color; }
       }
 
-      button.flat {
+      &.reorderable-page button.flat {
         color: $headerbar_fg_color;
         margin: 1px 0;
         min-width: 22px;

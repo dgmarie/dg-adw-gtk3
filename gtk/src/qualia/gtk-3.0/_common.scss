@@ -366,8 +366,6 @@ entry {
 
       &:focus { @include entry(osd-focus); }
 
-      &:backdrop { @include entry(osd-backdrop); }
-
       &:disabled { @include entry(osd-insensitive); }
     }
   }
@@ -681,37 +679,23 @@ button {
     border-radius: 5px;
 
     @include button(osd);
-
-    border: none;
     box-shadow: none;
 
     &:hover {
       @include button(osd-hover);
-
-      border: none;
       box-shadow: none;
     }
 
     &:active,
     &:checked {
       @include button(osd-active);
-
-      border: none;
       box-shadow: none;
     }
 
     &:disabled {
       &:backdrop, & {
         @include button(osd-insensitive);
-
-        border: none;
       }
-    }
-
-    &:backdrop {
-      @include button(osd-backdrop);
-
-      border: none;
     }
   }
 
@@ -726,8 +710,6 @@ button {
     &:checked { &:backdrop, & { @include button(osd-active); }}
 
     &:disabled { &:backdrop, & { @include button(osd-insensitive); }}
-
-    &:backdrop { @include button(osd-backdrop); }
 
     &.flat {
       @include button(undecorated);
@@ -794,8 +776,6 @@ button {
         &:checked { &:backdrop, & { @include button(osd-active, $b_color); }}
 
         &:disabled { &:backdrop, & { @include button(osd-insensitive, $b_color); }}
-
-        &:backdrop { @include button(osd-backdrop, $b_color); }
       }
     }
   }
@@ -1400,7 +1380,6 @@ spinbutton {
 
     &:disabled { @include button(osd-insensitive); }
 
-    &:backdrop { @include button(osd-backdrop); }
   }
 
   // Misc
@@ -2510,26 +2489,29 @@ notebook {
       // colors the button like the label, overridden otherwise
       button.flat {
         &:hover {
-          color: currentColor;
           background: $hover_color;
+          border-color: $button_border;
         }
-        &:active { background: $active_color;}
+        &:active {
+          background: $active_color;
+          border-color: $button_border;
+        }
 
         padding: 0;
         margin-top: 4px;
         margin-bottom: 4px;
         // FIXME: generalize .small-button?
-        min-width: 20px;
-        min-height: 20px;
+        min-width: 22px;
+        min-height: 22px;
         border-radius: 100%;
 
         &:last-child {
           margin-left: 4px;
-          margin-right: -4px;
+          margin-right: -8px;
         }
 
         &:first-child {
-          margin-left: -4px;
+          margin-left: -8px;
           margin-right: 4px;
         }
       }
@@ -2998,7 +2980,6 @@ radio {
 
     &:hover { @include button(osd); }
     &:active { @include button(osd-active); }
-    &:backdrop { @include button(osd-backdrop); }
     &:disabled { @include button(osd-insensitive); }
   }
 
@@ -4537,7 +4518,6 @@ colorchooser .popover.osd { border-radius: 5px; }
   .osd & { @extend %osd; }
 
   .osd & button.flat {  //FIXME: quick hack, redo properly
-    border-style: none;
     border-radius: 5px;
   }
 
