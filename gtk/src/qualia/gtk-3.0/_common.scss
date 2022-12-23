@@ -10,7 +10,7 @@ $card_radius: $button_radius + 6;
 
 // Optional compact sizes for buttons, headerbar and headerbar widgets
 $_sizevariant: 'default'; //compact otherwise
-$_headerbar_height: if($_sizevariant=='default', 45px, 39px);
+$_headerbar_height: if($_sizevariant=='default', if($variant=='light', 46px, 45px), if($variant=='light', 40px, 39px));
 $_entry_height: if($_sizevariant=='default', 32px, 26px);
 $_btn_pad: if($_sizevariant=='default', 4px 9px, 2px 5px);
 $_hb_btn_top_pad: if($_sizevariant=='default', 5px, 3px);
@@ -1531,7 +1531,7 @@ searchbar > revealer > box {
 // ***************
 %titlebar,
 headerbar {
-  padding: if($variant=='light', 1px 6px, 0 5px); // make window border look like its inset on dark theme
+  padding: if($variant=='light', 0 6px, 0 5px); // make window border look like its inset on dark theme
   min-height: $_headerbar_height;
   border-width: 0 0 1px;
   border-style: solid;
