@@ -2631,6 +2631,14 @@ scrollbar {
     }
   }
 
+  &.vertical trough > slider {
+    min-height: $_slider_min_length;
+  }
+
+  &.horizontal trough > slider {
+    min-width: $_slider_min_length;
+  }
+
   &.fine-tune {
     slider {
       &, &:hover, &:active {
