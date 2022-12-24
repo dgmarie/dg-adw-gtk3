@@ -1977,48 +1977,11 @@ treeview.view {
     background-color: $progress_bg_color;
     background-image: image($progress_bg_color);
     box-shadow: none;
-
-    &:selected {
-      &:focus, & {
-
-        @if $variant == 'light' {
-          color: $selected_bg_color;
-
-        }
-
-        @else { box-shadow: inset 0 1px transparentize(white, 0.95); }
-
-        background-image: image($base_color);
-
-        &:backdrop {
-          @if $variant == 'light' {
-            color: $selected_bg_color;
-          }
-          background-color: $backdrop_base_color;
-        }
-      }
-    }
-
-    &:backdrop {
-      @if $variant == 'light' { color: $backdrop_base_color; }
-
-      @else { border-color: $backdrop_base_color; }
-      background-image: none;
-      box-shadow: none;
-    }
   }
 
   &.trough { // progress bar trough in treeviews
     background-color: gtkalpha($fg_color,0.1);
-
-    &:selected {
-      &:focus, & {
-        background-color: if($variant == 'light',
-                             gtkalpha($selected_fg_color, 0.3),
-                             gtkmix(black, $selected_bg_color, 10%));
-
-      }
-    }
+    background-image: image(gtkalpha($fg_color,0.1));
   }
 
   header {
@@ -2354,11 +2317,6 @@ notebook {
     }
 
     tabs { margin: 0px; }
-
-    tabs > tab:not(.reorderable-page) {
-      border: 1px solid transparent;
-      &:hover { border-color: $button_border; }
-    }
   
     &.top {
       border-bottom-style: solid;
@@ -2367,6 +2325,7 @@ notebook {
         > tab {
           &:not(.reorderable-page):hover {
             background-color: $tab_color_hover;
+            box-shadow: inset 0 -4px $border_color;
           }
           &:not(.reorderable-page):checked {
             box-shadow: inset 0 -4px $selected_bg_color;
@@ -2382,6 +2341,7 @@ notebook {
         > tab {
           &:not(.reorderable-page):hover {
             background-color: $tab_color_hover;
+            box-shadow: inset 0 4px $border_color;
           }
           &:not(.reorderable-page):checked {
             box-shadow: inset 0 4px $selected_bg_color;
@@ -2397,6 +2357,7 @@ notebook {
         > tab {
           &:not(.reorderable-page):hover {
             background-color: $tab_color_hover;
+            box-shadow: inset -4px 0 $border_color;
           }
           &:not(.reorderable-page):checked {
             box-shadow: inset -4px 0 $selected_bg_color;
@@ -2412,6 +2373,7 @@ notebook {
         > tab {
           &:not(.reorderable-page):hover {
             background-color: $tab_color_hover;
+            box-shadow: inset 4px 0 $border_color;
           }
           &:not(.reorderable-page):checked {
             box-shadow: inset 4px 0 $selected_bg_color;
@@ -2637,32 +2599,51 @@ scrollbar {
     -GtkScrollbar-has-forward-stepper: false;
   }
 
-  background-color: $scrollbar_bg_color;
+  background-color: $base_color;
+  color: $text_color;
   transition: $_scrollbar_transition;
 
   // scrollbar border
-  //&.top { border-bottom: 1px solid $borders_color; }
-  //&.bottom { border-top: 1px solid $borders_color; }
-  //&.left { border-right: 1px solid $borders_color; }
-  //&.right { border-left: 1px solid $borders_color; }
+  &.top    { box-shadow: inset 0 -1px $border_color; padding-bottom: 1px; }
+  &.bottom { box-shadow: inset 0  1px $border_color; padding-top:    1px; }
+  &.left   { box-shadow: inset -1px 0 $border_color; padding-right:  1px; }
+  &.right  { box-shadow: inset  1px 0 $border_color; padding-left:   1px; }
 
-  // slider
-  slider {
-    color: $fg_color;
-    min-width: $_slider_width;
-    min-height: $_slider_width;
-    margin: -1px;
-    border: 4px solid transparent;
-    border-radius: 10px;
-    background-clip: padding-box;
-    background-color: $scrollbar_slider_color;
+  trough {
+    margin: 7px;
     transition: $_scrollbar_transition;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background-clip: padding-box;
 
-    &:hover { background-color: $scrollbar_slider_hover_color; }
+    // slider
+    > slider {
+      color: $fg_color;
+      min-width: $_slider_width;
+      min-height: $_slider_width;
+      margin: -1px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      background-clip: padding-box;
+      transition: $_scrollbar_transition;
+      background-color: gtkalpha(currentColor, .2);
 
-    &:hover:active { background-color: $scrollbar_slider_active_color; }
+      &:hover { background-color: gtkalpha(currentColor, .4) }
 
-    &:disabled { background-color: transparent; }
+      &:hover:active { background-color: gtkalpha(currentColor, .6) }
+
+      &:disabled { opacity: 0; }
+    }
+  }
+
+  &.horizontal trough {
+    margin-top: 3px;
+    margin-bottom: 3px;
+  }
+
+  &.vertical trough {
+    margin-left: 3px;
+    margin-right: 3px;
   }
 
   &.fine-tune {
@@ -2680,62 +2661,55 @@ scrollbar {
   }
 
   &.overlay-indicator {
-    &:not(.dragging):not(.hovering) {
-      border-color: transparent;
-      opacity: 0.4;
-      background-color: transparent;
-      transition-property: background-color, min-height, min-width;
+    background: none;
+    color: inherit;
+    box-shadow: none;
+    padding: 0;
 
-      slider {
-        margin: 0;
-        min-width: 3px;
-        min-height: 3px;
-        background-color: $fg_color;
-        border: 1px solid if($variant == 'light', white, black);
+    trough {
+      > slider {
+        border-color: gtkalpha($scrollbar_outline_color, 0.4);
       }
+    }
+    &:not(.hovering) trough > slider {
+      min-width: 3px;
+      min-height: 3px;
 
-      button {
-        min-width: 5px;
-        min-height: 5px;
-        background-color: $fg_color;
-        background-clip: padding-box;
-        border-radius: 100%;
-        border: 1px solid if($variant == 'light', white, black);
-        -gtk-icon-source: none;
-      }
-
-      &.horizontal {
-        slider {
-          margin: 0 2px;
-          min-width: $_slider_min_length;
-        }
-
-        button {
-          margin: 1px 2px;
-          min-width: 5px;
-        }
-      }
-
-      &.vertical {
-        slider {
-          margin: 2px 0;
-          min-height: $_slider_min_length;
-        }
-
-        button {
-          margin: 2px 1px;
-          min-height: 5px;
-        }
+      border-color: gtkalpha($scrollbar_outline_color, .35);
+    }
+    &.hovering {
+      trough {
+        border-color: gtkalpha($scrollbar_outline_color, .35);
+        background-color: gtkalpha(currentColor, .1);
       }
     }
 
-    &.dragging,
-    &.hovering { opacity: 0.8; }
+    &.horizontal {
+      trough > slider {
+        min-width: $_slider_min_length;
+      }
+      &:hovering trough > slider {
+        min-height: $_slider_width;
+      }
+      &:not(.hovering) trough {
+        margin-top: 3px;
+        margin-bottom: 3px;
+      }
+    }
+
+    &.vertical {
+      trough > slider {
+        min-height: $_slider_min_length;
+      }
+      &:hovering trough > slider {
+        min-width: $_slider_width;
+      }
+      &:not(.hovering) trough {
+        margin-left: 3px;
+        margin-right: 3px;
+      }
+    }
   }
-
-  &.horizontal slider { min-width: $_slider_min_length; }
-
-  &.vertical slider { min-height: $_slider_min_length; }
 
   // button styling
   button {
@@ -2748,22 +2722,22 @@ scrollbar {
 
     @include button(undecorated);
 
-    color: $scrollbar_slider_color;
+    color: gtkalpha(currentColor, .2);
 
     &:hover {
       @include button(undecorated);
 
-      color: $scrollbar_slider_hover_color;
+      color: gtkalpha(currentColor, .4);
     }
     &:active, &:checked {
       @include button(undecorated);
 
-      color: $scrollbar_slider_active_color;
+      color: gtkalpha(currentColor, .6);
     }
     &:disabled {
       @include button(undecorated);
 
-      color: $scrollbar_slider_color;
+      color: gtkalpha(currentColor, .2);
     }
   }
 
@@ -3774,7 +3748,7 @@ scrolledwindow {
     border-color: transparent;
     // the border image is used to add the missing dot between the borders, details, details, details...
     border-image: linear-gradient(to bottom, $borders_color 1px, transparent 1px) 0 0 0 1 / 0 1px stretch;
-    background-color: $scrollbar_bg_color;
+    background-color: gtkalpha(currentColor, .2);
 
     &:dir(rtl) { border-image-slice: 0 1 0 0; }
   }

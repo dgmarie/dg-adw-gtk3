@@ -33,6 +33,7 @@ $success_color: gtkcolor(success_color);
 $destructive_bg_color: gtkcolor(destructive_bg_color);
 $destructive_fg_color: gtkcolor(destructive_fg_color);
 $destructive_color: gtkcolor(destructive_color);
+$scrollbar_outline_color: gtkcolor(scrollbar_outline_color);
 
 $base_color: $view_bg_color;
 $text_color: $view_fg_color;
@@ -54,11 +55,6 @@ $top_hilight: $borders_edge;
 $dark_fill: gtkmix($borders_color, $bg_color, 50%);
 $popover_hover_color: gtkalpha(currentColor, .07);
 $menu_color: $popover_bg_color;
-
-$scrollbar_bg_color: $base_color;
-$scrollbar_slider_color: gtkalpha(currentColor, .2);
-$scrollbar_slider_hover_color: gtkalpha(currentColor, .4);
-$scrollbar_slider_active_color: gtkalpha(currentColor, .6);
 
 $osd_fg_color: transparentize(white, .1);
 $osd_text_color: white;
@@ -93,7 +89,6 @@ $backdrop_sidebar_bg_color: $bg_color;
 $backdrop_selected_tab_color: gtkalpha($accent_bg_color, 0.5);;
 
 $backdrop_scrollbar_bg_color: $backdrop_bg_color;
-$backdrop_scrollbar_slider_color: $scrollbar_slider_color;
 
 $backdrop_menu_color: $menu_color;
 

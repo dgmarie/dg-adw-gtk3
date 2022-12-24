@@ -72,86 +72,6 @@ window.csd.unified:not(.solid-csd):not(.fullscreen) {
   }
 }
 
-// Better scrollbars when the bottom corner is rounded
-window.csd.unified {
-  $_slider_width: 8px;
-  $_slider_min_length: 40px;
-  $_scrollbar_transition: all 200ms linear;
-  scrollbar {
-    background-color: $base_color;
-    color: $fg_color;
-
-    trough {
-      margin: 7px;
-      transition: $_scrollbar_transition;
-      border-radius: 10px;
-      background-color: $trough_color;
-
-      > slider {
-        min-width: $_slider_width;
-        min-height: $_slider_width;
-        margin: -6px;
-        border: 6px solid transparent;
-        border-radius: 10px;
-        background-clip: padding-box;
-        transition: $_scrollbar_transition;
-      }
-    }
-
-    &.horizontal trough {
-      margin-top: 6px;
-      margin-bottom: 6px;
-    }
-
-    &.vertical trough {
-      margin-left: 6px;
-      margin-right: 6px;
-    }
-
-    &.overlay-indicator {
-      background: none;
-      color: inherit;
-      box-shadow: none;
-      padding: 0;
-
-      &:not(.hovering) trough { background-color: transparent; }
-
-      &.horizontal {
-        trough > slider {
-          min-width: $_slider_min_length;
-        }
-
-        &.hovering trough > slider {
-          min-height: $_slider_width;
-        }
-
-        &:not(.hovering) trough {
-          margin-top: 3px;
-          margin-bottom: 3px;
-        }
-      }
-
-      &.vertical {
-        trough > slider {
-          min-height: $_slider_min_length;
-        }
-
-        &.hovering trough > slider {
-          min-width: $_slider_width;
-        }
-
-        &:not(.hovering) trough {
-          margin-left: 3px;
-          margin-right: 3px;
-        }
-      }
-    }
-
-    &.horizontal trough > slider { min-width: $_slider_min_length; }
-    &.vertical trough > slider { min-height: $_slider_min_length; }
-  }
-}
-
 // HdyComboRow
 popover.combo {
   padding: 0px;
@@ -355,69 +275,60 @@ keypad {
 
 // HdyViewSwitcher
 viewswitcher {
-  &, & button {
-    margin: 0;
-    padding: 0;
-  }
+  margin: 0;
+  padding: 0;
 
   button {
     border-radius: $button_radius;
-    border-width: 1px;
     box-shadow: none;
     font-size: 1rem;
     margin: 6px 2px;
+    padding: 0;
 
-    &:not(:checked):not(:hover) {
-      background: transparent;
-    }
+    @include button(undecorated);
 
-    &:not(:only-child):first-child:not(:checked):not(:hover),
-    &:not(:checked):not(:hover) + button:not(:checked):not(:hover) {
-      border-left-color: transparent;
-    }
-
-    &:not(:only-child):last-child:not(:checked):not(:hover) {
-      border-right-color: transparent;
-    }
-
-    &:not(:checked):hover {
-      @include button(hover);
+    :hover {
+      @include button(hover, $flat: true);
       background-image: none;
     }
     &:active {
-      @include button(active);
+      @include button(active, $flat: true);
       background-image: none;
     }
     &:checked {
-      @include button(checked);
+      @include button(checked, $flat: true);
       background-image: none;
+    }
+
+    > stack { // fix buttons being 1px too big
+      margin: -1px;
     }
 
     // View switcher in a header bar
     headerbar & {
-      &:not(:checked):hover {
+      color: $headerbar_fg_color;
+      &:hover {
         background-image: none;
-        @include button(normal, $tc: $headerbar_fg_color);
+        @include button(hover, $tc: $headerbar_fg_color, $flat: true);
         &:backdrop {
-          @include button(normal, $tc: $backdrop_headerbar_fg);
+          @include button(hover, $tc: $backdrop_headerbar_fg, $flat: true);
         }
       }
       &:active {
-        @include button(active, $tc: $headerbar_fg_color);
+        @include button(active, $tc: $headerbar_fg_color, $flat: true);
         &:backdrop {
-          @include button(active, $tc: $backdrop_headerbar_fg);
+          @include button(active, $tc: $backdrop_headerbar_fg, $flat: true);
         }
         background-image: none;
       }
       &:checked {
-        @include button(checked, $tc: $headerbar_fg_color);
+        @include button(checked, $tc: $headerbar_fg_color, $flat: true);
         &:backdrop {
-          @include button(checked, $tc: $backdrop_headerbar_fg);
+          @include button(checked, $tc: $backdrop_headerbar_fg, $flat: true);
         }
         background-image: none;
       }
     }
-
 
     headerbar & {
       @if $variant == 'dark' {
@@ -425,12 +336,25 @@ viewswitcher {
       }
     }
 
+    // Narrow view switcher
+    &.vertical {
+      &, headerbar & {
+        &, &:hover, &:active, &:checked {
+          &:dir(ltr), &:dir(rtl) {
+            border-radius: 0;
+            border-color: transparent;
+            margin: 0;
+          }
+        }
+      }
+    }
+
     // View switcher button
     > stack > box {
       &.narrow {
         font-size: 0.65rem;
-        padding-top: 0;
-        padding-bottom: 0;
+        padding-top: 6px;
+        padding-bottom: 5px;
 
         image,
         label {
@@ -440,31 +364,18 @@ viewswitcher {
       }
 
       &.wide {
-        padding: 0 11px;
-
-        image {
-          &:dir(ltr) {
-            padding-left: 7px;
-          }
-
-          &:dir(rtl) {
-            padding-right: 7px;
-          }
-        }
-
-        label {
-          &:dir(ltr) {
-            padding-right: 7px;
-          }
-
-          &:dir(rtl) {
-            padding-left: 7px;
-          }
-        }
+        padding: 0 12px;
       }
 
       label.active {
         font-weight: bold;
+      }
+    }
+    
+    &.horizontal {
+      > stack > box.narrow {
+        padding-top: 0;
+        padding-bottom: 0;
       }
     }
 
@@ -644,7 +555,7 @@ tabbar {
 
 
   tab {
-    margin: 5px 1px 5px 0;
+    margin: 5px 1px;
     border-style: none;
     border-radius: $button_radius;
     transition: background-color 150ms ease-in-out;
