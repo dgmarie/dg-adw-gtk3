@@ -1909,8 +1909,8 @@ treeview.view {
     -GtkTreeView-expander-size: 16;
    }
 
-  border-left-color: gtkmix($fg_color, $base_color, 50%); // this is actually the tree lines color,
-  border-top-color: $bg_color;                         // while this is the grid lines color, better then nothing
+  border-left-color: $_treeview_borders_color; // this is actually the tree lines color,
+  border-top-color: $_treeview_borders_color;                         // while this is the grid lines color, better then nothing
 
   rubberband { @extend rubberband; } // to avoid borders being overridden by the previously set props
 
@@ -1919,11 +1919,6 @@ treeview.view {
       border-radius: 0;
 
       @extend %selected_items;
-    }
-
-    &:backdrop, & {
-      border-left-color: gtkmix($selected_fg_color, $selected_bg_color, 50%);
-      border-top-color: gtkalpha($fg_color, 0.1); // doesn't work unfortunatelly
     }
   }
 
@@ -2036,7 +2031,7 @@ treeview.view {
   padding: 0 6px;
   background-image: none;
   border-style: none solid solid none;
-  border-color: $_treeview_borders_color;
+  border-color: gtkalpha($text_color, 0.15);
   border-radius: 0;
   text-shadow: none;
 
@@ -2610,7 +2605,7 @@ scrollbar {
   &.right  { box-shadow: inset  1px 0 $border_color; padding-left:   1px; }
 
   trough {
-    margin: 7px;
+    margin: 1px;
     transition: $_scrollbar_transition;
     border-radius: 10px;
     border: 1px solid transparent;
@@ -2636,16 +2631,6 @@ scrollbar {
     }
   }
 
-  &.horizontal trough {
-    margin-top: 3px;
-    margin-bottom: 3px;
-  }
-
-  &.vertical trough {
-    margin-left: 3px;
-    margin-right: 3px;
-  }
-
   &.fine-tune {
     slider {
       &, &:hover, &:active {
@@ -2667,9 +2652,19 @@ scrollbar {
     padding: 0;
 
     trough {
+      margin: 6px;
       > slider {
         border-color: gtkalpha($scrollbar_outline_color, 0.4);
       }
+    }
+    &:not(.hovering) button {
+      min-width: 5px;
+      min-height: 5px;
+      background-color: $fg_color;
+      background-clip: padding-box;
+      border-radius: 100%;
+      border: 1px solid gtkalpha($scrollbar_outline_color, .35);
+      -gtk-icon-source: none;
     }
     &:not(.hovering) trough > slider {
       min-width: 3px;
@@ -2685,6 +2680,13 @@ scrollbar {
     }
 
     &.horizontal {
+      trough {
+        margin-top: 5px;
+        margin-bottom: 5px;
+      }
+      button {
+        margin: 5px 5px;
+      }
       trough > slider {
         min-width: $_slider_min_length;
       }
@@ -2692,12 +2694,22 @@ scrollbar {
         min-height: $_slider_width;
       }
       &:not(.hovering) trough {
-        margin-top: 3px;
-        margin-bottom: 3px;
+        margin-top: 2px;
+        margin-bottom: 2px;
+      }
+      &:not(.hovering) button {
+        margin: 5px 2px;
       }
     }
 
     &.vertical {
+      trough {
+        margin-left: 5x;
+        margin-right: 5px;
+      }
+      button {
+        margin: 5px 5px;
+      }
       trough > slider {
         min-height: $_slider_min_length;
       }
@@ -2705,8 +2717,11 @@ scrollbar {
         min-width: $_slider_width;
       }
       &:not(.hovering) trough {
-        margin-left: 3px;
-        margin-right: 3px;
+        margin-left: 2px;
+        margin-right: 2px;
+      }
+      &:not(.hovering) button {
+        margin: 5px 2px;
       }
     }
   }
@@ -2716,7 +2731,7 @@ scrollbar {
     padding: 0;
     min-width: 12px;
     min-height: 12px;
-    border-style: none;
+    border: 1px solid transparent;
     border-radius: 0;
     transition-property: min-height, min-width, color;
 
