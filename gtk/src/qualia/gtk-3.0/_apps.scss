@@ -902,7 +902,6 @@ window.thunar {
   &.slider-button:nth-child(odd) {
     border-radius: $button_radius 0px 0px $button_radius;
     border-left-color: $button_border;
-    margin-left: 1px;
   }
 
   &.slider-button:nth-child(even) {

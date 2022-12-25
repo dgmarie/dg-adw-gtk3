@@ -309,7 +309,6 @@ entry {
     border: 1px solid;
     border-radius: $button_radius;
     transition: all 200ms $ease-out-quad;
-    margin: 1px; // give entries a 1px margin because they look bad when touching
 
     @include entry(normal);
 
@@ -572,7 +571,6 @@ button {
     border-radius: $button_radius;
     transition: $button_transition;
     font-weight: bold;
-    margin: 1px; // give buttons a 1px margin because they look bad when touching
 
     @include button(normal);
 
@@ -924,7 +922,6 @@ toolbar.inline-toolbar toolbutton {
     border-radius: 0;
     -gtk-outline-radius: 0;
     margin-left: -1px;
-    margin-right: 0;
   }
 }
 
@@ -936,7 +933,6 @@ toolbar.inline-toolbar toolbutton {
     border-bottom-left-radius: $button_radius;
     -gtk-outline-top-left-radius: $button_radius;
     -gtk-outline-bottom-left-radius: $button_radius;
-    margin-right: 0;
   }
   &:not(button):focus { border-left-color: entry_focus_border(); } // Fix for linked entries
 }
@@ -1000,7 +996,6 @@ toolbar.inline-toolbar toolbutton {
     border-radius: 0;
     -gtk-outline-radius: 0;
     margin-top: -1px;
-    margin-bottom: 0;
   }
 }
 
@@ -1456,22 +1451,6 @@ toolbar {
   // toolbar separators
   &.horizontal separator { margin: 0 7px 1px 6px; }
   &.vertical separator { margin: 6px 1px 7px 0; }
-
-  &:dir(ltr), &:dir(rtl) {
-    &.horizontal {
-      button,
-      entry {
-        margin-top: 0;
-        margin-bottom: 0;
-      }
-    }
-    &.vertical {
-      button,
-      entry {
-        margin-left: 0;
-        margin-right: 0;
-      }  
-  }
 
   &:not(.inline-toolbar):not(.osd) {
     // workaround: add margins to the children of tool items to simulate
