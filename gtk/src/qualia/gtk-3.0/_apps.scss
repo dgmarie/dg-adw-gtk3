@@ -448,7 +448,7 @@ XfdesktopIconView.view {
 
 // Menu
 #whiskermenu-window {
-  border-color: $window_outline_color;
+  border: 1px solid $popover_border;
   background-color: $popover_bg_color;
   padding: 3px;
 
@@ -1471,6 +1471,8 @@ MatePanelAppletFrameDBus > MatePanelAppletFrameDBus {
 
 .brisk-menu {
   background-color: $popover_bg_color;
+  border: 1px solid $popover_border;
+
   scrolledwindow.frame > scrollbar {
     background-color: transparent;
   }
