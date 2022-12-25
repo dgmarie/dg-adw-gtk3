@@ -902,6 +902,7 @@ window.thunar {
   &.slider-button:nth-child(odd) {
     border-radius: $button_radius 0px 0px $button_radius;
     border-left-color: $button_border;
+    margin-left: 0;
   }
 
   &.slider-button:nth-child(even) {
@@ -1427,20 +1428,20 @@ SheetStyleDialog.unity-force-quit {
 .mate-panel-menu-bar,
 #PanelPlug {
   &.horizontal button.flat,
-  &.horizontal menuitem {
+  &.horizontal menubar > menuitem {
     margin: 0 2px;
     padding: 0 4px;
   }
 
   &.vertical button.flat,
-  &.vertical menuitem {
+  &.vertical menubar > menuitem {
     margin: 2px 0;
     padding: 4px 0;
   }
   &:dir(rtl), &:dir(ltr) {
-    button,
-    menuitem,
-    #tasklist-button {
+    PanelApplet > button,
+    menubar > menuitem,
+    wnck-tasklist > #tasklist-button {
       border-radius: 12px;
     }
     #showdesktop-button {
