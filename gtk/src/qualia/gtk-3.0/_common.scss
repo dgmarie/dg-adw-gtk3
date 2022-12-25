@@ -1457,6 +1457,22 @@ toolbar {
   &.horizontal separator { margin: 0 7px 1px 6px; }
   &.vertical separator { margin: 6px 1px 7px 0; }
 
+  &:dir(ltr), &:dir(rtl) {
+    &.horizontal {
+      button,
+      entry {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+    &.vertical {
+      button,
+      entry {
+        margin-left: 0;
+        margin-right: 0;
+      }  
+  }
+
   &:not(.inline-toolbar):not(.osd) {
     // workaround: add margins to the children of tool items to simulate
     // spacing, ignore the overflow button (.toggle) and the overflow menu
