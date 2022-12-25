@@ -309,6 +309,7 @@ entry {
     border: 1px solid;
     border-radius: $button_radius;
     transition: all 200ms $ease-out-quad;
+    margin: 1px; // give entries a 1px margin because they look bad when touching
 
     @include entry(normal);
 
@@ -563,7 +564,6 @@ $_dot_color: if($variant=='light', $selected_bg_color,
 %button,
 button {
   @at-root %button_basic, & {
-
     min-height: 24px;
     min-width: 14px;
     padding: $_btn_pad;
@@ -572,6 +572,7 @@ button {
     border-radius: $button_radius;
     transition: $button_transition;
     font-weight: bold;
+    margin: 1px; // give buttons a 1px margin because they look bad when touching
 
     @include button(normal);
 
@@ -615,7 +616,7 @@ button {
     }
 
     @at-root %button_basic_flat,
-    &.flat { &:backdrop, &:disabled, &:backdrop:disabled { @include button(undecorated); }}
+    &.flat { &:disabled, disabled { @include button(undecorated); }}
 
     &:disabled {
       @include button(insensitive);
@@ -926,12 +927,8 @@ toolbar.inline-toolbar toolbutton {
     border-right-color: transparent;
     border-radius: 0;
     -gtk-outline-radius: 0;
-    &:checked, &:active {
-      border-right-color: $border_color;
-      + button {
-        border-left-color: transparent;
-      }
-    }
+    margin-left: -1px;
+    margin-right: 0;
   }
 }
 
@@ -943,12 +940,7 @@ toolbar.inline-toolbar toolbutton {
     border-bottom-left-radius: $button_radius;
     -gtk-outline-top-left-radius: $button_radius;
     -gtk-outline-bottom-left-radius: $button_radius;
-    &:checked, &:active {
-      border-right-color: $border_color;
-      + button {
-        border-left-color: transparent;
-      }
-    }
+    margin-right: 0;
   }
   &:not(button):focus { border-left-color: entry_focus_border(); } // Fix for linked entries
 }
@@ -962,6 +954,7 @@ toolbar.inline-toolbar toolbutton {
     box-shadow: none;
     -gtk-outline-top-right-radius: $button_radius;
     -gtk-outline-bottom-right-radius: $button_radius;
+    margin-left: -1px;
   }
   &:not(button):focus { border-right-color: entry_focus_border(); }
 }
@@ -1010,12 +1003,8 @@ toolbar.inline-toolbar toolbutton {
     border-bottom-color: transparent;
     border-radius: 0;
     -gtk-outline-radius: 0;
-    &:checked, &:active {
-      border-bottom-color: $border_color;
-      + button {
-        border-top-color: transparent;
-      }
-    }
+    margin-top: -1px;
+    margin-bottom: 0;
   }
 }
 
@@ -1045,6 +1034,7 @@ toolbar.inline-toolbar toolbutton {
     border-top-color: $border_color;
     -gtk-outline-bottom-left-radius: $button_radius;
     -gtk-outline-bottom-right-radius: $button_radius;
+    margin-top: -1px;
   }
 }
 
@@ -1347,12 +1337,14 @@ spinbutton {
       min-width: 32px;
       padding: 0;
       border-radius: 0;
+      margin: 0;
     }
 
     button {
       min-height: 32px;
       min-width: 32px;
       padding: 0;
+      margin: 0;
 
       &.up { @extend %top_button; }
 
