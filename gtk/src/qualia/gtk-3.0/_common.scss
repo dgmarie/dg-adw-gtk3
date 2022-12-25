@@ -383,83 +383,89 @@ entry {
 
    // linked entries
   .linked:not(.vertical) > & { @extend %linked; }
-  .linked:not(.vertical) > &:focus + &,
-  .linked:not(.vertical) > &:focus + button,
-  .linked:not(.vertical) > &:focus + combobox > box > button.combo { border-left-color: entry_focus_border(); }
+  .linked:not(.vertical) > &:focus + &:not(#hack),
+  .linked:not(.vertical) > &:focus + button:not(#hack),
+  .linked:not(.vertical) > &:focus + button.combo:not(#hack) {
+    &:dir(ltr), &:dir(rtl) {
+      border-left-color: entry_focus_border();
+    }
+  }
 
-  .linked:not(.vertical) > &:focus.error + &,
-  .linked:not(.vertical) > &:focus.error + button,
-  .linked:not(.vertical) > &:focus.error + combobox > box > button.combo { border-left-color: entry_focus_border($error_bg_color); }
+  .linked:not(.vertical) > &:focus.error + &:not(#hack),
+  .linked:not(.vertical) > &:focus.error + button:not(#hack),
+  .linked:not(.vertical) > &:focus.error + button.combo:not(#hack) {
+    &:dir(ltr), &:dir(rtl) {
+      border-left-color: entry_focus_border($error_bg_color);
+    }
+  }
 
-  .linked:not(.vertical) > &:drop(active) + &,
-  .linked:not(.vertical) > &:drop(active) + button,
-  .linked:not(.vertical) > &:drop(active) + combobox > box > button.combo { border-left-color: $drop_target_color; }
+  .linked:not(.vertical) > &:drop(active) + &:not(#hack),
+  .linked:not(.vertical) > &:drop(active) + button:not(#hack),
+  .linked:not(.vertical) > &:drop(active) + button.combo:not(#hack) {
+    &:dir(ltr), &:dir(rtl) {
+      border-left-color: $drop_target_color;
+    }
+  }
 
   // Vertically linked entries
   // FIXME: take care of "colored" entries
   .linked.vertical > & {
     @extend %linked_vertical;
-
-    // brighter border between linked entries
-    + entry,
-    + %entry {
-      &:dir(ltr), &:dir(rtl) {
+    &:dir(ltr), &:dir(rtl) { // specifity bump
+      // brighter border between linked entries
+      + entry,
+      + %entry {
         border-top-color: gtkalpha($fg_color, 0.15);
       }
-    }
 
-    // brighter border between linked insensitive entries
-    &:disabled + %entry:disabled,
-    &:disabled + entry:disabled {
-      &:dir(ltr), &:dir(rtl) {
+      // brighter border between linked insensitive entries
+      &:disabled + %entry:disabled,
+      &:disabled + entry:disabled {
         border-top-color: gtkalpha($insensitive_fg_color, 0.15);
       }
-    }
 
-    // color back the top border of a linked focused entry following another entry.
-    // :not(:only-child):not(#hack) is a specificity bump hack.
-    + %entry:focus:not(:only-child):not(#hack),
-    + entry:focus:not(:only-child):not(#hack) {
-      &:dir(ltr), &:dir(rtl) {
+      // color back the top border of a linked focused entry following another entry.
+      // :not(:only-child):not(#hack) is a specificity bump hack.
+      + %entry:focus:not(:only-child):not(#hack),
+      + entry:focus:not(:only-child):not(#hack),
+      &:focus:not(:only-child):not(#hack) {
         border-top-color: entry_focus_border();
       }
-    }
 
-    + %entry:focus.error:not(:only-child):not(#hack),
-    + entry:focus.error:not(:only-child):not(#hack) {
-      &:dir(ltr), &:dir(rtl) {
+      + %entry:focus.error:not(:only-child):not(#hack),
+      + entry:focus.error:not(:only-child):not(#hack),
+      &:focus.error:not(:only-child):not(#hack) {
         border-top-color: entry_focus_border($error_bg_color);
       }
-    }
 
-    + %entry:drop(active):not(:only-child):not(#hack),
-    + entry:drop(active):not(:only-child):not(#hack) {
-      &:dir(ltr), &:dir(rtl) {
+      + %entry:drop(active):not(:only-child):not(#hack),
+      + entry:drop(active):not(:only-child):not(#hack),
+      &:drop(active):not(:only-child):not(#hack) {
         border-top-color: $drop_target_color;
       }
-    }
 
-    // this takes care of coloring the top border of the focused entry subsequent widget.
-    // :not(:only-child) is a specificity bump hack.
-    &:focus:not(:only-child) {
-      + %entry,
-      + entry,
-      + button,
-      + combobox > box > button.combo { border-top-color: entry_focus_border(); }
-    }
+      // this takes care of coloring the top border of the focused entry subsequent widget.
+      // :not(:only-child) is a specificity bump hack.
+      &:focus:not(:only-child):not(#hack) {
+        + %entry,
+        + entry,
+        + button,
+        + button.combo { border-top-color: entry_focus_border(); }
+      }
 
-    &:focus.error:not(:only-child) {
-      + %entry,
-      + entry,
-      + button,
-      + combobox > box > button.combo { border-top-color: entry_focus_border($error_bg_color); }
-    }
+      &:focus.error:not(:only-child):not(#hack) {
+        + %entry,
+        + entry,
+        + button,
+        + button.combo { border-top-color: entry_focus_border($error_bg_color); }
+      }
 
-    &:drop(active):not(:only-child) {
-      + %entry,
-      + entry,
-      + button,
-      + combobox > box > button.combo { border-top-color: $drop_target_color; }
+      &:drop(active):not(:only-child):not(#hack) {
+        + %entry,
+        + entry,
+        + button,
+        + button.combo { border-top-color: $drop_target_color; }
+      }
     }
   }
 
@@ -922,6 +928,9 @@ toolbar.inline-toolbar toolbutton {
     border-radius: 0;
     -gtk-outline-radius: 0;
     margin-left: -1px;
+    button { // spinbuttons
+      border-radius: 0;
+    }
   }
 }
 
@@ -933,6 +942,10 @@ toolbar.inline-toolbar toolbutton {
     border-bottom-left-radius: $button_radius;
     -gtk-outline-top-left-radius: $button_radius;
     -gtk-outline-bottom-left-radius: $button_radius;
+    button { // spinbuttons
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
   }
   &:not(button):focus { border-left-color: entry_focus_border(); } // Fix for linked entries
 }
@@ -947,6 +960,10 @@ toolbar.inline-toolbar toolbutton {
     -gtk-outline-top-right-radius: $button_radius;
     -gtk-outline-bottom-right-radius: $button_radius;
     margin-left: -1px;
+    button { // spinbuttons
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
   }
   &:not(button):focus { border-right-color: entry_focus_border(); }
 }
@@ -996,6 +1013,9 @@ toolbar.inline-toolbar toolbutton {
     border-radius: 0;
     -gtk-outline-radius: 0;
     margin-top: -1px;
+    button { // spinbuttons
+      border-radius: 0;
+    }
   }
 }
 
@@ -1007,11 +1027,9 @@ toolbar.inline-toolbar toolbutton {
     border-top-right-radius: $button_radius;
     -gtk-outline-top-left-radius: $button_radius;
     -gtk-outline-top-right-radius: $button_radius;
-    &:checked, &:active {
-      border-bottom-color: $border_color;
-      + button {
-        border-top-color: transparent;
-      }
+    button { // spinbuttons
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
     }
   }
 }
@@ -1021,11 +1039,14 @@ toolbar.inline-toolbar toolbutton {
     border-radius: 0;
     border-bottom-left-radius: $button_radius;
     border-bottom-right-radius: $button_radius;
-    box-shadow: none;
     border-top-color: $border_color;
     -gtk-outline-bottom-left-radius: $button_radius;
     -gtk-outline-bottom-right-radius: $button_radius;
     margin-top: -1px;
+    button { // spinbuttons
+      border-top-right-radius: 0;
+      border-top-left-radius: 0;
+    }
   }
 }
 
@@ -1262,8 +1283,7 @@ spinbutton {
       @include button(undecorated);
 
       color: $osd_fg_color;
-      border-style: none none none solid;
-      border-color: gtkalpha($osd_borders_color, 0.7);
+      border-color: $button_border;
       border-radius: 0;
       box-shadow: none;
       -gtk-icon-shadow: 0 1px black;
@@ -1274,7 +1294,7 @@ spinbutton {
         @include button(undecorated);
 
         color: $osd_fg_color;
-        border-color: gtkalpha(opacify($osd_borders_color, 1), 0.5);
+        border-color: $button_border;
         background-color: gtkalpha($osd_fg_color, 0.1);
         -gtk-icon-shadow: 0 1px black;
         box-shadow: none;
@@ -1286,7 +1306,7 @@ spinbutton {
         @include button(undecorated);
 
         color: $osd_fg_color;
-        border-color: gtkalpha(opacify($osd_borders_color, 1), 0.5);
+        border-color: $button_border;
         -gtk-icon-shadow: none;
         box-shadow: none;
       }
@@ -1295,7 +1315,7 @@ spinbutton {
         @include button(undecorated);
 
         color: $osd_insensitive_fg_color;
-        border-color: gtkalpha(opacify($osd_borders_color, 1), 0.5);
+        border-color: $button_border;
         -gtk-icon-shadow: none;
         box-shadow: none;
         border-style: none none none solid;
@@ -2726,7 +2746,7 @@ scrollbar {
 
     &.vertical {
       trough {
-        margin-left: 5x;
+        margin-left: 5px;
         margin-right: 5px;
       }
       button {
