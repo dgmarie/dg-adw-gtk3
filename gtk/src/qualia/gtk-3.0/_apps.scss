@@ -892,19 +892,6 @@ window.thunar {
 // ********
 // * Caja *
 // ********
-
-.caja-navigation-window #Toolbar button {
-  &:backdrop {
-    image {
-      color: $headerbar_fg_color;
-      opacity: 0.5; // Because some icons aren't symbolic
-    }
-    &:disabled image {
-      color: $headerbar_fg_color;
-      opacity: 0.25;
-    }
-  }
-}
 .caja-pathbar button {
   min-width: 32px;
   border-radius: 0;
@@ -1058,16 +1045,6 @@ geary-conversation-viewer#conversation_viewer {
 
 #DockedDialogNotebook > header {
   background-color: $bg_color;
-}
-
-// Transmission
-#main-window-toolbar button {
-  &:backdrop {
-    image {
-      color: $headerbar_fg_color;
-      opacity: 0.5; // Because some icons aren't symbolic
-    }
-  }
 }
 
 // *********
@@ -1600,20 +1577,6 @@ MatePanelAppletFrameDBus > MatePanelAppletFrameDBus {
   }
   notebook {
     margin-top: -2px; // This might cause issues but is the only way i can get rid of the blank space
-  }
-  toolbar, notebook {
-    button {
-      &:backdrop {
-        image {
-          color: $headerbar_fg_color;
-          opacity: 0.5; // Because some icons aren't symbolic
-        }
-        &:disabled image {
-          color: $headerbar_fg_color;
-          opacity: 0.25;
-        }
-      }
-    }
   }
 }
 
