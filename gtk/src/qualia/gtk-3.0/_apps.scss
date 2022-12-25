@@ -587,8 +587,11 @@ $panel_transition_duration: 250ms;
   }
 
   .nemo-window-pane {
-    widget.view {
+    scrolledwindow.view {
       background-color: if($variant=='light', $base_color, $bg_color);
+    }
+    widget.view {
+      background: transparent;
       &:selected {
         background: $view_selected_color;
         color: $text_color;
