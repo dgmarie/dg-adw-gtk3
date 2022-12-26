@@ -717,16 +717,6 @@ window.background.chromium {
     font-weight: initial;
   }
 
-  @if $variant =='light' {
-    scrollbar slider {
-      background-color: gtkalpha(currentColor, .4);
-
-      &:hover {
-        background-color: gtkalpha(currentColor, .6);
-      }
-    }
-  }
-
   // https://github.com/lassekongo83/adw-gtk3/issues/130
   menuitem {
 
@@ -734,20 +724,6 @@ window.background.chromium {
     radio {
       min-height: 12px;
       min-width: 12px;
-    }
-  }
-}
-
-@if $variant =='dark' {
-  #MozillaGtkWidget {
-    &.background {
-      background-color: $headerbar_bg_color;
-    }
-
-    > widget {
-      border {
-        border-color: $borders_color;
-      }
     }
   }
 }
