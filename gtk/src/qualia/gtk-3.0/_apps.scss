@@ -4,6 +4,7 @@
 
 %panel_flat_button {
   color: $panel_fg_color;
+  @include button(undecorated);
   &:hover {
     @include button(hover, $tc: $panel_fg_color, $flat: true);
   }
@@ -472,6 +473,7 @@ XfdesktopIconView.view {
 
   scrollbar {
     background-color: transparent;
+    box-shadow: none;
   }
 
   .launchers-view {
@@ -488,6 +490,7 @@ $panel_transition_duration: 250ms;
   color: $panel_fg_color;
   transition-duration: $panel_transition_duration;
 
+  button,
   .tasklist button,
   #actions-button,
   #clock-button {
@@ -532,6 +535,9 @@ $panel_transition_duration: 250ms;
         @extend %linked;
       }
     }
+  }
+  .tasklist button { // less opaque tasklist buttons
+    @extend %panel_flat_button;
   }
 }
 
@@ -1123,7 +1129,7 @@ UnityPanelWidget,
   &.menuitem,
   .menuitem {
     color: $fg_color;
-    border-radius: 6px;
+    border-radius: 24px;
     @extend %button_basic_flat;
   }
 }
@@ -1166,15 +1172,13 @@ SheetStyleDialog.unity-force-quit {
     &.transparent {
       border-color: transparent;
     }
-
-    button {
-      border-radius: 8px;
+    button.flat.launcher {
+      border-radius: 6px;
     }
   }
 
   button {
     @extend %panel_button;
-    margin: 0 1px;
   }
   &.horizontal button {
     padding: 0px 4px;
@@ -1191,14 +1195,48 @@ SheetStyleDialog.unity-force-quit {
   button.flat.launcher {
     padding: 8px 0;
     color: $panel_fg_color;
-
+    border-radius: 0px;
     > icon {
       background-image: none;
     }
   }
 
+  &.horizontal {
+    button {
+      margin: 0 1px;
+    }
+  }
+  &.vertical {
+    button {
+      margin: 1px 0;
+    }
+  }
+
   separator {
     background-color: $panel_separator_color;
+  }
+}
+
+.budgie-container {
+  padding: 0px;
+  background-color: transparent;
+  @each $pos in (top, bottom) {
+    &.#{$pos} .budgie-panel.dock-mode,
+    &.#{$pos} .budgie-panel.dock-mode button.flat.launcher:checked {
+      &:dir(rtl), &:dir(ltr) {
+        border-#{$pos}-left-radius: 0;
+        border-#{$pos}-right-radius: 0;
+      }
+    }
+  }
+  @each $pos in (left, right) {
+    &.#{$pos} .budgie-panel.dock-mode,
+    &.#{$pos} .budgie-panel.dock-mode button.flat.launcher:checked {
+      &:dir(rtl), &:dir(ltr) {
+        border-top-#{$pos}-radius: 0;
+        border-bottom-#{$pos}-radius: 0;
+      }
+    }
   }
 }
 
@@ -1241,26 +1279,6 @@ SheetStyleDialog.unity-force-quit {
 .budgie-container {
   padding: 0px;
   background-color: transparent;
-  @each $pos in (top, bottom) {
-    &.#{$pos} .budgie-panel.dock-mode button.flat,
-    &.#{$pos} .budgie-panel.dock-mode,
-    &.#{$pos} button.flat.launcher:checked  {
-      &:dir(rtl), &:dir(ltr) {
-        border-#{$pos}-left-radius: 0;
-        border-#{$pos}-right-radius: 0;
-      }
-    }
-  }
-  @each $pos in (left, right) {
-    &.#{$pos} .budgie-panel.dock-mode button.flat,
-    &.#{$pos} .budgie-panel.dock-mode,
-    &.#{$pos} button.flat.launcher:checked {
-      &:dir(rtl), &:dir(ltr) {
-        border-top-#{$pos}-radius: 0;
-        border-bottom-#{$pos}-radius: 0;
-      }
-    }
-  }
 }
 
 #tasklist-button {
@@ -1427,22 +1445,28 @@ SheetStyleDialog.unity-force-quit {
 
 .mate-panel-menu-bar,
 #PanelPlug {
-  &.horizontal button.flat,
-  &.horizontal menubar > menuitem {
-    margin: 0 2px;
-    padding: 0 4px;
+  &.horizontal {
+    PanelApplet > button,
+    menubar > menuitem {
+      padding: 0 4px;
+    }
   }
 
-  &.vertical button.flat,
-  &.vertical menubar > menuitem {
-    margin: 2px 0;
-    padding: 4px 0;
+  &.vertical {
+    PanelApplet > button,
+    menubar > menuitem {
+      padding: 4px 0;
+    }
   }
+
   &:dir(rtl), &:dir(ltr) {
+    menubar {
+      padding: 0;
+    }
     PanelApplet > button,
     menubar > menuitem,
-    wnck-tasklist > #tasklist-button {
-      border-radius: 12px;
+    wnck-tasklist #tasklist-button {
+      border-radius: 14px;
     }
     #showdesktop-button {
       &, &:hover, &:checked {
@@ -1621,4 +1645,12 @@ MatePanelAppletFrameDBus > MatePanelAppletFrameDBus {
       background: $view_selected_active_color;
     }
   }
+}
+
+// ***********************
+// * Mate Control Center *
+// ***********************
+
+#MyControlCenter #slab_section_style2 label {
+  color: $text_color;
 }

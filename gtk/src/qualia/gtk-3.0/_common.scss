@@ -2136,11 +2136,11 @@ menu,
     color: $fg_color;
 
     &:hover {
-      background-color: $hover_color;
+      background-color: $selected_color;
       box-shadow: inset 0 0 0 1px $button_border;
     }
     &:active {
-      background-color: $active_color;
+      background-color: $selected_active_color;
       box-shadow: inset 0 0 0 1px $button_border;
     }
     &:disabled {
