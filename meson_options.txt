@@ -1,5 +1,7 @@
 option('gtk3', type: 'boolean', value: true)
 option('gtk4', type: 'boolean', value: true)
+option('window-controls', type: 'array', choices : ['symbolic', 'macos'])
+
 option('accent-colors',
     type: 'array',
     choices: [

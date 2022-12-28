@@ -1,11 +1,20 @@
 # theme sources .scss files
 accent_colors = get_option('accent-colors')
+window_controls = get_option('window-controls')
 
-variants = ['default', 'default-dark']
+variants = []
+if 'macos' in window_controls
+  variants += ['default-macos', 'default-dark-macos']
+endif
+if 'symbolic' in window_controls
+  variants += ['default-symbolic', 'default-dark-symbolic']
+endif
 
 foreach accent : accent_colors
-  variants += (accent)
-  variants += (accent + '-dark')
+  foreach variant : window_controls
+    variants += (accent + '-' + variant)
+    variants += (accent + '-dark' + '-' + variant)
+  endforeach
 endforeach
 
 # The files that need to be compiled
@@ -21,24 +30,48 @@ foreach variant : variants
   #  Install GTK3 theme  #
   ########################
 
-  if variant == 'default'
-    theme_name = meson.project_name()
-  elif variant == 'default-dark'
-    theme_name = meson.project_name() + '-dark'
+  gtk3_scss_sources = []
+
+  is_dark = variant.contains('-dark') ? true : false
+
+  is_symbolic = variant.endswith('-symbolic') ? true : false
+
+  window_controls_variant = is_symbolic ? 'symbolic' : 'macos'
+
+  if is_dark
+    suffix = '-dark-' + window_controls_variant
+    color = variant.split('-dark')[0]
+    thumbnail = color + '-dark'
+    if get_option('gtk3')
+      gtk3_scss_sources += [
+        gtk_scss_dark + '-' + window_controls_variant,
+      ]
+    endif
+  else
+    suffix = '-' + window_controls_variant
+    color = variant.split('-')[0]
+    thumbnail = color
+    if get_option('gtk3')
+      gtk3_scss_sources += [
+        gtk_scss + '-' + window_controls_variant,
+        gtk_scss_dark + '-' + window_controls_variant
+      ]
+    endif
+  endif
+
+  if variant.contains('default')
+    icon_theme = meson.project_name() + '-dark'
+  else
+    icon_theme = meson.project_name() + color + '-dark'
+  endif
+
+  if variant.contains('default')
+    theme_name = meson.project_name() + suffix
   else
     theme_name = meson.project_name() + '-' + variant
   endif
 
-  icon_theme = theme_name
-  if not icon_theme.endswith('-dark')
-    icon_theme += '-dark'
-  endif
-
-  if variant.endswith('-dark')
-    metacity = meson.project_name() + '-dark'
-  else
-    metacity = meson.project_name()
-  endif
+  metacity = meson.project_name() + suffix
 
   themes_dir = join_paths(get_option('prefix'), get_option('datadir'), 'themes')
   theme_dir = join_paths(themes_dir, theme_name)
@@ -67,31 +100,6 @@ foreach variant : variants
   ).stdout().strip().split('\n')
   gtk3_scss_dependencies += scss_dependencies
 
-  if variant.endswith('-dark')
-    is_dark = true
-  else
-    is_dark = false
-  endif
-
-  gtk3_scss_sources = []
-
-  if is_dark
-    color = variant.split('-dark')[0]
-    if get_option('gtk3')
-      gtk3_scss_sources = [
-        gtk_scss_dark,
-      ]
-    endif
-  else
-    color = variant
-    if get_option('gtk3')
-      gtk3_scss_sources = [
-        gtk_scss,
-        gtk_scss_dark,
-      ]
-    endif
-  endif
-
   foreach f : gtk3_scss_sources
     conf_data = configuration_data()
     conf_data.set('color', color)
@@ -107,10 +115,12 @@ foreach variant : variants
       command: [sassc, '-M', '-t', 'compact', '@INPUT@', '@OUTPUT@'],
       build_by_default: true)
 
+    dest = f.contains('-dark') ? 'gtk-dark.css' : 'gtk.css'
+
     if is_dark
-      meson.add_install_script('install-css.sh', meson.current_build_dir() / '@0@-@1@-generated.css'.format(theme_name, f), gtk3_dir / f + '.css', gtk3_dir, gtk3_dir / 'gtk.css')
+      meson.add_install_script('install-css.sh', meson.current_build_dir() / '@0@-@1@-generated.css'.format(theme_name, f), gtk3_dir / dest, gtk3_dir, gtk3_dir / 'gtk.css')
     else
-      meson.add_install_script('install-css.sh', meson.current_build_dir() / '@0@-@1@-generated.css'.format(theme_name, f), gtk3_dir / f + '.css', gtk3_dir)
+      meson.add_install_script('install-css.sh', meson.current_build_dir() / '@0@-@1@-generated.css'.format(theme_name, f), gtk3_dir / dest, gtk3_dir)
     endif
   endforeach
 
@@ -118,7 +128,7 @@ foreach variant : variants
   #  Install GTK4 theme  #
   ########################
 
-  if variant == 'default' or variant == 'default-dark'
+  if variant.startswith('default')
     gtk4_scss_dependencies = []
     scss_dependencies = run_command(
       'find', gtk4_scss_dir, '-name', '*.scss'
@@ -153,9 +163,9 @@ foreach variant : variants
         build_by_default: true)
 
       if is_dark
-        meson.add_install_script('install-css.sh', meson.current_build_dir() / '@0@-@1@-generated-gtk4.css'.format(theme_name, f), gtk4_dir / f + '.css', gtk4_dir, gtk4_dir / 'gtk.css')
+        meson.add_install_script('install-css.sh', meson.current_build_dir() / '@0@-@1@-generated-gtk4.css'.format(theme_name, f), gtk4_dir / 'gtk-dark.css', gtk4_dir, gtk4_dir / 'gtk.css')
       else
-        meson.add_install_script('install-css.sh', meson.current_build_dir() / '@0@-@1@-generated-gtk4.css'.format(theme_name, f), gtk4_dir / f + '.css', gtk4_dir)
+        meson.add_install_script('install-css.sh', meson.current_build_dir() / '@0@-@1@-generated-gtk4.css'.format(theme_name, f), gtk4_dir / 'gtk.css', gtk4_dir)
       endif
     endforeach
   endif
@@ -164,7 +174,7 @@ foreach variant : variants
   #  Install Assets  #
   ####################
 
-  if variant == 'default'
+  if variant in ['default-macos', 'default-symbolic']
     if get_option('gtk3')
       # Install asset files to themes/ThemeName/gtk-3.0/assets
       install_subdir(scss_dir / 'assets', install_dir : gtk3_dir, strip_directory : false)
@@ -179,19 +189,15 @@ foreach variant : variants
   #  Symlinks  #
   ##############
 
-  if variant != 'default' and get_option('gtk3')
-    meson.add_install_script('symlink.sh', themes_dir / meson.project_name() / 'gtk-3.0', gtk3_dir, 'assets')
+  if variant not in ['default-macos', 'default-symbolic'] and get_option('gtk3')
+    meson.add_install_script('symlink.sh', themes_dir / meson.project_name() + '-' + window_controls_variant / 'gtk-3.0', gtk3_dir, 'assets')
   endif
-  if variant == 'default-dark' and get_option('gtk4')
-    meson.add_install_script('symlink.sh', themes_dir / meson.project_name() / 'gtk-4.0', gtk4_dir, 'assets')
+  if variant.contains('default-dark') and get_option('gtk4')
+    meson.add_install_script('symlink.sh', themes_dir / meson.project_name() + '-' + window_controls_variant / 'gtk-4.0', gtk4_dir, 'assets')
   endif
 
   if not variant.startswith('default') and get_option('gtk4')
-    if not variant.endswith('-dark')
-      meson.add_install_script('symlink.sh', themes_dir / meson.project_name(), theme_dir,  'gtk-4.0')
-    else
-      meson.add_install_script('symlink.sh', themes_dir / meson.project_name() + '-dark', theme_dir, 'gtk-4.0')
-    endif
+    meson.add_install_script('symlink.sh', themes_dir / meson.project_name() + suffix, theme_dir,  'gtk-4.0')
   endif
 
   ################
@@ -200,7 +206,7 @@ foreach variant : variants
 
   if get_option('gtk3')
     install_data(
-      meson.current_source_dir() / 'thumbnails' / 'thumbnail-@0@.png'.format(variant),
+      meson.current_source_dir() / 'thumbnails' / 'thumbnail-@0@.png'.format(thumbnail),
       install_dir: gtk3_dir,
       rename: 'thumbnail.png'
     )

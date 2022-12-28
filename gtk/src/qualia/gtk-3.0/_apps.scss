@@ -621,6 +621,11 @@ $panel_transition_duration: 250ms;
         background-color: $view_selected_hover_color;
       }
     }
+    .rubberband:not(#hack),
+    rubberband:not(#hack) {
+      border: 1px solid $accent_color;
+      background-color: gtkalpha($accent_color, 0.2);
+    }
     widget.entry {
       // Add border around rename text entry
       border: 1px solid;
@@ -869,6 +874,11 @@ window.thunar {
         background-color: $view_selected_hover_color;
       }
     }
+    .rubberband:not(#hack),
+    rubberband:not(#hack) {
+      border: 1px solid $accent_color;
+      background-color: gtkalpha($accent_color, 0.2);
+    }
   }
 }
 // ********
@@ -927,6 +937,12 @@ window.thunar {
       background-color: $view_selected_hover_color;
     }
   }
+  .rubberband:not(#hack),
+  rubberband:not(#hack) {
+    border: 1px solid $accent_color;
+    background-color: gtkalpha($accent_color, 0.2);
+  }
+
   .view,
   .view.frame,
   .frame {
@@ -1061,7 +1077,7 @@ UnityDecoration {
   .top {
     border-radius: $window_radius $window_radius 0 0;
     // padding used for the min/max/close titlebuttons
-    padding: 0 6px 1px 6px;
+    padding: 0 6px 1px 5px;
     background-color: $headerbar_bg_color;
     background-clip: padding-box;
     color: $headerbar_fg_color;
