@@ -2664,7 +2664,7 @@ scrollbar {
   &.right  { box-shadow: inset  1px 0 $border_color; padding-left:   1px; }
 
   trough {
-    margin: 5px;
+    margin: 4px;
     transition: $_scrollbar_transition;
     border-radius: 10px;
     border: 1px solid transparent;
@@ -2691,13 +2691,13 @@ scrollbar {
   }
 
   &.horizontal > trough {
-    margin-top: 4px;
-    margin-bottom: 4px;
+    margin-top: 3px;
+    margin-bottom: 3px;
   }
 
   &.vertical > trough {
-    margin-left: 4px;
-    margin-right: 4px;
+    margin-left: 3px;
+    margin-right: 3px;
   }
 
 
