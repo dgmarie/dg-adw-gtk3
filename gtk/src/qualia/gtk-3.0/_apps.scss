@@ -724,9 +724,15 @@ window.background.chromium {
     font-weight: initial;
   }
 
+  scrollbar slider {
+    background-color: gtkalpha(currentColor, .2);
+    &:hover { background-color: gtkalpha(currentColor, .4); }
+    &:hover:active { background-color: gtkalpha(currentColor, .6) }
+    &:disabled { opacity: 0; }
+  }
+
   // https://github.com/lassekongo83/adw-gtk3/issues/130
   menuitem {
-
     check,
     radio {
       min-height: 12px;

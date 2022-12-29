@@ -72,40 +72,6 @@ window.csd.unified:not(.solid-csd):not(.fullscreen) {
   }
 }
 
-// Better scrollbar for rounded window
-window.csd.unified {
-  scrollbar {
-    trough {
-      margin: 6px;
-    }
-    &.horizontal trough {
-      margin-top: 5px;
-      margin-bottom: 5px;
-    }
-    &.vertical trough {
-      margin-left: 5px;
-      margin-right: 5px;
-    }
-    &.overlay-indicator {
-      trough {
-        margin: 5px;
-      }
-      &.horizontal {
-        &:not(.hovering) trough {
-          margin-top: 2px;
-          margin-bottom: 2px;
-        }
-      }
-
-      &.vertical {
-        &:not(.hovering) trough {
-          margin-left: 2px;
-          margin-right: 2px;
-        }
-      }
-    }
-  }
-}
 // HdyComboRow
 popover.combo {
   padding: 0px;

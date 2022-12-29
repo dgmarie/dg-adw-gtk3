@@ -2664,7 +2664,7 @@ scrollbar {
   &.right  { box-shadow: inset  1px 0 $border_color; padding-left:   1px; }
 
   trough {
-    margin: 1px;
+    margin: 5px;
     transition: $_scrollbar_transition;
     border-radius: 10px;
     border: 1px solid transparent;
@@ -2689,6 +2689,17 @@ scrollbar {
       &:disabled { opacity: 0; }
     }
   }
+
+  &.horizontal > trough {
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+
+  &.vertical > trough {
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+
 
   &.vertical trough > slider {
     min-height: $_slider_min_length;
@@ -2748,11 +2759,8 @@ scrollbar {
 
     &.horizontal {
       trough {
-        margin-top: 5px;
-        margin-bottom: 5px;
-      }
-      button {
-        margin: 5px 5px;
+        margin-top: 6px;
+        margin-bottom: 6px;
       }
       trough > slider {
         min-width: $_slider_min_length;
@@ -2761,22 +2769,17 @@ scrollbar {
         min-height: $_slider_width;
       }
       &:not(.hovering) trough {
-        margin-top: 2px;
-        margin-bottom: 2px;
-      }
-      &:not(.hovering) button {
-        margin: 5px 2px;
+        margin-top: 3px;
+        margin-bottom: 3px;
       }
     }
 
     &.vertical {
       trough {
-        margin-left: 5px;
-        margin-right: 5px;
+        margin-left: 6px;
+        margin-right: 6px;
       }
-      button {
-        margin: 5px 5px;
-      }
+
       trough > slider {
         min-height: $_slider_min_length;
       }
@@ -2784,11 +2787,8 @@ scrollbar {
         min-width: $_slider_width;
       }
       &:not(.hovering) trough {
-        margin-left: 2px;
-        margin-right: 2px;
-      }
-      &:not(.hovering) button {
-        margin: 5px 2px;
+        margin-left: 3px;
+        margin-right: 3px;
       }
     }
   }
