@@ -643,7 +643,9 @@ notebook {
           transition: border-color 150ms ease-in-out;
         }
         &, &:backdrop {
-          button.flat { color: transparent; }
+          &:dir(ltr), &:dir(rtl) {
+            button.flat { color: transparent; }
+          }
         }
       }
 
@@ -657,7 +659,7 @@ notebook {
           color: $backdrop_headerbar_fg;
           button.flat { color: $backdrop_headerbar_fg; }
         }
-        button.flat { color: $backdrop_headerbar_fg; }
+        button.flat { color: $headerbar_fg_color; }
       }
 
       &:checked.reorderable-page {
