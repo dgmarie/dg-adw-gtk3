@@ -460,8 +460,8 @@ list.view.frame {
   // Legacy application titlebuttons
   .ssd .titlebar {
     border-width: 0;
-    padding: 0 4px;
-    min-height: 36px;
+    padding: if($variant=='light', 0 4px, 0 3px);
+    min-height: if($variant=='light', 36px, 35px);
     border-bottom: 1px solid $headerbar_shade_color;
     //&:backdrop { border-color: $backdrop_borders_color; }
 
@@ -488,8 +488,8 @@ list.view.frame {
   // macOS Legacy application titlebuttons. Most of this (including the images that are used here) is borrowed from https://github.com/vinceliuice/WhiteSur-gtk-theme
   .ssd .titlebar {
     border-width: 0;
-    padding: 0 9px;
-    min-height: 36px;
+    padding: if($variant=='light', 0 9px, 0 8px);
+    min-height: if($variant=='light', 36px, 35px);
     border-bottom: 1px solid $headerbar_shade_color;
 
     &.default-decoration button.titlebutton {
@@ -611,7 +611,7 @@ popover.menu > stack {
 // Trying to mimic new libadwaita tabs
 notebook {
   > header {
-    padding: 0 3px;
+    padding: 0 if($variant=='light', 3px, 2px);
 
     button {
       &:dir(rtl), &:dir(ltr) { // specificity bump

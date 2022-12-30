@@ -330,6 +330,12 @@ viewswitcher {
       }
     }
 
+    headerbar & {
+      @if $variant == 'dark' {
+        margin-top: 5px
+      }
+    }
+
     // Narrow view switcher
     &.vertical {
       &, headerbar & {
@@ -478,7 +484,7 @@ row {
 
 tabbar {
   .box {
-    padding: 0 5px;
+    padding: if($variant=='light', 0 5px, 0 4px);
     min-height: 38px;
     background: $headerbar_bg_color;
     border-bottom: 1px solid $headerbar_shade_color;

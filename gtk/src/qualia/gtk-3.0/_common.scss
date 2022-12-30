@@ -10,10 +10,10 @@ $card_radius: $button_radius + 6;
 
 // Optional compact sizes for buttons, headerbar and headerbar widgets
 $_sizevariant: 'default'; //compact otherwise
-$_headerbar_height: if($_sizevariant=='default', 46px, 40px);
+$_headerbar_height: if($_sizevariant=='default', if($variant=='light', 46px, 45px), if($variant=='light', 40px, 39px));
 $_entry_height: if($_sizevariant=='default', 32px, 26px);
 $_btn_pad: if($_sizevariant=='default', 4px 9px, 2px 5px);
-$_hb_btn_top_pad: if($_sizevariant=='default', 6px, 3px);
+$_hb_btn_top_pad: if($_sizevariant=='default', 5px, 3px);
 $_hb_btn_bot_pad: if($_sizevariant=='default', 6px, 4px);
 $_img_btn_pad: if($_sizevariant=='default', 4px, 2px);
 $_sel_menu_pad: if($_sizevariant=='default', 6px 10px, 4px 10px);
@@ -1444,7 +1444,7 @@ combobox {
 // ************
 %toolbar {
   -GtkWidget-window-dragging: true;
-  padding: 5px 5px;
+  padding: if($variant=='light', 5px 5px, 5px 4px); // make window border look like its inset on dark theme
   background-color: $bg_color;
   &:backdrop { background-color: $backdrop_bg_color;}
 }
@@ -1534,7 +1534,7 @@ searchbar > revealer > box {
 // ***************
 %titlebar,
 headerbar {
-  padding: 0 6px;
+  padding: if($variant=='light', 0 6px, 0 5px); // make window border look like its inset on dark theme
   min-height: $_headerbar_height;
   border-width: 0 0 1px;
   border-style: solid;
@@ -2078,7 +2078,7 @@ treeview.view {
 menubar,
 .menubar {
   -GtkWidget-window-dragging: true;
-  padding: 3px 5px 4px;
+  padding: 3px if($variant=='light', 5px, 6px) 4px;
   box-shadow: inset 0 -1px $headerbar_shade_color;
   background-color: $bg_color;
   &:dir(rtl), &:dir(ltr) { // not actually a specifity bump, doing this so it only applies to gtk and not qgnomeplatform
