@@ -342,7 +342,7 @@ viewswitcher {
     // Narrow view switcher
     &.vertical {
       &, headerbar & {
-        &, &:hover, &:active, &:checked {
+        &, &:hover, &:active, &:checked, &:checked:hover {
           &:dir(ltr), &:dir(rtl) {
             border-radius: 0;
             border-color: transparent;
