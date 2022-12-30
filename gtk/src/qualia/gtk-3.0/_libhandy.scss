@@ -215,7 +215,10 @@ list.content {
     margin: 0;
     //padding: 2px;
     transition: 200ms $ease-out-quad;
-    border-color: $button_border;
+
+    &:hover, &:active, &:selected {
+      box-shadow: none;
+    }
 
     &:not(:last-child) {
       border-bottom: 1px solid $card_shade_color;
