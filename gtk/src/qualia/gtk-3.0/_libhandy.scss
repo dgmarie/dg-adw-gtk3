@@ -196,17 +196,20 @@ list.content {
     background-color: transparent;
     padding: 0;
   }
+
   row.expander list.nested {
     background-color: gtkalpha($card_bg_color, 0.5);
     color: $card_fg_color;
     border-radius: 0;
     border-color: transparent;
   }
+
   row.expander:last-child revealer > list {
     border-bottom-left-radius: $card_radius;
     border-bottom-right-radius: $card_radius;
     -gtk-outline-radius: 0 0 $card_radius $card_radius;
   }
+
   background-color: $card_bg_color;
   color: $card_fg_color;
   border-radius: $card_radius;
@@ -779,10 +782,18 @@ avatar {
 // Preferences
 window.preferences > deck > deck > box > stack > stack > scrolledwindow > viewport > clamp,
 preferencespage > scrolledwindow > viewport > clamp {
-  margin: 0 12px;
+  margin: 0;
 
   > list,
-  > box > preferencesgroup { margin-top: 24px; }
+  > box > preferencesgroup { margin-top: 12px; }
+  clamp {margin:0}
+  preferencesgroup {
+    list.content,
+    label { margin: 0 12px; }
+    list.content {
+      margin-bottom: 12px;
+    }
+  }
 }
 
 preferencesgroup > box {
