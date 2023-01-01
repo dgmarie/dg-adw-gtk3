@@ -143,10 +143,10 @@ $focus_border_color: gtkalpha($accent_color, 0.5);
 
   $button_normal: if($c != transparent, $c, gtkalpha(currentColor, .1));
   $button_hover: if($c != transparent, gtkmix($c, currentColor, 90%), gtkalpha(currentColor, .15));
-  $button_active: if($c != transparent, gtkmix($c, currentColor, 85%), gtkalpha(currentColor, .3));
-  $button_checked: $button_active;
-  $button_checked_hover: if($c != transparent, gtkmix($c, currentColor, 80%), gtkalpha(currentColor, .35));
-  $button_checked_active: if($c != transparent, gtkmix($c, currentColor, 75%), gtkalpha(currentColor, .4));
+  $button_active: if($c != transparent, gtkmix($c, black, 80%), gtkalpha(currentColor, .3));
+  $button_checked: if($c != transparent, gtkmix($c, black, 85%), $button_active);
+  $button_checked_hover: if($c != transparent, gtkmix($c, black, 95%), gtkalpha(currentColor, .35));
+  $button_checked_active: if($c != transparent, gtkmix($c, black, 70%), gtkalpha(currentColor, .4));
   $button_disabled: if($c != transparent, gtkalpha($c, 0.5), gtkalpha(currentColor, .1));
   $button_disabled_active:  if($c != transparent, gtkmix(gtkalpha($c, 0.5), currentColor, 85%), gtkalpha(currentColor, .3));
 
