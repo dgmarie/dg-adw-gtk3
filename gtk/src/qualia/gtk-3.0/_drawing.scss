@@ -166,7 +166,7 @@ $focus_border_color: gtkalpha($accent_color, 0.5);
 
   @if $c != transparent {
     @include focus-ring($outer: true, $offset: 1px, $transition: $button_transition);
-    -gtk-outline-radius: $button-radius + 2px;
+    -gtk-outline-radius: $button-radius + 3px;
   } @else {
     @include focus-ring($transition: $button_transition);
   }
