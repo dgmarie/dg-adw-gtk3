@@ -1103,16 +1103,6 @@ button.color {
   }
 }
 
-// list buttons
-// tone down as per new designs, see issue #1473, #1748
-list row button.image-button:not(.flat) {
-  @extend %undecorated_button;
-  border: 1px solid gtkalpha($borders_color, .5);
-  &:hover { @include button(hover); }
-  &:active { @include button(active); }
-  &:checked { @include button(checked); }
-}
-
 // *********
 // * Links *
 // *********

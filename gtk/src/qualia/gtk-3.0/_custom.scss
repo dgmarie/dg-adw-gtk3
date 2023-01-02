@@ -624,7 +624,6 @@ notebook {
 
     tab {
       &.reorderable-page {
-        @include focus-ring($transition: $button_transition);
         min-height: 26px;
         padding: 4px 12px;
         border-radius: $button_radius;
