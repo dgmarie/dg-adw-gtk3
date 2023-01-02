@@ -2476,14 +2476,14 @@ notebook {
       min-width: 30px;
       padding: 3px 12px;
 
-      outline-offset: -5px;
-
       color: $headerbar_fg_color;
       font-weight: normal;
 
-      border-color: transparent; //
+      border-color: transparent;
 
-      transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
+      &, button.flat {
+        transition: background 150ms ease-in-out, box-shadow 150ms ease-in-out, opacity 150ms ease-in-out,  color 150ms ease-in-out;
+      }
 
       // colors the button like the label, overridden otherwise
       button.flat {
