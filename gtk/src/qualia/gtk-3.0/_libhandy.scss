@@ -219,6 +219,7 @@ list.content {
               0 2px 4px 2px transparentize(black, .97);
 
   > row {
+    @include focus-ring($outer: true, $offset: -1px, $transition: $button_transition);
     &, row.header {
       background-color: transparent;
       color: $card_fg_color;
@@ -586,6 +587,8 @@ tabbar {
 
 
   tab {
+    @include focus-ring($transition: $button_transition);
+    -gtk-outline-radius: $button_radius;
     margin: 5px 1px;
     border-style: none;
     border-radius: $button_radius;
@@ -791,6 +794,7 @@ preferencespage > scrolledwindow > viewport > clamp {
     list.content,
     label { margin: 0 12px; }
     list.content {
+      margin-top: 2px;
       margin-bottom: 12px;
     }
   }

@@ -2,6 +2,25 @@
 
 // generic drawing of more complex things
 
+$ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$focus_transition: outline-color 200ms $ease-out-quad,
+                   outline-width 200ms $ease-out-quad,
+                   outline-offset 200ms $ease-out-quad;
+
+@mixin focus-ring($target: null, $width: 2px, $offset: -$width, $outer: false, $focus-state: ':focus', $fc: $focus_border_color, $transition: null) {
+  & #{$target} {
+    outline: 0 solid transparent;
+    outline-offset: if($outer, $offset + 4px, $offset + $width + 4px);
+    transition: $focus_transition, $transition;
+  }
+
+  &#{$focus-state} #{$target} {
+    outline-color: $fc;
+    outline-width: $width;
+    outline-offset: $offset;
+  }
+}
+
 @function _widget_edge($c:$borders_edge) {
 // outer highlight "used" on most widgets
   @if $c == none { @return none; }
@@ -102,14 +121,6 @@ $focus_border_color: gtkalpha($accent_color, 0.5);
     text-shadow: none;
     -gtk-icon-shadow: none;
   }
-  @if $t==osd-backdrop {
-    color: $osd_text_color;
-    background-color: transparentize(opacify($osd_borders_color, 1), 0.5);
-    background-clip: padding-box;
-    box-shadow: none;
-    text-shadow: none;
-    -gtk-icon-shadow: none;
-  }
 }
 
 // buttons
@@ -153,12 +164,18 @@ $focus_border_color: gtkalpha($accent_color, 0.5);
   background-clip: border-box;
   border: 1px solid $button_border;
 
+  @if $c != transparent {
+    @include focus-ring($outer: true, $offset: 1px, $transition: $button_transition);
+    -gtk-outline-radius: $button-radius + 2px;
+  } @else {
+    @include focus-ring($transition: $button_transition);
+  }
+
   @if $t==normal {
   //
   // normal button
   //
     color: $tc;
-    outline-color: gtkalpha($tc, 0.3);
     background-color: $button_normal;
   }
 
@@ -167,7 +184,6 @@ $focus_border_color: gtkalpha($accent_color, 0.5);
   // hovered button
   //
     color: $tc;
-    outline-color: gtkalpha($tc, 0.3);
     background-color: if($flat == true, $hover_color, $button_hover);
     box-shadow: none;
   }
@@ -191,7 +207,6 @@ $focus_border_color: gtkalpha($accent_color, 0.5);
   // pushed button
   //
     color: $tc;
-    outline-color: gtkalpha($tc, 0.3);
     background-color: if($flat == true, $active_color, $button_active);
     box-shadow: none;
 
@@ -204,7 +219,6 @@ $focus_border_color: gtkalpha($accent_color, 0.5);
   // checked button
   //
     color: $tc;
-    outline-color: gtkalpha($tc, 0.3);
     background-color: if($flat == true, $selected_color, $button_checked);
     box-shadow: none;
 
@@ -240,7 +254,7 @@ $focus_border_color: gtkalpha($accent_color, 0.5);
   //
     color: $osd_fg_color;
     background-color: transparentize(black, .35);
-    outline-color: transparentize($osd_fg_color, 0.7);
+    @include focus-ring($transition: $button_transition, $fc: $osd_focus_color);
   }
 
   @else if $t==osd-hover {
@@ -249,7 +263,7 @@ $focus_border_color: gtkalpha($accent_color, 0.5);
   //
     color: white;
     background-color: gtkalpha(gtkmix(black, currentColor, 85%), .65);
-    outline-color: transparentize($osd_fg_color, 0.7);
+    @include focus-ring($transition: $button_transition, $fc: $osd_focus_color);
   }
 
   @else if $t==osd-active {
@@ -258,8 +272,7 @@ $focus_border_color: gtkalpha($accent_color, 0.5);
   //
     color: white;
     background-color: gtkalpha(gtkmix(black, currentColor, 75%), .65);
-
-    outline-color: transparentize($osd_fg_color, 0.7);
+    @include focus-ring($transition: $button_transition, $fc: $osd_focus_color);
   }
 
   @else if $t==osd-insensitive {
@@ -273,21 +286,7 @@ $focus_border_color: gtkalpha($accent_color, 0.5);
     box-shadow: none;
     text-shadow: none;
     -gtk-icon-shadow: none;
-  }
-
-  @else if $t==osd-backdrop {
-  //
-  // backdrop osd button
-  //
-    $_bg: if($c != $bg_color, gtkalpha($c, 0.5), $osd_bg_color);
-
-    color: $osd_fg_color;
-    background-color: transparent;
-    background-image: image($_bg);
-    border-color: transparent;
-    box-shadow: none;
-    text-shadow: none;
-    -gtk-icon-shadow: none;
+    @include focus-ring($transition: $button_transition, $fc: $osd_focus_color);
   }
 
   @else if $t==undecorated {
