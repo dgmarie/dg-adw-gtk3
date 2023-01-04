@@ -186,26 +186,30 @@ headerbar, .titlebar, .primary-toolbar {
       color: $backdrop_headerbar_fg;
     }
 
-   entry {
-      color: $headerbar_fg_color;
-      &:disabled, &:backdrop {
+    entry {
+      &:dir(ltr), &:dir(rtl) {
         color: $headerbar_fg_color;
-        opacity: 0.5; // same color, just do 0.5 opacity on entire element
-      }
-      &:backdrop:disabled {
-        opacity: 0.25;
+        &:disabled, &:backdrop {
+          color: $headerbar_fg_color;
+          opacity: 0.5; // same color, just do 0.5 opacity on entire element
+        }
+        &:backdrop:disabled {
+          opacity: 0.25;
+        }
       }
     }
 
     button {
-      &:not(.suggested-action):not(.destructive-action) {
-        color: $headerbar_fg_color;
-        &:disabled, &:backdrop {
-          color: $headerbar_fg_color; // same color, just do 0.5 opacity on entire element
-          opacity: 0.5;
-        }
-        &:backdrop:disabled {
-          opacity: 0.25;
+      &:dir(ltr), &:dir(rtl) {
+        &:not(.suggested-action):not(.destructive-action) {
+          color: $headerbar_fg_color;
+          &:disabled, &:backdrop {
+            color: $headerbar_fg_color; // same color, just do 0.5 opacity on entire element
+            opacity: 0.5;
+          }
+          &:backdrop:disabled {
+            opacity: 0.25;
+          }
         }
       }
     }

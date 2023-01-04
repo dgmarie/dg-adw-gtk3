@@ -1069,7 +1069,7 @@ geary-conversation-viewer#conversation_viewer {
 // This is from Yaru
 
 UnityDecoration {
-  -UnityDecoration-extents: 37px 1px 1px 1px;
+  -UnityDecoration-extents: if($variant =='light', 38px 1px 1px 1px, 37px 1px 1px 1px);
   -UnityDecoration-input-extents: 10px;
 
   -UnityDecoration-shadow-offset-x: 1px;
@@ -1092,7 +1092,7 @@ UnityDecoration {
   .top {
     border-radius: $window_radius $window_radius 0 0;
     // padding used for the min/max/close titlebuttons
-    padding: 0 6px 1px 5px;
+    padding: if($variant =='light', 1px 7px 1px 7px, 0 6px 1px 6px);
     background-color: $headerbar_bg_color;
     background-clip: padding-box;
     color: $headerbar_fg_color;
