@@ -1712,17 +1712,6 @@ headerbar {
         border: none;
         color: $headerbar_fg_color;
         background-color: transparent;
-
-        &:backdrop {
-          image {
-            opacity: 0.5; // Because some icons aren't symbolic
-            transition: $backdrop_transition;
-          }
-          &:disabled image {
-            color: $headerbar_fg_color;
-            opacity: 0.25;
-          }
-        }
       }
 
       &.close, &.maximize, &.minimize {
@@ -1738,6 +1727,9 @@ headerbar {
         margin: 0 1px;
         padding: 0;
         transition: $button_transition;
+        &:backdrop {
+          opacity: 1;
+        }
       }
 
       @each $k in ('close', 'maximize', 'minimize') {

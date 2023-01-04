@@ -587,12 +587,11 @@ tabbar {
 
 
   tab {
-    @include focus-ring($transition: $button_transition);
+    @include focus-ring($transition: background-color 150ms ease-in-out);
     -gtk-outline-radius: $button_radius;
     margin: 5px 1px;
     border-style: none;
     border-radius: $button_radius;
-    transition: background-color 150ms ease-in-out;
 
     background-image: if($variant == 'light',
                           -gtk-scaled(
@@ -609,6 +608,10 @@ tabbar {
     background-repeat: no-repeat;
 
     &:first-child { background-image: none; }
+
+    &:backdrop {
+      opacity: 0.5;
+    }
 
     &:hover {
       background-color: $hover_color;
