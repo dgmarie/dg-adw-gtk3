@@ -528,6 +528,11 @@ $panel_transition_duration: 250ms;
     }
 
     menu {
+      button {
+        margin: 0;
+        color: $fg_color;
+        @extend %button;
+      }
       -gtk-icon-effect: none;
 
       text-shadow: none;
@@ -1553,6 +1558,10 @@ MatePanelAppletFrameDBus > MatePanelAppletFrameDBus {
     menu {
       > menuitem {
         padding: 4px 6px;
+      }
+
+      #org\.ayatana\.indicator\.slider {
+        -gtk-icon-style: symbolic; // fix volume icons in light theme
       }
 
       arrow.bottom {
