@@ -201,7 +201,7 @@ headerbar, .titlebar, .primary-toolbar {
 
     button {
       &:dir(ltr), &:dir(rtl) {
-        &:not(.suggested-action):not(.destructive-action) {
+        &:not(.suggested-action):not(.destructive-action):not(.titlebutton) {
           color: $headerbar_fg_color;
           &:disabled, &:backdrop {
             color: $headerbar_fg_color; // same color, just do 0.5 opacity on entire element
@@ -463,6 +463,15 @@ list.view.frame {
       border: none;
       box-shadow: none;
       background-color: transparent;
+      color: $headerbar_fg_color;
+      &:disabled, &:backdrop {
+        color: $headerbar_fg_color; // same color, just do 0.5 opacity on entire element
+        opacity: 0.5;
+      }
+      &:backdrop:disabled {
+        opacity: 0.25;
+      }
+
       &.close, &.maximize, &.minimize {
         background-color: $titlebutton_normal;
         box-shadow: inset 0 0 0 1px $button_border;
@@ -502,14 +511,11 @@ list.view.frame {
           background-color: transparent;
           border-width: 0px;
           outline-width: 0px;
-          color: transparent;
           min-height: 16px;
           min-width: 16px;
           margin: 0 1px;
           padding: 0;
-          &:backdrop {
-            opacity: 1;
-          }
+          color: transparent;
         }
 
         @each $k in ('close', 'maximize', 'minimize') {

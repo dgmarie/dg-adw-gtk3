@@ -1469,6 +1469,8 @@ SheetStyleDialog.unity-force-quit {
   &:dir(rtl), &:dir(ltr) {
     menubar {
       padding: 0;
+      background-color: $panel_bg_color;
+      color: $panel_fg_color;
     }
     PanelApplet > button,
     menubar > menuitem,
@@ -1486,7 +1488,6 @@ SheetStyleDialog.unity-force-quit {
         @extend %panel_flat_button;
       }
     }
-
     background-color: $panel_bg_color;
     color: $panel_fg_color;
     border: $window_outline_color;
