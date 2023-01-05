@@ -1524,21 +1524,19 @@ searchbar > revealer > box {
 // ***************
 %titlebar,
 headerbar {
-  @at-root %headerbar_stuff, & {
-    padding: if($variant=='light', 0 6px, 0 5px); // make window border look like its inset on dark theme
-    min-height: $_headerbar_height;
-    border-width: 0 0 1px;
-    border-style: solid;
-    border-color: $headerbar_shade_color;
-    border-radius: 0;
+  padding: if($variant=='light', 0 6px, 0 5px); // make window border look like its inset on dark theme
+  min-height: $_headerbar_height;
+  border-width: 0 0 1px;
+  border-style: solid;
+  border-color: $headerbar_shade_color;
+  border-radius: 0;
 
-    @include headerbar_fill;
+  @include headerbar_fill;
 
-    &:backdrop {
-      background-color: $headerbar_backdrop_color;
-      background-image: none;
-      transition: $backdrop_transition;
-    }
+  &:backdrop {
+    background-color: $headerbar_backdrop_color;
+    background-image: none;
+    transition: $backdrop_transition;
   }
 
   .title {

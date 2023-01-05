@@ -124,8 +124,24 @@
   }
 }
 
+%main_toolbar {
+  padding: if($variant=='light', 5px 5px, 5px 4px); // make window border look like its inset on dark theme
+  border-width: 0 0 1px;
+  border-style: solid;
+  border-color: $headerbar_shade_color;
+  border-radius: 0;
+
+  @include headerbar_fill;
+
+  &:backdrop {
+    background-color: $headerbar_backdrop_color;
+    background-image: none;
+    transition: $backdrop_transition;
+  }
+}
+
 // headerbar stuff
-%headerbar_stuff,
+%main_toolbar,
 headerbar, .titlebar, .primary-toolbar {
   // Text colors for gtk named color support (except backdrop and disabled)
   &:not(.selection-mode) {
@@ -160,6 +176,14 @@ headerbar, .titlebar, .primary-toolbar {
     }
 
     switch image { color: transparent; }
+  }
+
+  separator {
+    background-color: $headerbar_border;
+    &:backdrop {
+      background-color: $headerbar_border_backdrop;
+      transition: $backdrop_transition;
+    }
   }
 
   button:not(.titlebutton) {

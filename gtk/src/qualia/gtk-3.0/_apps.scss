@@ -848,10 +848,7 @@ terminal-window notebook {
 
 window.thunar {
   toolbar.horizontal:not(.inline-toolbar) {
-    @extend %headerbar_stuff;
-    background-color: $headerbar_bg_color;
-    &:backdrop { background-color: $headerbar_backdrop_color; }
-    border-bottom: 1px solid $headerbar_shade_color;
+    @extend %main_toolbar;
   }
   .sidebar {
     border-top: none;
@@ -1606,10 +1603,7 @@ MatePanelAppletFrameDBus > MatePanelAppletFrameDBus {
 
 .mousepad {
   box.horizontal > toolbar.horizontal:not(.inline-toolbar) {
-    @extend %headerbar_stuff;
-    background-color: $headerbar_bg_color;
-    &:backdrop { background-color: $headerbar_backdrop_color; }
-    border-bottom: 1px solid $headerbar_shade_color;
+    @extend %main_toolbar;
   }
   notebook {
     margin-top: -2px; // This might cause issues but is the only way i can get rid of the blank space
@@ -1622,10 +1616,7 @@ MatePanelAppletFrameDBus > MatePanelAppletFrameDBus {
 
 .pluma-window {
   .primary-toolbar {
-    @extend %headerbar_stuff;
-    background-color: $headerbar_bg_color;
-    &:backdrop { background-color: $headerbar_backdrop_color; }
-    border-bottom: 1px solid $headerbar_shade_color;
+    @extend %main_toolbar;
   }
   statusbar > widget > frame > border {
     border: none;
