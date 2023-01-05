@@ -585,7 +585,6 @@ button {
 
     &:hover {
       @include button(hover);
-      -gtk-icon-effect: highlight;
     }
 
     &:active {
@@ -599,7 +598,6 @@ button {
     &:backdrop {
       &.flat, & {
         transition: $backdrop_transition;
-        -gtk-icon-effect: none;
       }
     }
 

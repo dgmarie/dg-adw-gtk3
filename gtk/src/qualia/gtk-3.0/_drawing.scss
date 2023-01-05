@@ -71,6 +71,7 @@ $focus_border_color: gtkalpha($accent_color, 0.5);
 
   border: 1px solid $button_border;
   background-clip: border-box;
+  -gtk-icon-effect: none; // remove highlight on some entries
 
   @if $t==normal {
     color: $text_color;
@@ -163,6 +164,7 @@ $focus_border_color: gtkalpha($accent_color, 0.5);
 
   background-clip: border-box;
   border: 1px solid $button_border;
+  -gtk-icon-effect: none; // remove highlight on some buttons
 
   @if $c != transparent {
     @include focus-ring($outer: true, $offset: 1px, $transition: $button_transition);
