@@ -130,7 +130,7 @@ $focus_border_color: gtkalpha($accent_color, 0.5);
   @else { @return gtkshade($c, 0.9); }
 }
 
-@mixin button($t, $c: transparent, $tc: $fg_color, $edge: none, $backimage: null, $flat: 'false') {
+@mixin button($t, $c: transparent, $tc: $fg_color, $edge: none, $backimage: null, $flat: false) {
 //
 // Button drawing function
 //

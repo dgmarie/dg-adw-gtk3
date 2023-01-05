@@ -1435,7 +1435,7 @@ combobox {
 // ************
 %toolbar {
   -GtkWidget-window-dragging: true;
-  padding: if($variant=='light', 5px 5px, 5px 4px); // make window border look like its inset on dark theme
+  padding: 5px;
   background-color: $bg_color;
   &:backdrop { background-color: $backdrop_bg_color;}
 }
@@ -1484,7 +1484,7 @@ toolbar {
 
   padding: 3px;
   border-width: 0 1px 1px;
-  border-radius: 0  0 5px 5px;
+  border-radius: 0 0 6px 6px;
 }
 
 searchbar > revealer > box,
@@ -1495,14 +1495,13 @@ searchbar > revealer > box,
 
   border-width: 0 0 1px;
   border-style: solid;
-  border-color: $borders_color;
+  border-color: $border_color;
   padding: 3px;
 }
 
 searchbar > revealer > box {
   // workaround: undo the GtkContainer:border-width and use CSS padding instead
   margin: -6px;
-  padding: 6px;
 }
 
 %darkbar {
@@ -1525,19 +1524,21 @@ searchbar > revealer > box {
 // ***************
 %titlebar,
 headerbar {
-  padding: if($variant=='light', 0 6px, 0 5px); // make window border look like its inset on dark theme
-  min-height: $_headerbar_height;
-  border-width: 0 0 1px;
-  border-style: solid;
-  border-color: $headerbar_shade_color;
-  border-radius: 0;
+  @at-root %headerbar_stuff, & {
+    padding: if($variant=='light', 0 6px, 0 5px); // make window border look like its inset on dark theme
+    min-height: $_headerbar_height;
+    border-width: 0 0 1px;
+    border-style: solid;
+    border-color: $headerbar_shade_color;
+    border-radius: 0;
 
-  @include headerbar_fill;
+    @include headerbar_fill;
 
-  &:backdrop {
-    background-color: $headerbar_backdrop_color;
-    background-image: none;
-    transition: $backdrop_transition;
+    &:backdrop {
+      background-color: $headerbar_backdrop_color;
+      background-image: none;
+      transition: $backdrop_transition;
+    }
   }
 
   .title {
@@ -1969,11 +1970,6 @@ treeview.view {
 
   &:disabled {
     color: $insensitive_fg_color;
-
-    &:selected {
-      color: gtkmix($selected_fg_color, $selected_bg_color, 40%);
-      &:backdrop { color: gtkmix($backdrop_selected_fg_color, $selected_bg_color, 30%); }
-    }
   }
 
   &.separator {
@@ -1996,17 +1992,7 @@ treeview.view {
 
     &:dir(rtl) { -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl'); }
 
-    color: gtkmix($text_color, $base_color, 70%);
-
-    &:hover { color: $text_color; }
-
-    &:selected {
-      color: gtkmix($selected_fg_color, $selected_bg_color, 70%);
-
-      &:hover { color: $selected_fg_color; }
-
-      &:backdrop { color: gtkmix($backdrop_selected_fg_color, $selected_bg_color, 70%); }
-    }
+    color: gtkalpha(currentColor, .7);
 
     &:checked { -gtk-icon-source: -gtk-icontheme('pan-down-symbolic'); }
   }
@@ -2026,11 +2012,9 @@ treeview.view {
 
   header {
     button {
-      $_column_header_color: gtkmix($fg_color, $base_color, 50%);
-
       @extend %column_header_button;
 
-      color: $_column_header_color;
+      color: gtkalpha(currentColor, .4);
       background-color: $base_color;
       font-weight: bold;
       font-size: small;
@@ -2040,7 +2024,7 @@ treeview.view {
       &:hover {
         @extend %column_header_button;
 
-        color: gtkmix($_column_header_color, $fg_color, 50%);
+        color: gtkalpha(currentColor, .7);
         box-shadow: none;
         transition: none; //I shouldn't need this
       }
@@ -2048,7 +2032,7 @@ treeview.view {
       &:active {
         @extend %column_header_button;
 
-        color: $fg_color;
+        color: $text_color;
         transition: none; //I shouldn't need this
       }
     }
@@ -2614,7 +2598,7 @@ notebook.frame,
     &:backdrop, & {
       > header {
         &:dir(ltr), &:dir(rtl) {
-          background-color: $base_color;
+          background-color: $bg_color;
           border-color: $border_color;
           color: $fg_color;
           padding: 0;
@@ -3835,7 +3819,14 @@ frame > border,
 
 actionbar > revealer > box {
   padding: 6px;
-  border-top: 1px solid $borders_color;
+  background-color: $headerbar_bg_color;
+  color: $headerbar_fg_color;
+  border-top: 1px solid $headerbar_shade_color;
+  &:backdrop {
+    background-color: $headerbar_backdrop_color;
+    color: $backdrop_headerbar_fg;
+    transition: $backdrop_transition;
+  }
 }
 
 scrolledwindow {

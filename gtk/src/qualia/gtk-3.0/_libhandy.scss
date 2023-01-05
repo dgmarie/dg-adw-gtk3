@@ -337,28 +337,23 @@ viewswitcher {
     }
 
     // View switcher in a header bar
-    headerbar & {
+    headerbar &,
+    actionbar & {
       color: $headerbar_fg_color;
       &:hover {
         background-image: none;
         @include button(hover, $tc: $headerbar_fg_color, $flat: true);
-        &:backdrop {
-          @include button(hover, $tc: $backdrop_headerbar_fg, $flat: true);
-        }
       }
       &:active {
         @include button(active, $tc: $headerbar_fg_color, $flat: true);
-        &:backdrop {
-          @include button(active, $tc: $backdrop_headerbar_fg, $flat: true);
-        }
         background-image: none;
       }
       &:checked {
         @include button(checked, $tc: $headerbar_fg_color, $flat: true);
-        &:backdrop {
-          @include button(checked, $tc: $backdrop_headerbar_fg, $flat: true);
-        }
         background-image: none;
+      }
+      &:backdrop {
+        opacity: 0.5;
       }
     }
 
