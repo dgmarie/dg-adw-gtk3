@@ -219,14 +219,14 @@ list.content {
               0 2px 4px 2px transparentize(black, .97);
 
   > row {
-    @include focus-ring($outer: true, $offset: -1px, $transition: $button_transition);
     &, row.header {
       background-color: transparent;
       color: $card_fg_color;
       margin: 0;
       //padding: 2px;
-      transition: 200ms $ease-out-quad;
-  
+      transition: $button_transition;
+      @include focus-ring($offset: -1px, $transition: $button_transition);
+
       &:hover, &:active, &:selected {
         box-shadow: none;
       }
