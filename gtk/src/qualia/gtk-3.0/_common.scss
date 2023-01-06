@@ -4041,6 +4041,8 @@ messagedialog { // Message Dialog styling
         border-radius: 0;
         margin: 0;
   
+        @include focus-ring($transition: $button_transition);
+
         &:hover {
           background: $hover_color;
         }
