@@ -388,20 +388,6 @@ statusbar {
   font-size: small;
 }
 
-// scrolled window list rows
-scrolledwindow list {
-  &:not(.content) {
-    padding: 5px 0;
-  }
-  row {
-    margin: 1px 6px;
-    border-radius: $button_radius;
-  }
-  separator.horizontal {
-    margin: 5px 6px;
-  }
-}
-
 // Fix wrong border-radius on hdy spinbutton entries
 list.content .horizontal spinbutton entry {
   border-top-left-radius: $button_radius;

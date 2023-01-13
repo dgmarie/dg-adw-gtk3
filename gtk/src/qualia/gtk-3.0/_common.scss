@@ -3888,7 +3888,6 @@ list {
 }
 
 row {
-  -gtk-outline-radius: $button_radius;
   @include focus-ring();
 
   &:hover { transition: none; }
@@ -3898,12 +3897,11 @@ row {
     -gtk-outline-radius: $button_radius;
 
     &.has-open-popup, // this is for indicathing which row generated a popover see https://bugzilla.gnome.org/show_bug.cgi?id=754411
-    &:hover, &:focus { background-color: $hover_color; box-shadow: inset 0 0 0 1px $button_border; }
+    &:hover, &:focus { background-color: $hover_color; }
 
-    &:active { background-color: $active_color; box-shadow: inset 0 0 0 1px $button_border; }
+    &:active { background-color: $active_color; }
     &:selected {
       background-color: $selected_color;
-      box-shadow: inset 0 0 0 1px $button_border;
       color: $fg_color;
       &:hover { background-color: $selected_hover_color; }
       &:active { background-color: $selected_active_color; }
@@ -4128,6 +4126,11 @@ filechooserbutton:drop(active) {
     &.left:dir(rtl) {
       border-right: 1px solid $borders_color;
       border-left-style: none;
+      @if $variant == 'dark' {
+        row, separator {
+          margin-left: 5px;
+        }
+      }
     }
 
     @at-root %sidebar_right,
@@ -4135,6 +4138,11 @@ filechooserbutton:drop(active) {
     &.right {
       border-left: 1px solid $borders_color;
       border-right-style: none;
+      @if $variant == 'dark' {
+        row, separator {
+          margin-right: 5px;
+        }
+      }
     }
   }
 
@@ -4146,12 +4154,20 @@ filechooserbutton:drop(active) {
   paned & { &.left, &.right, &.left:dir(rtl), &:dir(rtl), &:dir(ltr), & { border-style: none; }}
 
   row {
+    -gtk-outline-radius: $button_radius;
     border-radius: $button_radius;
     -gtk-outline-radius: $button_radius;
+    &:activatable {
+      &:hover, &:active, &.has-open-popup, &:selected {
+        box-shadow: inset 0 0 0 1px $button_border;
+      }
+    }
   }
+
   row {
     margin: 1px 6px;
   }
+
   separator {
     margin: 5px 6px;
   }
@@ -4226,10 +4242,32 @@ filechooser {
     background-color: if($variant=='light', $bg_color, $base_color);
   }
 }
+
 placessidebar {
   > viewport.frame { border-style: none; }
   &.sidebar {
     background-color: if($variant=='light', $bg_color, $base_color);
+  }
+
+  separator {
+    margin: 5px 6px;
+    @if $variant == 'dark' {
+      margin-left: 5px;
+    }
+  }
+
+  &:dir(ltr), &:dir(rtl) {
+    list {
+      padding: 2px 0;
+    }
+    row {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    separator{
+      margin-top: 2px;
+      margin-bottom: 2px;
+    }
   }
 
   row {

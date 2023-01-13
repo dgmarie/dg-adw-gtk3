@@ -388,9 +388,19 @@ $disk_space_free: #eeeeec;
 // * gnome-tweaks *
 // ****************
 
-list.tweak-categories separator.horizontal {
-  background: transparent;
-  margin: 2px 0;
+list.tweak-categories {
+  padding: 5px 0;
+  row {
+    margin: 1px 6px;
+    @if $variant == 'dark' {
+      margin-left: 5px;
+    }
+    border-radius: $button_radius;
+  }
+  separator.horizontal {
+    margin: 0;
+    background: transparent;
+  }
 }
 
 .tweak-group .tweak list {
