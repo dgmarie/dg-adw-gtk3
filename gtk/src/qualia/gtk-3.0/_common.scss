@@ -906,7 +906,6 @@ toolbar.inline-toolbar toolbutton {
 
 %linked_middle {
   &, > box > button.combo {
-    border-right-color: transparent;
     border-radius: 0;
     -gtk-outline-radius: 0;
     margin-left: -1px;
@@ -919,7 +918,6 @@ toolbar.inline-toolbar toolbutton {
 %linked_left {
   &, > box > button.combo {
     border-radius: 0;
-    border-right-color: transparent;
     border-top-left-radius: $button_radius;
     border-bottom-left-radius: $button_radius;
     -gtk-outline-radius: 0;
@@ -987,7 +985,6 @@ toolbar.inline-toolbar toolbutton {
 
 %linked_vertical_middle {
   &, > box > button.combo {
-    border-bottom-color: transparent;
     border-radius: 0;
     -gtk-outline-radius: 0;
     margin-top: -1px;
@@ -1000,7 +997,6 @@ toolbar.inline-toolbar toolbutton {
 %linked_vertical_top {
   &, > box > button.combo {
     border-radius: 0;
-    border-bottom-color: transparent;
     border-top-left-radius: $button_radius;
     border-top-right-radius: $button_radius;
     -gtk-outline-radius: 0;
@@ -3894,7 +3890,6 @@ row {
 
   &.activatable {
     color: $fg_color;
-    -gtk-outline-radius: $button_radius;
 
     &.has-open-popup, // this is for indicathing which row generated a popover see https://bugzilla.gnome.org/show_bug.cgi?id=754411
     &:hover, &:focus { background-color: $hover_color; }
@@ -4157,7 +4152,7 @@ filechooserbutton:drop(active) {
     -gtk-outline-radius: $button_radius;
     border-radius: $button_radius;
     -gtk-outline-radius: $button_radius;
-    &:activatable {
+    &.activatable {
       &:hover, &:active, &.has-open-popup, &:selected {
         box-shadow: inset 0 0 0 1px $button_border;
       }
@@ -4263,6 +4258,11 @@ placessidebar {
     row {
       margin-top: 0;
       margin-bottom: 0;
+      &.activatable {
+        &:hover, &:active, &.has-open-popup, &:selected {
+          box-shadow: inset 0 0 0 1px $button_border;
+        }
+      }
     }
     separator{
       margin-top: 2px;

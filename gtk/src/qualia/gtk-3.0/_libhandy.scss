@@ -74,29 +74,21 @@ window.csd.unified:not(.solid-csd):not(.fullscreen) {
 
 // HdyComboRow
 popover.combo {
-  padding: 0px;
-
   list {
     border-style: none;
     background-color: transparent;
     min-width: 200px;
-    margin-top: 6px;
-    margin-bottom: 6px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 
     > row {
       padding: 0px 8px 0px 8px;
-      min-height: 50px;
-
-      &:not(:last-child) {
-        border-bottom: 1px solid hdyalpha($borders_color, 0.5)
-      }
-
-      &:first-child {
-        @include rounded-border(top);
-      }
-
-      &:last-child {
-        @include rounded-border(bottom);
+      min-height: 34px;
+      margin: 1px 6px;
+      border-radius: $button_radius;
+      -gtk-outline-radius: $button-radius;
+      &:hover, &:active, &:focus, &:selected {
+        box-shadow: inset 0 0 0 1px $button_border;
       }
     }
   }
@@ -190,8 +182,51 @@ row.expander {
   }
 }
 
+// leaflets
+leaflet > box:first-child {
+  border-style: none;
+  background-color: $sidebar_bg_color;
+
+  &:dir(ltr) {
+    @if $variant == 'dark' {
+      row, separator {
+        margin-left: 5px;
+      }
+    }
+  }
+
+  &:dir(rtl) {
+    @if $variant == 'dark' {
+      row, separator {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  list {
+    padding: 5px 0;
+    background-color: transparent;
+    row {
+      margin: 1px 6px;
+      -gtk-outline-radius: $button_radius;
+      border-radius: $button_radius;
+      -gtk-outline-radius: $button_radius;
+      &.activatable {
+        &:hover, &:active, &.has-open-popup, &:selected {
+          box-shadow: inset 0 0 0 1px $button_border;
+        }
+      }
+    }
+  
+    separator {
+      margin: 5px 6px;
+    }
+  }
+}
+
 // Lists
 list.content {
+  margin: 2px;
   list {
     background-color: transparent;
     padding: 0;

@@ -1,0 +1,152 @@
+// *********************
+// * Cinnamon Settings *
+// *********************
+
+.cs-category-view iconview.view {
+  :hover {
+    background-color: $view_hover_color;
+    border: 1px solid $button_border;
+    border-radius: 6px;
+  }
+  &:selected {
+    border: 1px solid $button_border;
+    background: $view_selected_color;
+    color: $text_color;
+    &:hover {
+      background: $view_selected_hover_color;
+    }
+    &:active {
+      background: $view_selected_active_color;
+    }
+  }
+}
+
+// ********
+// * Nemo *
+// ********
+
+%desktop-canvas-item,
+.nemo-desktop.nemo-canvas-item {
+  color: $selected_fg_color;
+  text-shadow: 1px 1px 2px transparentize(black, 0.2);
+}
+
+.nemo-properties-dialog {
+  .dialog-action-box .dialog-action-area {
+    // add margin to preferences buttons
+    margin: 2px 6px 4px;
+  }
+
+  toolbar stackswitcher.linked button {
+    margin-right: 0;
+
+    &:backdrop {
+      color: $backdrop_fg_color;
+      background-color: $backdrop_bg_color;
+    }
+  }
+}
+
+.nemo-window {
+  widget > .toolbar.horizontal {
+    margin: -2px;
+    padding: 3px 0;
+    background-color: if($variant=='light', $bg_color, $base_color);
+  }
+  .sidebar {
+    background-color: if($variant=='light', $bg_color, $base_color);
+    scrollbar {background-color: transparent;}
+
+    scrolledwindow.frame.nemo-places-sidebar {
+      // get rid of double border in sidebar
+      border: none;
+    }
+    viewport.frame box.vertical treeview.view.places-treeview {
+      border-radius: 0; // get rid of weird radius on selected rows
+
+      &:not(:selected) {
+        &:not(:backdrop):hover {
+          background-image: image($base_hover_color);
+        }
+      }
+    }
+  }
+
+  .nemo-window-pane {
+    scrolledwindow.view {
+      background-color: if($variant=='light', $base_color, $bg_color);
+    }
+    widget.view {
+      background: transparent;
+      &:selected {
+        background: $view_selected_color;
+        color: $text_color;
+        &:hover {
+          background: $view_selected_hover_color;
+        }
+        &:active {
+          background: $view_selected_active_color;
+        }
+      }
+    }
+    treeview.view {
+      background-color: if($variant=='light', $base_color, $bg_color);
+      :hover {
+        background-color: $view_hover_color;
+      }
+      &:selected {
+        background-color: $view_selected_color;
+      }
+      &:selected:hover {
+        background-color: $view_selected_hover_color;
+      }
+    }
+    .rubberband:not(#hack),
+    rubberband:not(#hack) {
+      border: 1px solid $accent_color;
+      background-color: gtkalpha($accent_color, 0.2);
+    }
+    widget.entry {
+      // Add border around rename text entry
+      border: 1px solid;
+      border-radius: 3px;
+      color: $fg_color;
+      border-color: $selected_bg_color;
+      background-color: $bg_color;
+    }
+
+    widget.entry:selected {
+      // Add highlighting to selected text in rename text entry
+      border: 1px solid;
+      border-radius: 3px;
+      color: $selected_fg_color;
+      border-color: $selected_bg_color;
+      background-color: $selected_bg_color;
+    }
+  }
+
+  toolbar.horizontal.primary-toolbar {
+    widget.linked.raised button {
+
+      // use proper icons for next and left in stackswitcher-like pathbar
+      &:first-child widget {
+        -gtk-icon-source: -gtk-icontheme('go-previous-symbolic');
+      }
+
+      &:last-child widget {
+        -gtk-icon-source: -gtk-icontheme('go-next-symbolic');
+      }
+    }
+
+    toolitem box widget * {
+      // reset toolbar button dimensions
+      min-height: 0;
+      min-width: 0;
+    }
+
+    .linked button {
+      // link linked buttons
+      margin-right: 0;
+    }
+  }
+}

@@ -1,0 +1,325 @@
+// **********
+// * Budgie *
+// **********
+
+// popovers
+.budgie-popover {
+  color: $fg_color;
+  border-radius: $popover_radius;
+  border: 1px solid $window_outline_color;
+  background-clip: border-box;
+  background-color: $popover_bg_color;
+  box-shadow: 0 2px 3px 1px transparentize(black, 0.85);
+}
+
+.budgie-popover .container {
+  padding: 8px;
+}
+
+.budgie-popover,
+.raven-frame {
+  list,
+  list row.activatable {
+    &:dir(rtl), &:dir(ltr) {
+      background-color: transparent;
+      border-color: transparent;
+      box-shadow: none;
+      color: $fg_color;
+    }
+  }
+  list {
+    separator {
+      margin: 4px 0;
+    }
+    > row.activatable {
+      padding: 0;
+      margin: 1px 0;
+      border-radius: $button_radius;
+      -gtk-icon-effect: none;
+      &:first-child {
+        margin-top: 0;
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.budgie-popover textview,
+.budgie-popover text {
+  border-radius: $popover_radius;
+}
+
+.budgie-popover textview {
+  margin: 3px;
+}
+
+.raven-frame > border,
+.budgie-popover .container > border {
+  border: none;
+}
+
+.raven {
+  background-color: $popover_bg_color;
+  padding: 6px;
+  color: $fg_color;
+  .raven-mpris {
+    background-color: gtkalpha($popover_bg_color, 0.7);
+  }
+}
+
+.budgie-container {
+  padding: 0px;
+  background-color: transparent;
+}
+
+// panel
+.budgie-panel:not(#hack) {
+  &:dir(ltr), &:dir(rtl) { // some specifity bumps
+    background-color: $panel_bg_color;
+    color: $panel_fg_color;
+
+    &.transparent {
+      background-color: transparent;
+    }
+
+    &.dock-mode {
+      border-radius: 6px;
+      padding: 8px;
+      border: 1px solid $window_outline_color;
+      background-clip: border-box;
+
+      &.transparent {
+        border-color: transparent;
+      }
+    }
+
+    button {
+      @extend %panel_button;
+      border-radius: 0px;
+      &, &:hover, &:active, &:checked {
+        border: none;
+      }
+    }
+    &.horizontal button {
+      padding: 0px 4px;
+    }
+    &.vertical button {
+      padding: 4px 0px;
+    }
+    button.flat {
+      @extend %panel_flat_button;
+      min-height: 0;
+      color: $panel_fg_color;
+      border-radius: 0px;
+      &, &:hover, &:active, &:checked {
+        border: none;
+      }
+    }
+
+    button.flat.launcher {
+      color: $panel_fg_color;
+      border-radius: 0px;
+      border: none;
+      > icon {
+        background-image: none;
+      }
+    }
+
+    separator {
+      background-color: $panel_separator_color;
+    }
+  }
+}
+
+.budgie-container:not(#hack) {
+  padding: 0px;
+  background-color: transparent;
+  @each $pos in (top, bottom) {
+    &.#{$pos} .budgie-panel.dock-mode,
+    &.#{$pos} .budgie-panel.dock-mode button.flat.launcher:checked {
+      &:dir(rtl), &:dir(ltr) {
+        border-#{$pos}-left-radius: 0;
+        border-#{$pos}-right-radius: 0;
+      }
+    }
+  }
+  @each $pos in (left, right) {
+    &.#{$pos} .budgie-panel.dock-mode,
+    &.#{$pos} .budgie-panel.dock-mode button.flat.launcher:checked {
+      &:dir(rtl), &:dir(ltr) {
+        border-top-#{$pos}-radius: 0;
+        border-bottom-#{$pos}-radius: 0;
+      }
+    }
+  }
+}
+
+
+@each $pos, $b_pos in ((top, bottom), (bottom, top), (left, right), (right, left)) {
+  .#{$pos} .raven-frame {
+    border-#{$b_pos}: 1px solid $wm_border;
+  }
+  .#{$pos} .budgie-panel.dock-mode:not(#hack) {
+    padding-#{$pos}: 0;
+    border-#{$pos}-color: transparent;
+    button.flat,
+    button.flat.launcher {
+      padding-#{$pos}: 4px;
+      padding-#{$b_pos}: 4px;
+    }
+  }
+
+  .#{$pos} .shadow-block {
+    background-color: transparent;
+    background-image: none;
+  }
+}
+
+#tasklist-button {
+  border-image: none;
+}
+
+// menu
+.budgie-menu {
+  padding: 2px;
+
+  entry.search {
+    margin-bottom: 6px;
+  }
+
+  .category-button {
+    margin: 1px 0;
+    &:first-child {
+      margin-top: -2px;
+    }
+    &:last-child {
+      margin-bottom: -2px;
+    }
+  }
+
+  .categories.sidebar {
+    border-color: $border_color;
+    background-color: transparent;
+    padding-right: 6px;
+    margin-right: 6px;
+  }
+
+  row.activatable {
+    padding: 0;
+  }
+}
+
+// dialogs
+.budgie-polkit-dialog,
+.budgie-session-dialog,
+.budgie-run-dialog {
+  background-color: $headerbar_bg_color;
+  color: $fg_color;
+  border-radius: 18px;
+
+  > box > grid {
+    padding: 12px;
+  }
+
+  > decoration {
+    border-radius: 18px;
+  }
+
+  .linked.horizontal > button:not(#hack) {
+    &:dir(ltr), &:dir(rtl) {
+      border-right-style: none;
+      border-bottom-style: none;
+      -gtk-outline-radius: 0;
+      background-color: transparent;
+      color: $dialog_fg_color;
+      border-top: 1px solid gtkalpha($fg_color, 0.15);
+      border-left: 1px solid gtkalpha($fg_color, 0.15);
+      border-radius: 0;
+      padding: 8px 14px;
+
+      &:hover {
+        background: $hover_color;
+      }
+
+      &:active {
+        background: $active_color;
+      }
+
+      &.suggested-action {
+        color: $accent_color;
+      }
+
+      &.destructive-action {
+        color: $destructive_color;
+      }
+
+      &:checked {
+        background: $selected_color;
+
+        &:hover {
+          background: $selected_hover_color;
+        }
+
+        &:active {
+          background: $selected_active_color;
+        }
+      }
+
+      &:first-child {
+        border-left-style: none;
+        border-radius: 0 0 0 17px;
+        -gtk-outline-bottom-left-radius: 17px;
+      }
+
+      &:last-child {
+        border-radius: 0 0 17px 0;
+        -gtk-outline-bottom-right-radius: 17px;
+      }
+    }
+  }
+}
+
+// alt tab and notification
+.budgie-switcher-window,
+.budgie-notification-window {
+  border-radius: 18px;
+  background-color: transparent;
+  .drop-shadow {
+    background-color: $popover_bg_color;
+    border: 1px solid $window_outline_color;
+    background-clip: border-box;
+    border-radius: 18px;
+    padding: 12px;
+    box-shadow: 0 2px 3px 1px transparentize(black, 0.85);
+  }
+}
+
+.budgie-switcher-window flowbox {
+  padding: 0;
+}
+
+.budgie-switcher-window flowboxchild {
+  border-radius: $popover_radius;
+  &:hover, &:active, &:selected {
+    color: $fg_color;
+    box-shadow: inset 0 0 0 1px $button_border;
+  }
+  &:hover {
+    background-color: $hover_color;
+  }
+  &:active {
+    background-color: $active_color;
+  }
+  &:selected {
+    background-color: $selected_color;
+  }
+}
+
+.budgie-notification,
+.budgie-switcher {
+  color: $fg_color;
+  border-radius: 18px;
+  background-color: transparent;
+}

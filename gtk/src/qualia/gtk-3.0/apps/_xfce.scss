@@ -1,0 +1,183 @@
+// *********
+// * XFCE4 *
+// *********
+
+XfdesktopIconView.view {
+  background: transparent;
+  color: $osd_fg_color;
+  border-radius: $button_radius;
+
+  &:active {
+    background: gtkalpha(gtkmix(black, $selected_bg_color, 15%), 0.5);
+    text-shadow: 0 1px 1px black;
+  }
+
+  .label {
+    text-shadow: 1px 1px 2px black;
+  }
+
+  .rubberband {
+    @extend rubberband;
+    border-radius: 0;
+  }
+}
+
+// Xubuntu Menu
+#whiskermenu-window {
+  border: 1px solid $popover_border;
+  background-color: $popover_bg_color;
+  padding: 3px;
+
+  > frame > border {
+    opacity: 0;
+  }
+
+  .categories.vertical {
+    margin: 2px 0;
+  }
+
+  button {
+    margin: 1px 0;
+  }
+
+  .launchers-pane {
+    margin: 3px;
+    background-color: $headerbar_bg_color;
+    border: 1px solid $border-color;
+  }
+
+  scrollbar {
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  .launchers-view {
+    background-color: transparent;
+  }
+}
+
+// Xfce4 panel
+$panel_transition_duration: 250ms;
+
+.xfce4-panel.background {
+  border: none;
+  background-color: $panel_bg_color;
+  color: $panel_fg_color;
+  transition-duration: $panel_transition_duration;
+
+  button,
+  .tasklist button,
+  #actions-button,
+  #clock-button {
+    margin: 2px;
+  }
+
+  .tasklist image {
+    //-gtk-icon-transform: scale(0); margin: -10px; // Removes the icon
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+
+  button {
+    label {
+      padding-left: 6px;
+      padding-right: 6px;
+    }
+  }
+
+  button {
+    border-radius: 12px;
+    padding: 0 6px;
+    min-height: 12px;
+    min-width: 12px;
+    color: $panel_fg_color;
+    @extend %panel_button;
+    &.flat {
+      @extend %panel_flat_button;
+    }
+
+    entry {
+      caret-color: $text_color;
+    }
+
+    menu {
+      button {
+        margin: 0;
+        color: $fg_color;
+        @extend %button;
+      }
+      -gtk-icon-effect: none;
+
+      text-shadow: none;
+
+      // Theme pulseaudio-plugin's mpris buttons
+      .linked button {
+        @extend %linked;
+      }
+    }
+  }
+  .tasklist button { // less opaque tasklist buttons
+    @extend %panel_flat_button;
+  }
+}
+
+// **********
+// * Thunar *
+// **********
+
+window.thunar {
+  toolbar.horizontal:not(.inline-toolbar) {
+    @extend %main_toolbar;
+  }
+  .sidebar {
+    border-top: none;
+    background-color: if($variant=='light', $bg_color, $base_color);
+    scrollbar {background-color: transparent;}
+  }
+  .standard-view {
+    border-top: none;
+    widget.view {
+      background-color: if($variant=='light', $base_color, $bg_color);
+      &:selected {
+        background: $view_selected_color;
+        color: $text_color;
+        &:hover {
+          background: $view_selected_hover_color;
+        }
+        &:active {
+          background: $view_selected_active_color;
+        }
+      }
+    }
+    treeview.view {
+      background-color: if($variant=='light', $base_color, $bg_color);
+      :hover {
+        background-color: $view_hover_color;
+      }
+      &:selected {
+        background-color: $view_selected_color;
+      }
+      &:selected:hover {
+        background-color: $view_selected_hover_color;
+      }
+    }
+    .rubberband:not(#hack),
+    rubberband:not(#hack) {
+      border: 1px solid $accent_color;
+      background-color: gtkalpha($accent_color, 0.2);
+    }
+  }
+}
+
+// ************
+// * Mousepad *
+// ************
+
+.mousepad {
+  box.horizontal > toolbar.horizontal:not(.inline-toolbar) {
+    @extend %main_toolbar;
+  }
+  notebook {
+    margin-top: -2px; // This might cause issues but is the only way i can get rid of the blank space
+  }
+}

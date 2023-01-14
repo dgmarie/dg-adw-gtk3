@@ -1,0 +1,239 @@
+// ********
+// * Mate *
+// ********
+
+// panel
+.mate-panel-menu-bar,
+#PanelPlug {
+  &.horizontal {
+    PanelApplet > button,
+    menubar > menuitem {
+      padding: 0 4px;
+    }
+  }
+
+  &.vertical {
+    PanelApplet > button,
+    menubar > menuitem {
+      padding: 4px 0;
+    }
+  }
+
+  &:dir(rtl), &:dir(ltr) {
+    menubar {
+      padding: 0;
+      background-color: $panel_bg_color;
+      color: $panel_fg_color;
+    }
+    PanelApplet > button,
+    menubar > menuitem,
+    wnck-tasklist #tasklist-button {
+      border-radius: 14px;
+    }
+    #showdesktop-button {
+      &, &:hover, &:checked {
+        background-color: transparent;
+      }
+    }
+    button:not(#showdesktop-button) {
+      @extend %panel_button;
+      &.flat {
+        @extend %panel_flat_button;
+      }
+    }
+    background-color: $panel_bg_color;
+    color: $panel_fg_color;
+    border: $window_outline_color;
+  }
+}
+
+#MatePanelAppletPopup {
+  color: $fg_color;
+}
+MatePanelAppletFrameDBus > MatePanelAppletFrameDBus {
+  color: $panel_fg_color;
+}
+
+#PanelPlug {
+  menuitem > window > decoration {
+    border: none;
+  }
+
+  > PanelApplet > menubar {
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+
+    > menuitem:hover {
+      background-color: $selected_color;
+    }
+
+    menu {
+      > menuitem {
+        padding: 4px 6px;
+      }
+
+      #org\.ayatana\.indicator\.slider {
+        -gtk-icon-style: symbolic; // fix volume icons in light theme
+      }
+
+      arrow.bottom {
+        margin-top: 12px;
+      }
+    }
+  }
+}
+
+// ubuntu-mate menu
+.brisk-menu {
+  background-color: $popover_bg_color;
+  border: 1px solid $popover_border;
+
+  scrolledwindow.frame > scrollbar {
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  > box {
+    padding: 10px;
+  }
+
+  entry {
+    margin: 3px;
+  }
+
+  .categories-list {
+    padding: 4px 0;
+
+    button {
+      margin: 1px 3px;
+    }
+  }
+
+  .frame {
+    border: none;
+  }
+
+  .apps-list {
+    background-color: $headerbar_bg_color;
+    border-radius: 6px;
+    border: 1px solid $border_color;
+    padding: 5px 6px;
+    margin: 5px 3px;
+
+    > row.activatable {
+      background-color: transparent;
+      margin: 1px 0;
+      padding: 0;
+    }
+  }
+}
+
+// ********
+// * Caja *
+// ********
+.caja-pathbar button {
+  min-width: 32px;
+  border-radius: 0;
+  margin-right: -3px;
+  border-right-color: transparent;
+  border-left-color: $border_color;
+  margin-left: -1px;
+  &.slider-button:nth-child(odd) {
+    border-radius: $button_radius 0px 0px $button_radius;
+    border-left-color: $button_border;
+    margin-left: 0;
+  }
+
+  &.slider-button:nth-child(even) {
+    border-radius: 0 $button_radius $button_radius 0;
+    border-right-color: $button_border;
+  }
+}
+
+.caja-side-pane {
+  background-color: if($variant=='light', $bg_color, $base_color);
+  scrollbar {background-color: transparent;}
+}
+.caja-side-pane .frame {
+  border-style: solid none none none;
+}
+
+.caja-notebook {
+  widget.view {
+    background-color: if($variant=='light', $base_color, $bg_color);
+    &:selected {
+      background: $view_selected_color;
+      color: $text_color;
+      &:hover {
+        background: $view_selected_hover_color;
+      }
+      &:active {
+        background: $view_selected_active_color;
+      }
+    }
+  }
+  treeview.view {
+    background-color: if($variant=='light', $base_color, $bg_color);
+    :hover {
+      background-color: $view_hover_color;
+    }
+    &:selected {
+      background-color: $view_selected_color;
+    }
+    &:selected:hover {
+      background-color: $view_selected_hover_color;
+    }
+  }
+  .rubberband:not(#hack),
+  rubberband:not(#hack) {
+    border: 1px solid $accent_color;
+    background-color: gtkalpha($accent_color, 0.2);
+  }
+
+  .view,
+  .view.frame,
+  .frame {
+    border-left: 0;
+    border-right: 0;
+  }
+}
+
+// Gets rid of fat separator on backdrop
+.caja-side-pane+separator+box:backdrop {
+  background: $backdrop_bg_color;
+}
+
+.caja-navigation-window,
+.caja-desktop-window {
+  widget.view widget.entry {
+    color: $fg_color;
+    border-color: $borders_color;
+  }
+}
+
+// desktop mode
+.caja-desktop.caja-canvas-item {
+  @extend %desktop-canvas-item;
+}
+
+// *********
+// * Pluma *
+// *********
+
+.pluma-window {
+  .primary-toolbar {
+    @extend %main_toolbar;
+  }
+  statusbar > widget > frame > border {
+    border: none;
+  }
+}
+
+// ***********************
+// * Mate Control Center *
+// ***********************
+
+#MyControlCenter #slab_section_style2 label {
+  color: $text_color;
+}
