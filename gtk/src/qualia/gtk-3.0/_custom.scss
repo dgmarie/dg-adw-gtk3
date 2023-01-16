@@ -426,11 +426,10 @@ list.view.frame {
       background-color: transparent;
       color: $headerbar_fg_color;
       &:disabled, &:backdrop {
-        color: $headerbar_fg_color; // same color, just do 0.5 opacity on entire element
-        opacity: 0.5;
+        color: $backdrop_headerbar_fg;
       }
       &:backdrop:disabled {
-        opacity: 0.25;
+        color: $backdrop_disabled_headerbar_fg;
       }
 
       &.close, &.maximize, &.minimize {
