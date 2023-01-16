@@ -637,3 +637,19 @@ geary-conversation-viewer#conversation_viewer {
 #DockedDialogNotebook > header {
   background-color: $bg_color;
 }
+
+// *********
+// * Tilix *
+// *********
+
+.tilix-toolbar,
+.tilix-search-frame,
+.terminal-titlebar {
+  @extend %main_toolbar;
+  padding-bottom: 5px;
+}
+
+.tilix-search-frame {
+  padding-top: 1px;
+  padding-bottom: 1px;
+}

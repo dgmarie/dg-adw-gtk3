@@ -75,7 +75,7 @@
     @include button(normal);
   }
 
-  &.flat:not(:hover):not(:active) { @include button(undecorated); }
+  &.flat:not(:hover):not(:active):not(:checked) { @include button(undecorated); }
 
   &.suggested-action, &.text-button.suggested-action { @extend %suggested_buttons; }
   &.destructive-action, &.text-button.destructive-action { @extend %destructive_buttons; }
@@ -124,12 +124,16 @@
   }
 }
 
-%main_toolbar {
-  padding: if($variant=='light', 5px 5px, 5px 4px); // make window border look like its inset on dark theme
+%main_toolbar,
+.location-bar,
+searchbar > revealer > box,
+.primary-toolbar {
+  padding: if($variant=='light', 5px 5px 4px, 5px 4px 4px); // make window border look like its inset on dark theme
   border-width: 0 0 1px;
   border-style: solid;
   border-color: $headerbar_shade_color;
   border-radius: 0;
+  background-clip: border-box;
 
   @include headerbar_fill;
 
@@ -142,6 +146,8 @@
 
 // headerbar stuff
 %main_toolbar,
+.location-bar,
+searchbar > revealer > box,
 headerbar, .titlebar, .primary-toolbar {
   // Text colors for gtk named color support (except backdrop and disabled)
   &:not(.selection-mode) {
@@ -526,22 +532,6 @@ treeview.view {
 // In nautilus preferences there is no padding below the last list
 .preferences scrolledwindow > .frame > clamp {
   &.large, &.medium, &.small { padding-bottom: 30px; }
-}
-
-// Toolbars
-.primary-toolbar {
-  &:dir(ltr), &:dir(rtl) {
-    background-color: $headerbar_bg_color;
-    &:backdrop {
-      background-color: $headerbar_backdrop_color;
-      transition: $backdrop_transition;
-    }
-  }
-}
-.primary-toolbar.horizontal {
-  &:dir(ltr), &:dir(rtl) {
-    border-bottom: 1px solid $headerbar_shade_color;
-  }
 }
 
 // Popover menuitems
