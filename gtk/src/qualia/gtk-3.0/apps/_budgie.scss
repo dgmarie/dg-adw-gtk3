@@ -211,10 +211,16 @@
   }
 }
 
+.budgie-menu-overlay {
+  background-color: $headerbar_bg_color;
+  box-shadow: inset 0 0 0 1px $popover_border;
+  padding: 8px;
+  border-radius: $popover_radius;
+}
+
 // dialogs
 .budgie-polkit-dialog,
-.budgie-session-dialog,
-.budgie-run-dialog {
+.budgie-session-dialog {
   background-color: $headerbar_bg_color;
   color: $fg_color;
   border-radius: 18px;
@@ -277,6 +283,29 @@
         border-radius: 0 0 17px 0;
         -gtk-outline-bottom-right-radius: 17px;
       }
+    }
+  }
+}
+
+.budgie-run-dialog {
+  &:dir(ltr), &:dir(rtl) {
+    border-radius: 0;
+    entry.search {
+      border-radius: 0;
+      -gtk-outline-radius: 0;
+      &:not(:focus) {
+        border-color: transparent;
+      }
+    }
+    > decoration {
+      border-radius: 0;
+    }
+    > box {
+      border-radius: 0;
+      background-color: $popover_bg_color;
+    }
+    list {
+      background-color: transparent;
     }
   }
 }
