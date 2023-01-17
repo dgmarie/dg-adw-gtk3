@@ -343,6 +343,26 @@ $disk_space_free: #eeeeec;
   }
 }
 
+treeview.open-document-selector-treeview.view {
+  border-color: transparent;
+  &:not(:selected):not(:hover) {
+    background-color: transparent;
+    color: $text_color;
+  }
+  &:not(:selected):hover {
+    background-color: $view_hover_color;
+    color: $text_color;
+  }
+  &:selected:not(:hover) {
+    background-color: $view_selected_color;
+    color: $text_color;
+  }
+  &:selected:hover {
+    background-color: $view_selected_hover_color;
+    color: $text_color;
+  }
+}
+
 // ****************
 // * gnome-tweaks *
 // ****************

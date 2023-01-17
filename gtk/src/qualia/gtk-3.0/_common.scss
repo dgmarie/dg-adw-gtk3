@@ -2585,7 +2585,8 @@ notebook {
 
 frame notebook,
 notebook.frame,
-.frame notebook {
+.frame notebook,
+notebook notebook {
   &:dir(ltr), &:dir(rtl) {
     &:backdrop, & {
       > header {
