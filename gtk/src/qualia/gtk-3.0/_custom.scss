@@ -128,12 +128,18 @@
 .location-bar,
 searchbar > revealer > box,
 .primary-toolbar {
-  padding: if($variant=='light', 5px 5px 4px, 5px 4px 4px); // make window border look like its inset on dark theme
+  padding: 5px 5px 4px;
   border-width: 0 0 1px;
   border-style: solid;
   border-color: $headerbar_shade_color;
   border-radius: 0;
   background-clip: border-box;
+
+  .background:not(.unified) & {
+    @if $variant == 'dark' {
+      padding: 5px 4px 4px; // make window border look like its inset on dark theme
+    }
+  }
 
   @include headerbar_fill;
 
@@ -409,9 +415,9 @@ list.view.frame {
 
 @if $window_controls == 'symbolic' {
   // Legacy application titlebuttons
-  .ssd .titlebar {
+  .ssd .titlebar:not(#hack) {
     border-width: 0;
-    padding: if($variant=='light', 0 4px, 0 3px);
+    padding: if($variant=='light', 0 3px, 0 2px);
     min-height: if($variant=='light', 36px, 35px);
     border-bottom: 1px solid $headerbar_shade_color;
     //&:backdrop { border-color: $backdrop_borders_color; }
@@ -446,7 +452,7 @@ list.view.frame {
 
 @if $window_controls == 'macos' {
   // macOS Legacy application titlebuttons. Most of this (including the images that are used here) is borrowed from https://github.com/vinceliuice/WhiteSur-gtk-theme
-  .ssd .titlebar {
+  .ssd .titlebar:not(#hack) {
     border-width: 0;
     padding: if($variant=='light', 0 9px, 0 8px);
     min-height: if($variant=='light', 36px, 35px);
@@ -569,8 +575,12 @@ popover.menu > stack {
 // Trying to mimic new libadwaita tabs
 notebook {
   > header {
-    padding: 0 if($variant=='light', 3px, 2px);
-
+    padding: 0 3px;
+    .background:not(.unified) & {
+      @if $variant == 'dark' {
+        padding: 0 2px;
+      }
+    }
     button {
       &:dir(rtl), &:dir(ltr) { // specificity bump
         color: $headerbar_fg_color;
