@@ -151,7 +151,7 @@ $switch_hover_color: gtkalpha(currentColor, .2);
 $slider_color: gtkmix(white, $base_color, 80%);
 $slider_hover_color: white;
 
-$window_outline_color: if($variant == 'light', transparentize(black, 0.92), transparentize(white, 0.90));
+$window_outline_color: transparentize(white, 0.90);
 
 $fill_color: $selected_bg_color;
 $fill_text_color: $selected_fg_color;
