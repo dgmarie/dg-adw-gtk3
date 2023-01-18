@@ -70,25 +70,23 @@ window.csd.unified:not(.solid-csd):not(.fullscreen) {
       border-radius: $window_radius;
     }
   }
-}
-
-// mimix libadwaita outline
-window.csd.unified {
-  decoration {
-    // This isn't perfect but it's pretty close to libadwaita's window decoration
-    box-shadow: 0 1px 3px 3px transparent,
-                0 2px 6px 2px transparentize(black, 0.87),
-                0 3px 12px 10px transparentize(black, 0.91),
-                0 3px 14px 12px transparent,
-                0 6px 14px 14px transparentize(black, 0.96),
-                0 0 0 1px transparentize(black, 0.95); //doing borders with box-shadow
-    &:backdrop {
-      box-shadow: 0 1px 3px 3px transparentize(black, 0.91),
-                  0 2px 10px 6px transparentize(black, 0.95),
-                  0 3px 12px 10px transparent,
-                  0 3px 14px 12px transparentize(black, 0.97),
-                  0 6px 14px 14px transparent,
-                  0 0 0 2px transparentize(black, 0.98); //doing borders with box-shadow
+  &:not(.maximized) {
+    decoration {
+      // This isn't perfect but it's pretty close to libadwaita's window decoration
+      box-shadow: 0 1px 3px 3px transparent,
+                  0 2px 6px 2px transparentize(black, 0.87),
+                  0 3px 12px 10px transparentize(black, 0.91),
+                  0 3px 14px 12px transparent,
+                  0 6px 14px 14px transparentize(black, 0.96),
+                  0 0 0 1px transparentize(black, 0.95); //doing borders with box-shadow
+      &:backdrop {
+        box-shadow: 0 1px 3px 3px transparentize(black, 0.91),
+                    0 2px 10px 6px transparentize(black, 0.95),
+                    0 3px 12px 10px transparent,
+                    0 3px 14px 12px transparentize(black, 0.97),
+                    0 6px 14px 14px transparent,
+                    0 0 0 2px transparentize(black, 0.98); //doing borders with box-shadow
+      }
     }
   }
   decoration-overlay {
