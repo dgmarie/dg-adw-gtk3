@@ -570,10 +570,15 @@ row {
 
 tabbar {
   .box {
-    padding: if($variant=='light', 0 5px, 0 4px);
+    padding: 0 5px;
     min-height: 38px;
     background: $headerbar_bg_color;
     border-bottom: 1px solid $headerbar_shade_color;
+    .background:not(.unified) & {
+      @if $variant == 'dark' {
+        padding: 0 4px; // make window border look like its inset on dark theme
+      }
+    }
 
     &:backdrop {
       transition: $backdrop_transition;
