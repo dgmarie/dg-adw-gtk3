@@ -375,8 +375,7 @@ list.tweak-categories {
 }
 
 .tweak-group .tweak list {
-  border-radius: $card_radius;
-  border: 1px solid $borders_color;
+  @extend %boxed_list;
 }
 
 // **************

@@ -408,7 +408,6 @@ list.content .horizontal spinbutton entry {
 
 // Non "content" lists
 list.view.frame {
-  border-radius: $card_radius;
   &, &:backdrop { background-color: $card_bg_color; }
 }
 

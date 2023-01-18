@@ -249,11 +249,18 @@ leaflet > box:first-child {
 }
 
 // Lists
-list.content {
+list.content,
+list.view.frame,
+%boxed_list {
   margin: 2px;
+  border: none;
   list {
     background-color: transparent;
     padding: 0;
+  }
+
+  separator {
+    background-color: transparent;
   }
 
   row.expander list.nested {
@@ -279,6 +286,7 @@ list.content {
 
   > row {
     &, row.header {
+      border: none;
       background-color: transparent;
       color: $card_fg_color;
       margin: 0;
@@ -853,11 +861,9 @@ preferencespage > scrolledwindow > viewport > clamp {
   > box > preferencesgroup { margin-top: 12px; }
   clamp {margin:0}
   preferencesgroup {
-    list.content,
     label { margin: 0 12px; }
     list.content {
-      margin-top: 2px;
-      margin-bottom: 12px;
+      margin: 2px 12px 12px;
     }
   }
 }
