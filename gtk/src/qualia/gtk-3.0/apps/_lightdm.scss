@@ -5,34 +5,30 @@
 // GTK Greeter
 
 #panel_window {
-    background-color: $panel_bg_color;
-    color: $panel_fg_color;
-  }
-  
-  #login_window,
-  #shutdown_dialog,
-  #restart_dialog {
+  background-color: $panel_bg_color;
+  color: $panel_fg_color;
+}
+
+#login_window,
+#shutdown_dialog,
+#restart_dialog {
+  &:dir(ltr), &:dir(rtl) {
     padding: 12px;
     border-radius: 18px;
-    border: 1px solid $window_outline_color;
+    border: 1px solid $border_color;
     background-color: $headerbar_bg_color;
-    box-shadow: 0 1px 3px 3px transparent,
-                0 2px 6px 2px transparentize(black, 0.87),
-                0 3px 12px 10px transparentize(black, 0.91),
-                0 3px 14px 12px transparent,
-                0 6px 14px 14px transparentize(black, 0.96),
-                0 0 0 1px transparentize(black, 0.95); //doing borders with box-shadow
+    box-shadow: none;
   }
-  
-  #login_window entry {
-    border-radius: 999px;
-    background-color: gtkalpha($fg_color, 0.1);
-    &:disabled {
-      background-color: gtkalpha($fg_color, 0.05);
-    }
+}
+
+#login_window entry {
+  border-radius: 999px;
+  background-color: gtkalpha($fg_color, 0.1);
+  &:disabled {
+    background-color: gtkalpha($fg_color, 0.05);
   }
-  
-  #content_frame {
-    padding-bottom: 12px;
-  }
-  
+}
+
+#content_frame {
+  padding-bottom: 12px;
+}
