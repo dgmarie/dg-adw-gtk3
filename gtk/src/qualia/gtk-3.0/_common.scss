@@ -1869,7 +1869,7 @@ headerbar { // headerbar border rounding
 }
 
 .titlebar:not(headerbar) {
-  window.csd > & {
+  window.csd.background > & {
     // in csd we assume every titlebar is a headerbar so reset anything, this is needed for split toolbars cases
     padding: 0;
     background-color: transparent;
